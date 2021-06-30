@@ -22,11 +22,12 @@ require_once 'includes/dbh.inc.php';
                 $sqli = "SELECT id,name FROM voivodship";
                 $result = mysqli_query($conn, $sqli);
                 while ($row = mysqli_fetch_array($result)) {
-                    echo '<option>'.$row['id'].'.'.$row['name'].'</option>';
+                    echo '<option>'.$row['name'].'</option>';
                 }
                 ?>
             </select>
-        <input type = "text" name="name" placeholder="Wpisz nazwę miasta">
+        <input type = "text" name="name" placeholder="Wpisz nazwę miasta...">
+            <input type = "text" name="description" placeholder="Dodaj krótki opis...">
         <button type = "submit" name ="submit">Dodaj miasto</button>
     </form>
 </section>

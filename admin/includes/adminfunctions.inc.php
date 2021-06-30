@@ -78,3 +78,32 @@ function loginUser($conn,$login,$password)
         }
     }
 }
+function emptyInputAddCity($name)
+{
+    $result;
+    if(empty($name))
+    {
+        $result = true;
+    }
+    else
+    {
+        $result = false;
+    }
+    return $result;
+}
+function addcity($conn,$voivodshipid,$name,$description)
+{
+    $sql="INSERT INTO city (name,description,id_voivodship) VALUES (?, ?, (SELECT id FROM voivodship where name = ?));";
+    $stmt=mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../addcity.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "sss",$name,$description,$voivodshipid);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../addcity.php?error=none");
+    exit();
+
+}
