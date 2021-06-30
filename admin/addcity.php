@@ -31,6 +31,23 @@ require_once 'includes/dbh.inc.php';
         <button type = "submit" name ="submit">Dodaj miasto</button>
     </form>
 </section>
+<?php
+    if(isset($_GET["error"]))
+    {
+        if($_GET["error"]=="errorinputvoivodship")
+        {
+            echo"<p>Nie wybrałeś województwa</p>";
+        }
+        if($_GET["error"]=="emptyinputcity")
+        {
+            echo"<p>Nie wpisałeś nazwy miasta</p>";
+        }
+        if($_GET["error"]=="none")
+        {
+            echo"<p>Pomyślnie dodano miasto!</p>";
+        }
+    }
 
+?>
 </body>
 </html>

@@ -93,6 +93,10 @@ function emptyInputAddCity($name)
 }
 function addcity($conn,$voivodshipid,$name,$description)
 {
+    if(empty($description))
+    {
+        $description="Nie dodano opisu miasta";
+    }
     $sql="INSERT INTO city (name,description,id_voivodship) VALUES (?, ?, (SELECT id FROM voivodship where name = ?));";
     $stmt=mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
