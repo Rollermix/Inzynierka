@@ -21,4 +21,4 @@ if (isset($_SESSION["useruid"]))
 ?>
 
 </body>
-</html><?php
+</html>
