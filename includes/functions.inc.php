@@ -1,8 +1,8 @@
 <?php
-function emptyInputSignup($firstname,$lastname,$login,$email,$description,$password,$repeatpassword)
+function emptyInputSignup($firstname,$lastname,$login,$email,$password,$repeatpassword)
 {
     $result;
-    if(empty($firstname) || empty($lastname) || empty($login) || empty($email) || empty($description) || empty($password) || empty($repeatpassword))
+    if(empty($firstname) || empty($lastname) || empty($login) || empty($email) || empty($password) || empty($repeatpassword))
     {
         $result = true;
     }
@@ -29,7 +29,7 @@ function invalidLogin($login)
 
 function invalidEmail($email)
 {
-    $result;
+
     if(!filter_var($email, FILTER_VALIDATE_EMAIL))
     {
         $result = true;
@@ -38,7 +38,7 @@ function invalidEmail($email)
     {
         $result = false;
     }
-    return result;
+    return $result;
 }
 
 function pwdMatch($password, $repeatpassword)
@@ -94,4 +94,41 @@ function createUser($conn,$firstname,$lastname,$login,$email,$description,$passw
     mysqli_stmt_close($stmt);
     header("location: ../signup.php?error=none");
     exit();
+}
+function emptyInputLogin($login,$password)
+{
+    $result;
+    if(empty($login) || empty($password))
+    {
+        $result = true;
+    }
+    else
+    {
+        $result = false;
+    }
+    return $result;
+}
+
+function loginUser($conn,$login,$password)
+{
+    $uidExists = loginExists($conn, $login, $login);
+    if($uidExists === false)
+    {
+        header("location: ../login.php?error=wrongLogin");
+        exit();
+    }
+    $passwordHashed = $uidExists["password"];
+    $checkPwd = password_verify($password,$passwordHashed);
+    if($checkPwd === false)
+    {
+        header("location: ../login.php?error=wrongPassword");
+    }
+    else if ($checkPwd === true)
+    {
+        session_start();
+        $_SESSION["userid"] = $uidExists["id"];
+        $_SESSION["useruid"] = $uidExists["login"];
+        header("location: ../index.php");
+        exit();
+    }
 }

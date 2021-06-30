@@ -5,6 +5,9 @@
     <title> Praca inżynierska-logowanie</title>
 </head>
 <body>
+<?php
+require_once 'header.php';
+?>
     <section class="signup-form">
         <h2>
             Zarejestruj się
@@ -37,7 +40,7 @@
         }
         else if($_GET["error"]=="invalidemail")
         {
-            echo"<p>Wprowadziłeś różne hasła</p>";
+            echo"<p>Wprowadziłeś zły email</p>";
         }
         else if($_GET["error"]=="logintaken")
         {
@@ -46,6 +49,10 @@
         else if($_GET["error"]=="stmtfailed")
         {
             echo"<p>Something went wrong, try again!</p>";
+        }
+        else if($_GET["error"]=="none")
+        {
+            echo "<p>Zarejestrowałeś sie</p>";
         }
     }
     ?>
