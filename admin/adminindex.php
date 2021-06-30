@@ -6,7 +6,7 @@
 </head>
 <body>
 <?php
-require_once 'header.php';
+require_once 'adminheader.php';
 require_once 'includes/dbh.inc.php';
 ?>
 <a>DOGGO WALKS</a>
@@ -21,4 +21,4 @@ if (isset($_SESSION["useruid"]))
 ?>
 
 </body>
-</html>
+</html><?php

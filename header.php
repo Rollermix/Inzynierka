@@ -14,11 +14,14 @@ session_start();
                     if (isset($_SESSION["useruid"]))
                     {
                         echo  "<li><a href='signup.php'>Profil</a></li>";
-                        echo  "<li><a href='login.php'>Wyloguj sie</a></li>";
+                        echo  "<li><a href='includes/logout.inc.php'>Wyloguj sie</a></li>";
                     }
                     else
+                    {
                         echo "<li><a href='signup.php'>Zarejestruj się</a></li>";
                         echo "<li><a href='login.php'>Zaloguj się</a></li>";
+                    }
+
                     ?>
 
 
