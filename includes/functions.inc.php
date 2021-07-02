@@ -128,7 +128,19 @@ function loginUser($conn,$login,$password)
         session_start();
         $_SESSION["userid"] = $uidExists["id"];
         $_SESSION["useruid"] = $uidExists["login"];
+        $_SESSION['loggedin'] = true;
         header("location: ../index.php");
         exit();
     }
+}
+function isLogged()
+{
+
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+        echo "Welcome to the member's area, " . $_SESSION['useruid'] . "!";
+    } else {
+        header("location: ../login.php?error=notLogged");
+        exit();
+    }
+
 }

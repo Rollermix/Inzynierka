@@ -5,10 +5,14 @@
     <title> Praca inżynierska-logowanie</title>
 </head>
 <body>
+
 <?php
 require_once 'adminheader.php';
 require_once 'includes/dbh.inc.php';
+require_once 'includes/adminfunctions.inc.php';
+isLogged();
 ?>
+
 <section class="city-form">
     <h2>
         Dodaj miasto

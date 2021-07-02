@@ -39,10 +39,15 @@ require_once 'header.php';
         {
             echo"<p>Something went wrong, try again!</p>";
         }
+        else if($_GET["error"]=="notLogged")
+        {
+            echo"<p>Brak dostępu, zaloguj się aby uzyskać dostęp!</p>";
+        }
         else if($_GET["error"]=="none")
         {
             echo "<p>Zalogowałeś sie</p>";
         }
+
     }
     ?>
 </body>

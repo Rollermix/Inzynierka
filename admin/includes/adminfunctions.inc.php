@@ -68,6 +68,7 @@ function loginUser($conn,$login,$password)
             session_start();
             $_SESSION["userid"] = $uidExists["id"];
             $_SESSION["useruid"] = $uidExists["login"];
+            $_SESSION['loggedin'] = true;
             header("location: ../adminindex.php");
             exit();
         }
@@ -109,5 +110,16 @@ function addcity($conn,$voivodshipid,$name,$description)
     mysqli_stmt_close($stmt);
     header("location: ../addcity.php?error=none");
     exit();
+
+}
+function isLogged()
+{
+
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+        echo "Welcome to the member's area, " . $_SESSION['useruid'] . "!";
+    } else {
+        header("location: ../admin/adminlogin.php?error=notLogged");
+        exit();
+    }
 
 }
