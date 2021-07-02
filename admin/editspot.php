@@ -10,7 +10,7 @@ require_once 'adminheader.php';
 require_once 'includes/dbh.inc.php';
 ?>
 
-<form action="editspot.inc.php" method="post">
+<form action="includes/editspot.inc.php" method="post">
 <?php
 if(isset($_GET["edit"])) {
     $nazwa = ($_GET["edit"]);
@@ -50,8 +50,10 @@ if(isset($_GET["edit"])) {
         echo '<input type = "text" name="name" value="'.$nazwa.'">';
 
     $description = $rowid['description'];
+    $_SESSION['idspot'] = $rowid['id'];
+
     echo '<input type = "text" name="description" value="'.$description.'">';
-        echo '<br>';
+        echo '<br >';
 
 }
 

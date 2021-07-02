@@ -183,7 +183,7 @@ function addspot($conn, $city, $name, $description)
     mysqli_stmt_bind_param($stmt, "sss",$name,$description,$city);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../managespots.inc.php?error=none");
+    header("location: ../managespots.php?error=none");
     exit();
 
 }
@@ -206,5 +206,17 @@ function deleteSpot($conn,$name)
 }
 function editspot($conn,$id, $city, $name, $description)
 {
-    $sql="UPDATE";
+    $sql="UPDATE spot SET name =?, description=?, id_city = (SELECT id FROM city where name = ?) WHERE id=?";
+    $stmt=mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../edit.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt,"ssss",$name,$description,$city,$id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../managespots.php?error=noneedit");
+    exit();
+
 }
