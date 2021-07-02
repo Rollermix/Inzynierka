@@ -15,7 +15,7 @@ isLogged();
     <h2>
         Zarządzaj miejscami
     </h2>
-<form action="includes/managespots.inc.php" method="post">
+<form action="includes/addspot.inc.php" method="post">
     <form method ="POST">
         <select name ='city'>
             <option>Wybierz miasto...</option>
@@ -32,14 +32,5 @@ isLogged();
         <input type = "text" name="description" placeholder="Dodaj krótki opis...">
         <button type = "submit" name ="submit">Dodaj spot</button>
     </form>
-    <?php
-    $sqli = "SELECT name,deleted FROM spot";
-    $result = mysqli_query($conn, $sqli);
-    while ($row = mysqli_fetch_array($result)) {
-        $curr = $row['name'];
-        if($row['deleted']==0)
-        echo $row['name'].'<button>' . '<a href ="includes/managespots.inc.php?delete=' . $curr . '">' . ' Usun' . '</a>' . '</button>'.'<br>';
-    }
-    ?>
 </body>
 </html>

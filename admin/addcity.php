@@ -22,13 +22,11 @@ isLogged();
             <select name ='voivodship'>
                 <option>Wybierz województwo...</option>
                 <?php
-                $i=1;
                 $sqli = "SELECT id,name FROM voivodship";
                 $result = mysqli_query($conn, $sqli);
                 while ($row = mysqli_fetch_array($result)) {
 
-                    echo '<option>'.$i.'.'.$row['name'].'</option>';
-                    $i++;
+                    echo '<option>'.$row['name'].'</option>';
                 }
                 ?>
             </select>

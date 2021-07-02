@@ -9,18 +9,18 @@ if(isset($_POST["submit"]))
     require_once 'adminfunctions.inc.php';
     if ($voivodshipid === $check)
     {
-        header("location: ../managecities.php?error=errorinputvoivodship");
+        header("location: ../addcity.php?error=errorinputvoivodship");
         exit();
     }
     if(emptyInputAddCity($name)!==false)
     {
-        header("location: ../managecities.php?error=emptyinputcity");
+        header("location: ../addcity.php?error=emptyinputcity");
         exit();
     }
     addcity($conn,$voivodshipid,$name,$description);
 }
 else
 {
-    header("location: ../managecities.php");
+    header("location: ../addcity.php");
     exit();
 }
