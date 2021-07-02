@@ -123,3 +123,48 @@ function isLogged()
     }
 
 }
+function blockUser($conn,$name)
+{
+    $sql="UPDATE user SET blocked = 1 WHERE login=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../manageusers.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s",$name);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../manageusers.php?error=none");
+    exit();
+}
+function unblockUser($conn,$name)
+{
+    $sql="UPDATE user SET blocked = 0 WHERE login=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../manageusers.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s",$name);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../manageusers.php?error=none");
+    exit();
+}
+function deleteUser($conn,$name)
+{
+    $sql="UPDATE user SET deleted = 1 WHERE login=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../manageusers.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s",$name);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../manageusers.php?error=none");
+    exit();
+}
