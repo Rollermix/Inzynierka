@@ -21,12 +21,16 @@ isLogged();
                 $result = mysqli_query($conn, $sqli);
                 while ($row = mysqli_fetch_array($result)) {
                     $curr=$row['login'];
-                    if ($row['blocked']==0 && $row['deleted']==0)
-                        echo $row['login'].'<button>'.'<a href ="includes/manageusers.inc.php?block='.$curr.'">'.' Zablokuj'.'</a>'.
-                            '</button>'. '<button>'.'<a href ="includes/manageusers.inc.php?delete='.$curr.'">'.' Usun'.'</a>'.'</button>';
-                    else if ($row['blocked']==1)
-                        echo $row['login'].'<button>'.'<a href ="includes/manageusers.inc.php?unblock='.$curr.'">'.' Odblokuj'.'</a>'.'</button>'.
-                            '</button>'. '<button>'.'<a href ="includes/manageusers.inc.php?delete='.$curr.'">'.' Usun'.'</a>'.'</button>';
+                    if ($row['blocked']==0 && $row['deleted']==0) {
+                        echo $row['login'] . '<button>' . '<a href ="includes/manageusers.inc.php?block=' . $curr . '">' . ' Zablokuj' . '</a>' .
+                            '</button>' . '<button>' . '<a href ="includes/manageusers.inc.php?delete=' . $curr . '">' . ' Usun' . '</a>' . '</button>';
+                        echo '<br>';
+                    }
+                    else if ($row['blocked']==1) {
+                        echo $row['login'] . '<button>' . '<a href ="includes/manageusers.inc.php?unblock=' . $curr . '">' . ' Odblokuj' . '</a>' . '</button>' .
+                            '</button>' . '<button>' . '<a href ="includes/manageusers.inc.php?delete=' . $curr . '">' . ' Usun' . '</a>' . '</button>';
+                        echo '<br>';
+                    }
                 }
 ?>
 </section>
