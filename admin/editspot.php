@@ -10,11 +10,11 @@ require_once 'adminheader.php';
 require_once 'includes/dbh.inc.php';
 ?>
 
-<form>
+<form action="editspot.inc.php" method="post">
 <?php
 if(isset($_GET["edit"])) {
     $nazwa = ($_GET["edit"]);
-    $sql="Select id_city From spot Where name= ?;";
+    $sql="Select id,id_city,description From spot Where name= ?;";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
@@ -48,6 +48,9 @@ if(isset($_GET["edit"])) {
     echo '</select>';
 
         echo '<input type = "text" name="name" value="'.$nazwa.'">';
+
+    $description = $rowid['description'];
+    echo '<input type = "text" name="description" value="'.$description.'">';
         echo '<br>';
 
 }

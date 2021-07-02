@@ -204,3 +204,7 @@ function deleteSpot($conn,$name)
         exit();
     }
 }
+function editspot($conn,$id, $city, $name, $description)
+{
+    $sql="UPDATE";
+}
