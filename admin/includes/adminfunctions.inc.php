@@ -35,7 +35,6 @@ function emptyInputLogin($login,$password)
     }
     return $result;
 }
-
 function loginUser($conn,$login,$password)
 {
     $uidExists = loginExists($conn, $login, $login);
@@ -79,7 +78,7 @@ function loginUser($conn,$login,$password)
         }
     }
 }
-function emptyInputAddCity($name)
+function emptyInputAdd($name)
 {
     $result;
     if(empty($name))
@@ -102,13 +101,13 @@ function addcity($conn,$voivodshipid,$name,$description)
     $stmt=mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../addcity.php?error=stmtfailed");
+        header("location: ../managecities.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "sss",$name,$description,$voivodshipid);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../addcity.php?error=none");
+    header("location: ../managecities.php?error=none");
     exit();
 
 }
@@ -184,7 +183,24 @@ function addspot($conn, $city, $name, $description)
     mysqli_stmt_bind_param($stmt, "sss",$name,$description,$city);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../managespots.php?error=none");
+    header("location: ../managespots.inc.php?error=none");
     exit();
 
+}
+function deleteSpot($conn,$name)
+{
+    {
+        $sql="UPDATE spot SET deleted = 1 WHERE name=?;";
+        $stmt = mysqli_stmt_init($conn);
+        if(!mysqli_stmt_prepare($stmt,$sql))
+        {
+            header("location: ../managespots.php?error=stmtfailed");
+            exit();
+        }
+        mysqli_stmt_bind_param($stmt, "s",$name);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        header("location: ../managespots.php?error=none");
+        exit();
+    }
 }

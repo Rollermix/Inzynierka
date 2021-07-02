@@ -26,7 +26,7 @@ isLogged();
                             '</button>' . '<button>' . '<a href ="includes/manageusers.inc.php?delete=' . $curr . '">' . ' Usun' . '</a>' . '</button>';
                         echo '<br>';
                     }
-                    else if ($row['blocked']==1) {
+                    else if ($row['blocked']==1 && $row['deleted']==0) {
                         echo $row['login'] . '<button>' . '<a href ="includes/manageusers.inc.php?unblock=' . $curr . '">' . ' Odblokuj' . '</a>' . '</button>' .
                             '</button>' . '<button>' . '<a href ="includes/manageusers.inc.php?delete=' . $curr . '">' . ' Usun' . '</a>' . '</button>';
                         echo '<br>';

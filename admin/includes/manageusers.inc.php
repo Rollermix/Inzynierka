@@ -1,6 +1,8 @@
 <?php
+session_start();
 require_once 'adminfunctions.inc.php';
 require_once 'dbh.inc.php';
+isLogged();
 if(isset($_GET["block"])) {
 
 

@@ -43,6 +43,13 @@ require_once 'header.php';
         {
             echo"<p>Brak dostępu, zaloguj się aby uzyskać dostęp!</p>";
         }
+        else if($_GET["error"]=="accountblocked")
+        {
+            echo"<p>Koncto zablokowane</p>";
+        }else if($_GET["error"]=="accountdeleted")
+        {
+            echo"<p>Konto usunięte</p>";
+        }
         else if($_GET["error"]=="none")
         {
             echo "<p>Zalogowałeś sie</p>";

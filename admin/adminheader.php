@@ -14,7 +14,7 @@ session_start();
         if (isset($_SESSION["useruid"]))
         {
             echo  "<li><a href='signup.php'>Profil</a></li>";
-            echo  "<li><a href='addcity.php'>Dodaj miasto</a></li>";
+            echo "<li><a href='managecities.php'>Dodaj miasto</a></li>";
             echo  "<li><a href='manageusers.php'>Zarządzaj użytkownikami</a></li>";
             echo  "<li><a href='managespots.php'>Zarządzaj miejscami</a></li>";
             echo  "<li><a href='includes/adminlogout.inc.php'>Wyloguj sie</a></li>";

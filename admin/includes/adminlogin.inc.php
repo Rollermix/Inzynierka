@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(isset($_POST["submit"]))
 {
     $login = $_POST["name"];

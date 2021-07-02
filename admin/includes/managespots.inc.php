@@ -1,6 +1,8 @@
 <?php
+session_start();
 require_once 'dbh.inc.php';
 require_once 'adminfunctions.inc.php';
+isLogged();
 if (isset($_POST["submit"])) {
     $check = 'Wybierz miasto...';
     $city = $_POST["city"];
@@ -11,7 +13,7 @@ if (isset($_POST["submit"])) {
         header("location: ../managespots.php?error=errorinputcity");
         exit();
     }
-    if (emptyInputAddCity($name) !== false) {
+    if (emptyInputAdd($name) !== false) {
         header("location: ../managespots.php?error=emptyinputspot");
         exit();
     }

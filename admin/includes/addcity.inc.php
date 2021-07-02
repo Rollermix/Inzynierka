@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(isset($_POST["submit"]))
 {
     $check='Wybierz województwo...';
@@ -9,18 +10,18 @@ if(isset($_POST["submit"]))
     require_once 'adminfunctions.inc.php';
     if ($voivodshipid === $check)
     {
-        header("location: ../addcity.php?error=errorinputvoivodship");
+        header("location: ../managecities.php?error=errorinputvoivodship");
         exit();
     }
-    if(emptyInputAddCity($name)!==false)
+    if(emptyInputAdd($name)!==false)
     {
-        header("location: ../addcity.php?error=emptyinputcity");
+        header("location: ../managecities.php?error=emptyinputcity");
         exit();
     }
     addcity($conn,$voivodshipid,$name,$description);
 }
 else
 {
-    header("location: ../addcity.php");
+    header("location: ../managecities.php");
     exit();
 }
