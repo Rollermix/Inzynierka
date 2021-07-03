@@ -19,11 +19,12 @@ isLogged();
         <select name ='city'>
             <option>Wybierz miasto...</option>
             <?php
-            $sqli = "SELECT name FROM city";
+            $sqli = "SELECT name,deleted FROM city";
             $result = mysqli_query($conn, $sqli);
             while ($row = mysqli_fetch_array($result)) {
-
+                    if($row['deleted']==0)
                 echo '<option>'.$row['name'].'</option>';
+
             }
             ?>
         </select>
@@ -36,9 +37,10 @@ isLogged();
     $result = mysqli_query($conn, $sqli);
     while ($row = mysqli_fetch_array($result)) {
         $curr = $row['name'];
-        if($row['deleted']==0)
-        echo $row['name'].'<button>'.'<a href ="editspot.php?edit=' . $curr . '">' . ' Edytuj' . '</a>' .'</button>'
-            .'<button>' . '<a href ="includes/managespots.inc.php?delete=' . $curr . '">' . ' Usun' . '</a>' . '</button>'.'<br>';
+        if($row['deleted']==0) {
+            echo $row['name'] . '<button>' . '<a href ="editspot.php?edit=' . $curr . '">' . ' Edytuj' . '</a>' . '</button>'
+                . '<button>' . '<a href ="includes/managespots.inc.php?delete=' . $curr . '">' . ' Usun' . '</a>' . '</button>' . '<br>';
+        }
     }
     ?>
 </body>

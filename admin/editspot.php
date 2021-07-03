@@ -39,11 +39,12 @@ if(isset($_GET["edit"])) {
     $rowcity = mysqli_fetch_array($resultData2);
     $city = $rowcity['name'];
     echo '<select name ="city">'.'<option>'.$city.'</option>';
-            $sqli = "SELECT name FROM city";
+            $sqli = "SELECT name,deleted FROM city";
             $result = mysqli_query($conn, $sqli);
             while ($row = mysqli_fetch_array($result)) {
-                if($city !== $row['name'])
-                echo '<option>' . $row['name'] . '</option>';
+                if($city !== $row['name'] && $row['deleted']==0) {
+                    echo '<option>' . $row['name'] . '</option>';
+                }
             }
     echo '</select>';
 

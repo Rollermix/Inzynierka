@@ -220,3 +220,34 @@ function editspot($conn,$id, $city, $name, $description)
     exit();
 
 }
+function editcity($conn,$id, $voivodship, $name, $description)
+{
+    $sql="UPDATE city SET name =?, description=?, id_voivodship = (SELECT id FROM voivodship where name = ?) WHERE id=?;";
+    $stmt=mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../editcity.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt,"ssss",$name,$description,$voivodship,$id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../managecities.php?error=updated");
+    exit();
+
+}
+function deleteCity($conn,$nazwa)
+{
+    $sql="UPDATE city SET deleted =1 WHERE name=?;";
+    $stmt=mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../managecities.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt,"s",$nazwa);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../managecities.php?error=deleted");
+    exit();
+}

@@ -17,7 +17,7 @@ isLogged();
     <h2>
         Dodaj miasto
     </h2>
-    <form action="includes/addcity.inc.php" method="post">
+    <form action="includes/managecities.inc.php" method="post">
         <form method ="POST">
             <select name ='voivodship'>
                 <option>Wybierz województwo...</option>
@@ -35,6 +35,17 @@ isLogged();
         <button type = "submit" name ="submit">Dodaj miasto</button>
     </form>
 </section>
+<?php
+$sqli = "SELECT name,deleted FROM city";
+$result = mysqli_query($conn, $sqli);
+    while ($row = mysqli_fetch_array($result)) {
+        if($row['deleted']==0) {
+            $curr = $row['name'];
+            echo $row['name'] . '<button>' . '<a href ="editcity.php?edit=' . $curr . '">' . ' Edytuj' . '</a>' . '</button>' .
+                '<button>' . '<a href ="includes/managecities.inc.php?delete=' . $curr . '">' . ' Usuń ' . '</a>' . '</button>' . '<br>';
+        }
+}
+?>
 <?php
     if(isset($_GET["error"]))
     {
