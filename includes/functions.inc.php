@@ -198,7 +198,8 @@ function isDeleted($conn,$login)
     return $result;
     mysqli_stmt_close($stmt);
 }
-function editUser($conn,$firstname,$lastname,$login,$email,$description,$newpassword,$city,$id)
+function editUser($conn,$firstname,$lastname,$login,$email,$description,$city,$id)
 {
+
     $sql="UPDATE `user` SET `description`=IFNULL(Null,`description`) WHERE id =?";
 }

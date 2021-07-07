@@ -12,11 +12,12 @@ require_once 'includes/functions.inc.php';
 isLogged();
 ?>
 <?php
-echo $_SESSION["useruid"];
+
 $sqli = "SELECT id FROM user WHERE login='".$_SESSION["useruid"]."'";
 $result = mysqli_query($conn, $sqli);
 $row = mysqli_fetch_array($result);
-$_SESSION["idchanging"];
+$_SESSION["idchanging"]=$row['id'];
+
 ?>
 <section class="signup-form">
     <h2>
@@ -39,13 +40,16 @@ $_SESSION["idchanging"];
             ?>
         </select>
         <input type = "text" name="description" placeholder="Opisz siebie...">
-        <input type = "password" name="newpassword" placeholder="Wpisz nowe hasło...">
-        <input type = "password" name="repeatnewpassword" placeholder="Powtórz nowe hasło...">
-        <br>
-        <input type = "password" name="password" placeholder="Wprowadź hasło...">
-        <button type = "submit" name ="submit">Zmień hasło</button>
+
+        <button type = "submit" name ="submit">Zmień dane</button>
     </form>
 </section>
+    <form>
+        <input type ="password" name="newpassword" placeholder="Wpisz nowe hasło">
+        <input type ="password" name="repeatnewpassword" placeholder="Powtórz nowe hasło">
+        <input type ="password" name="newpassword" placeholder="Wpisz obecne hasło">
+        <button type = "submit" name ="submit">Zmień hasło</button>
+    </form>
 <?php
 if(isset($_GET["error"]))
 {
