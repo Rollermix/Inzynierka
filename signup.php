@@ -7,6 +7,7 @@
 <body>
 <?php
 require_once 'header.php';
+require_once 'includes/dbh.inc.php';
 ?>
     <section class="signup-form">
         <h2>
@@ -17,6 +18,17 @@ require_once 'header.php';
             <input type = "text" name="lastname" placeholder="Wpisz nazwisko...">
             <input type = "text" name="login" placeholder="Wpisz nazwę użytkownika...">
             <input type = "text" name="email" placeholder="Wpisz email...">
+            <select name ='city'>
+                <option>Wybierz miasto...</option>
+                <?php
+                $sqli = "SELECT name FROM city";
+                $result = mysqli_query($conn, $sqli);
+                while ($row = mysqli_fetch_array($result)) {
+
+                    echo '<option>'.$row['name'].'</option>';
+                }
+                ?>
+            </select>
             <input type = "text" name="description" placeholder="Opisz siebie...">
             <input type = "password" name="password" placeholder="Wpisz hasło...">
             <input type = "password" name="repeatpassword" placeholder="Powtórz hasło...">

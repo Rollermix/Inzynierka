@@ -9,11 +9,11 @@ session_start();
     <body>
         <nav>
             <ul>
-
+                    <li><a href='about.php'>O DoggoWalks</a></li>
                     <?php
                     if (isset($_SESSION["useruid"]))
                     {
-                        echo  "<li><a href='signup.php'>Profil</a></li>";
+                        echo  "<li><a href='manageaccount.php'>Zarządzaj profilem</a></li>";
                         echo  "<li><a href='includes/logout.inc.php'>Wyloguj sie</a></li>";
                     }
                     else

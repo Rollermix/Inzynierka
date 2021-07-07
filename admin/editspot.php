@@ -8,6 +8,7 @@
 <?php
 require_once 'adminheader.php';
 require_once 'includes/dbh.inc.php';
+isLogged();
 ?>
 
 <form action="includes/editspot.inc.php" method="post">

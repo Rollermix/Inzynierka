@@ -8,6 +8,7 @@ if (isset($_POST["submit"]))
     $description = $_POST["description"];
     $password = $_POST["password"];
     $repeatpassword = $_POST["repeatpassword"];
+    $city = $_POST["city"];
 
     require_once 'dbh.inc.php';
     require_once 'functions.inc.php';
@@ -36,7 +37,7 @@ if (isset($_POST["submit"]))
         header("location: ../signup.php?error=logintaken");
         exit();
     }
-    createUser($conn,$firstname,$lastname,$login,$email,$description,$password);
+    createUser($conn,$firstname,$lastname,$login,$email,$description,$password,$city);
 
 }
 else

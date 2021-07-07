@@ -79,9 +79,11 @@ function loginExists($conn, $login, $email)
     mysqli_stmt_close($stmt);
 }
 
-function createUser($conn,$firstname,$lastname,$login,$email,$description,$password)
+function createUser($conn,$firstname,$lastname,$login,$email,$description,$password,$city)
 {
-    $sql = "INSERT INTO user (name,surname,login,email,description,password) VALUES (?,?,?,?,?,?);";
+    if($city=="Wybierz miasto...")
+        $city=NULL;
+    $sql = "INSERT INTO user (name,surname,login,email,description,password,id_city) VALUES (?,?,?,?,?,?,(SELECT id FROM city where name = ?));";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
@@ -89,7 +91,7 @@ function createUser($conn,$firstname,$lastname,$login,$email,$description,$passw
         exit();
     }
     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
-    mysqli_stmt_bind_param($stmt, "ssssss",$firstname,$lastname,$login,$email,$description,$hashedPwd);
+    mysqli_stmt_bind_param($stmt, "sssssss",$firstname,$lastname,$login,$email,$description,$hashedPwd,$city);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     header("location: ../signup.php?error=none");
@@ -146,7 +148,7 @@ function isLogged()
 }
 function isBlocked($conn,$login)
 {
-    $result;
+    $result=false;
     $sql = "SELECT blocked FROM user WHERE login = ? OR email = ?;";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
@@ -157,7 +159,8 @@ function isBlocked($conn,$login)
     mysqli_stmt_bind_param($stmt, "ss",$login, $email);
     mysqli_stmt_execute($stmt);
     $resultData = mysqli_stmt_get_result($stmt);
-    if($resultData==1)
+    $row = mysqli_fetch_array($resultData);
+    if($row['blocked']==1)
     {
         $result = true;
     }
@@ -182,7 +185,8 @@ function isDeleted($conn,$login)
     mysqli_stmt_bind_param($stmt, "ss",$login, $email);
     mysqli_stmt_execute($stmt);
     $resultData = mysqli_stmt_get_result($stmt);
-    if($resultData==1)
+    $row = mysqli_fetch_array($resultData);
+    if($row['deleted']==1)
     {
         $result = true;
     }
@@ -193,4 +197,8 @@ function isDeleted($conn,$login)
     }
     return $result;
     mysqli_stmt_close($stmt);
+}
+function editUser($conn,$firstname,$lastname,$login,$email,$description,$newpassword,$city,$id)
+{
+    $sql="UPDATE `user` SET `description`=IFNULL(Null,`description`) WHERE id =?";
 }
