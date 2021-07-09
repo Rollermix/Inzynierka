@@ -201,5 +201,23 @@ function isDeleted($conn,$login)
 function editUser($conn,$firstname,$lastname,$login,$email,$description,$city,$id)
 {
 
-    $sql="UPDATE `user` SET `description`=IFNULL(Null,`description`) WHERE id =?";
+    $sql="UPDATE user SET 
+                name=IFNULL(?,name),
+                surname=IFNULL(?,surname),
+                email=IFNULL(?,email),
+                login=IFNULL(?,login),
+                description=IFNULL(?,description),
+                id_city=IFNULL((SELECT id FROM city where name = ?),id_city)
+                WHERE id =?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../manageaccount.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "sssssss",$firstname,$lastname,$email,$login,$description,$city,$id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../manageaccount.php?error=none");
+    exit();
 }

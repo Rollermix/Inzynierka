@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'dbh.inc.php';
 require_once 'functions.inc.php';
 $firstname = $_POST["firstname"];
@@ -28,17 +29,20 @@ if(!empty($email)) {
 }
 else
     $email=NULL;
-if(!empty($newpassword)|| !empty($repeatnewpassword)) {
-    if (pwdMatch($newpassword, $repeatnewpassword) !== false) {
-        header("location: ../manageaccount?error=passworddontmatch");
-        exit();
-    }
-}
+
 if(!empty($login)) {
     if (loginExists($conn, $login, $email) !== false) {
         header("location: ../manageaccount.php?error=logintaken");
         exit();
     }
 }
+if(empty($firstname))
+    $firstname=NULL;
+if(empty($lastname))
+    $lastname=NULL;
+if(empty($description))
+    $description=NULL;
+if(empty($city))
+    $city=NULL;
 
-editUser($conn,$firstname,$lastname,$login,$email,$description,$newpassword,$city,$id,$password);
+editUser($conn,$firstname,$lastname,$login,$email,$description,$city,$id);
