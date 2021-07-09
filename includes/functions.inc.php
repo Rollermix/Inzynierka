@@ -221,3 +221,64 @@ function editUser($conn,$firstname,$lastname,$login,$email,$description,$city,$i
     header("location: ../manageaccount.php?error=none");
     exit();
 }
+function deleteAccount($conn,$id)
+{
+    $sql="UPDATE user SET 
+                deleted = 1
+                WHERE id =?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../manageaccount.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s",$id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header ("location: ../includes/logout.inc.php?deleted=true");
+    exit();
+}
+function emptyInputChangingPwd($password,$newpassword,$repeatnewpassword)
+{
+    $result;
+    if(empty($password) || empty($newpassword) || empty($repeatnewpassword))
+    {
+        $result = true;
+    }
+    else
+    {
+        $result = false;
+    }
+    return $result;
+}
+function editPwd($conn,$login,$password,$newpassword,$repeatnewpassword)
+{
+    $uidExists = loginExists($conn, $login, $login);
+    if($uidExists === false)
+    {
+        header("location: ../login.php?error=wrongLogin");
+        exit();
+    }
+    $passwordHashed = $uidExists["password"];
+    $checkPwd = password_verify($password,$passwordHashed);
+    if($checkPwd === false)
+    {
+        header("location: ../login.php?error=wrongPassword");
+    }
+    else
+    {
+        $hashedPwd = password_hash($newpassword, PASSWORD_DEFAULT);
+        $sql = "UPDATE user Set Password =? WHERE login=?;";
+        $stmt = mysqli_stmt_init($conn);
+        if(!mysqli_stmt_prepare($stmt,$sql))
+        {
+            header("location: ../signup.php?error=stmtfailed");
+            exit();
+        }
+        mysqli_stmt_bind_param($stmt, "ss",$hashedPwd,$login);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        header("location: ../manageaccount.php?error=none");
+        exit();
+    }
+}

@@ -44,12 +44,16 @@ $_SESSION["idchanging"]=$row['id'];
         <button type = "submit" name ="submit">Zmień dane</button>
     </form>
 </section>
-    <form>
+    <form action="includes/changepassword.inc.php" method="post">
         <input type ="password" name="newpassword" placeholder="Wpisz nowe hasło">
         <input type ="password" name="repeatnewpassword" placeholder="Powtórz nowe hasło">
-        <input type ="password" name="newpassword" placeholder="Wpisz obecne hasło">
-        <button type = "submit" name ="submit">Zmień hasło</button>
+        <input type ="password" name="password" placeholder="Wpisz obecne hasło">
+        <button type = "submit" name ="submit2">Zmień hasło</button>
     </form>
+<br>
+<?php
+echo '<button>' . '<a href ="includes/deleteaccount.inc.php?id=' . $_SESSION["idchanging"] . '">' . ' Usuń konto' . '</a>' . '</button>';
+?>
 <?php
 if(isset($_GET["error"]))
 {
