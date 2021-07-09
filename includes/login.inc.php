@@ -23,6 +23,24 @@ if(isset($_POST["submit"]))
     }
     loginUser($conn,$login,$password);
 }
+else if ((isset($_POST["submit2"])))
+{
+    $login = $_POST["name"];
+
+    require_once 'dbh.inc.php';
+    require_once 'functions.inc.php';
+    if(empty($login))
+    {
+        header("location: ../login.php?error=emptylogin");
+        exit();
+    }
+    if(loginExists2($conn,$login)!==true)
+    {
+        header("location: ../login.php?error=loginnotexist");
+        exit();
+    }
+    remindPassword($conn,$login);
+}
 else
 {
     header("location: ../login.php");

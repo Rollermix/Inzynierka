@@ -78,7 +78,30 @@ function loginExists($conn, $login, $email)
     }
     mysqli_stmt_close($stmt);
 }
-
+function loginExists2($conn, $login)
+{
+    $sql = "SELECT * FROM user WHERE login =? or email=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../signup.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "ss",$login,$login);
+    mysqli_stmt_execute($stmt);
+    $resultData = mysqli_stmt_get_result($stmt);
+    if(mysqli_fetch_assoc($resultData))
+    {
+        $result = true;
+        return $result;
+    }
+    else
+    {
+        $result = false;
+        return $result;
+    }
+    mysqli_stmt_close($stmt);
+}
 function createUser($conn,$firstname,$lastname,$login,$email,$description,$password,$city)
 {
     if($city=="Wybierz miasto...")
@@ -282,3 +305,24 @@ function editPwd($conn,$login,$password,$newpassword,$repeatnewpassword)
         exit();
     }
 }
+function remindPassword($conn,$login)
+{
+    $sql = "SELECT email FROM user WHERE login =? or email=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../signup.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "ss",$login,$login);
+    mysqli_stmt_execute($stmt);
+    $resultData = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($resultData);
+    $email=$row['email'];
+    $msg = "First line of text\nSecond line of text";
+    $msg = wordwrap($msg,70);
+    mail($email,"My subject",$msg);
+    header("location: ../login.php?remind=".$email);
+    exit();
+}
+
