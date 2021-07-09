@@ -17,6 +17,7 @@ require_once 'header.php';
             <input type = "text" name="name" placeholder="Wpisz nazwę użytkownika lub email...">
             <input type = "password" name="password" placeholder="Wpisz hasło...">
             <button type = "submit" name ="submit">Zaloguj się</button>
+            <button type = "submit" name ="submit2">Przypomnij hasło</button>
         </form>
     </section>
     <?php
