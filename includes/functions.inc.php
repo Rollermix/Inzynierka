@@ -398,3 +398,22 @@ function adddog($conn,$name,$size,$opis,$user)
     mysqli_stmt_close($stmt);
 
 }
+function editdog($conn,$name,$size,$opis,$user)
+{
+    $sql="UPDATE dog SET 
+                name=IFNULL(?,name),
+                size=IFNULL(?,size),
+                opis=IFNULL(?,opis)
+                WHERE id_user =?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../editdog.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "ssss",$name,$size,$opis,$user);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../editdog.php?error=none");
+    exit();
+}
