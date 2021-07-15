@@ -7,7 +7,9 @@
 <body>
 <?php
 require_once 'adminheader.php';
+
 require_once 'includes/dbh.inc.php';
+require_once 'includes/adminfunctions.inc.php';
 isLogged();
 ?>
 
@@ -62,5 +64,6 @@ if(isset($_GET["edit"])) {
 ?>
     <button type = "submit" name ="submit">Edytuj</button>
 </form>
+
 </body>
 </html>

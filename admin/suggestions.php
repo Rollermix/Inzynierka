@@ -24,8 +24,8 @@ if(mysqli_num_rows($result)>0)
             readSuggestion($row["id"],$conn);
         } if($row['id_status']==2) {
             echo '<tr><td>' . $row['suggestion'] . '</td>' . '<td>' . $row['status'] . '</td>' .'<td>'.
-                '<button>'.'<a href="addcity?acceptcity='.$row["id"].'">'.'Dodaj miasto'.'</a>'.
-                '</button>'.'</td>'.'<td>'.'<button>'.'<a href="editspot?acceptspot='.$row["id"].'">'.'Dodaj spot'.'</a>'.
+                '<button>'.'<a href="addcity.php?acceptcity='.$row["id"].'">'.'Dodaj miasto'.'</a>'.
+                '</button>'.'</td>'.'<td>'.'<button>'.'<a href="managespots.php?acceptspot='.$row["id"].'">'.'Dodaj spot'.'</a>'.
                 '</button>'.'</td>'.'<td>'.'<button>'.'<a href="includes/suggestions.inc.php?discard='.$row["id"].'">'.'Odrzuć'.'</a>'.
                 '</button>'.'</td>'.'</tr>';
         }

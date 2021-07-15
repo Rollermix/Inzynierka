@@ -43,5 +43,19 @@ isLogged();
         }
     }
     ?>
+
+<?php
+if(isset($_GET["acceptspot"]))
+{
+    $id=$_GET["acceptspot"];
+    $sqli = "SELECT suggestion FROM suggestions WHERE id=".$id;
+    $result = mysqli_query($conn, $sqli);
+    while ($row = mysqli_fetch_array($result)) {
+
+        echo '<p>'.$row['suggestion'].'</p>';
+    }
+    acceptSuggestion($id,$conn);
+}
+?>
 </body>
 </html>

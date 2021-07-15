@@ -21,9 +21,13 @@ isLogged();
                 $result = mysqli_query($conn, $sqli);
                 while ($row = mysqli_fetch_array($result)) {
                     $curr=$row['login'];
+                    $sql = "SELECT id From reminder WHERE id_user=".$row['id'];
+                    $result2 = mysqli_query($conn, $sql);
+                    $row2 = mysqli_num_rows($result2);
                     if ($row['blocked']==0 && $row['deleted']==0) {
                         echo $row['login'] . '<button>' . '<a href ="includes/manageusers.inc.php?block=' . $curr . '">' . ' Zablokuj' . '</a>' .
                             '</button>' . '<button>' . '<a href ="includes/manageusers.inc.php?delete=' . $curr . '">' . ' Usun' . '</a>' . '</button>';
+                        echo ' Użytkownik dostał następującą liczbę upomnień: '.$row2;
                         echo '<br>';
                     }
                     else if ($row['blocked']==1 && $row['deleted']==0) {
