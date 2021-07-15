@@ -9,6 +9,12 @@ if(isset($_POST["submit"])) {
     $size = $_POST["size"];
     $opis = $_POST["opis"];
     $user = $_SESSION["userid"];
+    if(empty($opis))
+        $opis=NULL;
+    if($size=="Wybierz rozmiar psa...")
+        $size=NULL;
+    if(empty($name))
+        $name=NULL;
     editdog($conn,$name,$size,$opis,$user);
 }
 $statusMsg = '';

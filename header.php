@@ -17,6 +17,7 @@ session_start();
                     {
                         hasdog($conn,$_SESSION["userid"]);
                         echo  "<li><a href='suggestion.php'>Zgłoś coś</a></li>";
+                        echo  "<li><a href='addwalk.php'>Dodaj spacer</a></li>";
                         echo  "<li><a href='manageaccount.php'>Zarządzaj profilem</a></li>";
                         echo  "<li><a href='includes/logout.inc.php'>Wyloguj sie</a></li>";
                     }
