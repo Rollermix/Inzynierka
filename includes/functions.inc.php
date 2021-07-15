@@ -12,7 +12,6 @@ function emptyInputSignup($firstname,$lastname,$login,$email,$password,$repeatpa
     }
     return $result;
 }
-
 function invalidLogin($login)
 {
     $result;
@@ -26,7 +25,6 @@ function invalidLogin($login)
     }
     return $result;
 }
-
 function invalidEmail($email)
 {
 
@@ -40,7 +38,6 @@ function invalidEmail($email)
     }
     return $result;
 }
-
 function pwdMatch($password, $repeatpassword)
 {
     $result;
@@ -54,7 +51,6 @@ function pwdMatch($password, $repeatpassword)
     }
     return $result;
 }
-
 function loginExists($conn, $login, $email)
 {
     $sql = "SELECT * FROM user WHERE login = ? OR email = ?;";
@@ -133,7 +129,6 @@ function emptyInputLogin($login,$password)
     }
     return $result;
 }
-
 function loginUser($conn,$login,$password)
 {
     $uidExists = loginExists($conn, $login, $login);
@@ -363,4 +358,43 @@ function addSuggestion($conn,$suggestion,$iduser)
     mysqli_stmt_close($stmt);
     header("location: ../suggestion.php?error=none");
     exit();
+}
+function hasdog($conn,$id)
+{
+
+    $sql = "SELECT * FROM dog WHERE id_user = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../signup.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s",$id);
+    mysqli_stmt_execute($stmt);
+    $resultData = mysqli_stmt_get_result($stmt);
+    $row=mysqli_num_rows($resultData);
+    if($row==0)
+    {
+        echo '<a href="../inzynierka/adddog.php">Dodaj Psa</a>';
+    }
+    else if($row==1)
+    {
+        echo '<a href="../inzynierka/editdog.php">Edytuj Psa</a>';
+    }
+    mysqli_stmt_close($stmt);
+}
+function adddog($conn,$name,$size,$opis,$user)
+{
+
+    $sql = "INSERT INTO dog (id_user,name,size,opis) VALUES (?,?,?,?);";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../adddog.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "ssss",$user,$name,$size,$opis);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
 }
