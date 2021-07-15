@@ -18,7 +18,6 @@ isLogged();
         Dodaj miasto
     </h2>
     <form action="includes/addcity.inc.php" method="post">
-        <form method ="POST">
             <select name ='voivodship'>
                 <option>Wybierz województwo...</option>
                 <?php

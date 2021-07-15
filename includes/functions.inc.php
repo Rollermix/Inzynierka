@@ -325,4 +325,42 @@ function remindPassword($conn,$login)
     header("location: ../login.php?remind=".$email);
     exit();
 }
-
+function emptyInputSuggestion($suggestion)
+{
+    $result;
+    if(empty($suggestion))
+    {
+        $result = true;
+    }
+    else
+    {
+        $result = false;
+    }
+    return $result;
+}
+function toLongSuggestion($suggestion)
+{
+    $result;
+        if(strlen($suggestion)>500)
+        {
+            $result = true;
+        }
+        else $result = false;
+        return $result;
+}
+function addSuggestion($conn,$suggestion,$iduser)
+{
+    $status = "1";
+    $sql = "INSERT INTO suggestions (suggestion,id_user,id_status) VALUES (?,?,?);";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../suggestion.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "sss",$suggestion,$iduser,$status);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../suggestion.php?error=none");
+    exit();
+}

@@ -13,6 +13,7 @@ session_start();
                     <?php
                     if (isset($_SESSION["useruid"]))
                     {
+                        echo  "<li><a href='suggestion.php'>Zgłoś coś</a></li>";
                         echo  "<li><a href='manageaccount.php'>Zarządzaj profilem</a></li>";
                         echo  "<li><a href='includes/logout.inc.php'>Wyloguj sie</a></li>";
                     }

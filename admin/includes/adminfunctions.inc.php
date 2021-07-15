@@ -251,3 +251,52 @@ function deleteCity($conn,$nazwa)
     header("location: ../managecities.php?error=deleted");
     exit();
 }
+function discardSuggestion($conn, $id)
+{
+    $sql="UPDATE suggestions SET id_status = 4 WHERE id=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../suggestions.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s",$id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../suggestions.php?error=none");
+    exit();
+}
+function readSuggestion($id,$conn)
+{
+    $sql="UPDATE suggestions SET id_status = 2 WHERE id=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../admin/suggestions.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s",$id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    exit();
+}
+function sendReminder($conn,$adminid,$id,$description)
+{
+    if(empty($description))
+    {
+        header("location: ../reminduser.php?error=nothing&iduser=".$id);
+        exit();
+    }
+    $sql="INSERT INTO reminder (id_user,id_sending_user,Message) VALUES (?,?,?);";
+    $stmt=mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../reminduser.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "sss",$id,$adminid,$description);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../manageusers.php?error=none");
+    exit();
+}
