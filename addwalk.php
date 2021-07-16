@@ -9,8 +9,8 @@
 require_once 'header.php';
 require_once 'includes/dbh.inc.php';
 ?>
-<form action="includes/adddog.inc.php" method="post">
-    <select name ='id_spot'>
+<form action="includes/addwalk.inc.php" method="post">
+    <select name ='spot'>
         <option>Wybierz miejsce</option>
         <?php
         $sqli = "SELECT spot.name FROM spot INNER JOIN city ON spot.id_city=city.id WHERE city.id=(SELECT id_city FROM user WHERE id=".$_SESSION["userid"].")";
@@ -22,6 +22,9 @@ require_once 'includes/dbh.inc.php';
         }
         ?>
     </select>
+    <input type="datetime-local" name="date">
+    <input type="text" name="description" placeholder="Opis...">
+    <button type = "submit" name ="submit">Dodaj spacer</button>
 
 </form>
 

@@ -417,3 +417,18 @@ function editdog($conn,$name,$size,$opis,$user)
     header("location: ../editdog.php?error=none");
     exit();
 }
+function addwalk($conn, $spot, $date,$description,$addinguser)
+{
+    $sql = "INSERT INTO walk (id_spot,id_user,time,description) VALUES ((Select id from spot WHERE name =?),?,?,?);";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../addwalk.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "ssss",$spot,$addinguser,$date,$description);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../addwalk.php?error=none");
+    exit();
+}
