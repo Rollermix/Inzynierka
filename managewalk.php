@@ -29,12 +29,21 @@ while ($row = mysqli_fetch_array($result)) {
 echo "Twoje zaakceptowane spacery:<br>";
 $sqli = 'SELECT walk.*,spot.name,user.login From walk INNER JOIN spot ON spot.id=walk.id_spot 
         INNER JOIN user ON user.id=walk.id_accompanied_user  WHERE walk.id_accompanied_user IS NOT NULL 
-        AND walk.id_user="'.$_SESSION['userid'].'"OR walk.id_accompanied_user="'.$_SESSION['userid'].'"';
+        AND walk.id_user="'.$_SESSION['userid'].'"';
 $result = mysqli_query($conn, $sqli);
 while ($row = mysqli_fetch_array($result)) {
         echo 'Użytkownik: '.$row['login'].' Miejsce '.$row['name'].' Kiedy: '.$row['time'].' Opis: '.$row['description'];
 }
-
+$sql2 = 'SELECT walk.*,spot.name,user.login From walk INNER JOIN spot ON spot.id=walk.id_spot 
+        INNER JOIN user ON user.id=walk.id_user  WHERE walk.id_accompanied_user IS NOT NULL 
+        AND walk.id_accompanied_user="'.$_SESSION['userid'].'"';
+$result2 = mysqli_query($conn, $sql2);
+$numrows2=mysqli_num_rows($result2);
+if ($numrows2>0) {
+    while ($row = mysqli_fetch_array($result2)) {
+        echo 'Użytkownik: ' . $row['login'] . ' Miejsce ' . $row['name'] . ' Kiedy: ' . $row['time'] . ' Opis: ' . $row['description'];
+    }
+}
 
 ?>
 
