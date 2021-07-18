@@ -19,6 +19,7 @@ $result = mysqli_query($conn, $sqli);
 while ($row = mysqli_fetch_array($result)) {
     if ($row['id_accompanied_user'] == NULL) {
         echo 'Miejsce '.$row['name'].' Kiedy: '.$row['time'].' Opis: '.$row['description'];
+        echo '<button>'.'<a href="editwalk.php?id='.$row['id'].'">'.'Edytuj'.'</a>'.'</button>';
     }
 }
 ?>

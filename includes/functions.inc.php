@@ -539,3 +539,23 @@ function setDisplayedMessage($conn,$idmessage)
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 }
+function editWalk($conn,$idwalk,$spot,$date,$description)
+{
+    $sql="UPDATE walk SET 
+                id_spot=IFNULL((Select id from spot WHERE name =?),id_spot),
+                time=IFNULL(?,time),
+                description=IFNULL(?,description),
+                last_edited=NOW()
+                WHERE id=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../managewalk.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "ssss",$spot,$date,$description,$idwalk);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../managewalk.php?error=none");
+    exit();
+}
