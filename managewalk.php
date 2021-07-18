@@ -21,18 +21,30 @@ while ($row = mysqli_fetch_array($result)) {
         echo 'Miejsce '.$row['name'].' Kiedy: '.$row['time'].' Opis: '.$row['description'];
     }
 }
-
-
 ?>
 <br>
 <?php
-echo "Twoje zaakceptowane spacery:<br>";
 $sqli = 'SELECT walk.*,spot.name,user.login From walk INNER JOIN spot ON spot.id=walk.id_spot 
         INNER JOIN user ON user.id=walk.id_accompanied_user  WHERE walk.id_accompanied_user IS NOT NULL 
         AND walk.id_user="'.$_SESSION['userid'].'"';
 $result = mysqli_query($conn, $sqli);
 while ($row = mysqli_fetch_array($result)) {
-        echo 'Użytkownik: '.$row['login'].' Miejsce '.$row['name'].' Kiedy: '.$row['time'].' Opis: '.$row['description'];
+        if($row['approved']==1) {
+            echo "Twoje zatwierdzone spacery:<br>";
+            echo 'Użytkownik: ' . $row['login'] . ' Miejsce ' . $row['name'] . ' Kiedy: ' . $row['time'] . ' Opis: ' . $row['description'];
+            echo '<button>'.'<a href ="chat.php?id='.$row['id'].'">'.'Otwórz czat'.'</a>'.'</button>';
+        }
+        echo '<br>';
+        echo "Twoje spacery do akceptacji:<br>";
+        if($row['approved']==0 && $row['cancelled']==0) {
+            echo 'Użytkownik: ' . $row['login'] . ' Miejsce ' . $row['name'] . ' Kiedy: ' . $row['time'] . ' Opis: ' .
+                $row['description'].'<button>'.'<a href="includes/accept.inc.php?id='.$row['id'].'">'.'Akceptuj'.'</a>'.
+                '</button>'.'<button>'.'<a href="includes/deny.inc.php?id='.$row['id'].'">'.'Anuluj'.'</a>'.'</button>';
+        }
+         if($row['cancelled']==1) {
+        echo "Twoje anulowane spacery:<br>";
+        echo 'Użytkownik: ' . $row['login'] . ' Miejsce ' . $row['name'] . ' Kiedy: ' . $row['time'] . ' Opis: ' . $row['description'];
+    }
 }
 $sql2 = 'SELECT walk.*,spot.name,user.login From walk INNER JOIN spot ON spot.id=walk.id_spot 
         INNER JOIN user ON user.id=walk.id_user  WHERE walk.id_accompanied_user IS NOT NULL 
@@ -47,6 +59,6 @@ if ($numrows2>0) {
 
 ?>
 
-</br>
+</button>
 </body>
 </html>

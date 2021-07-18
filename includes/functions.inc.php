@@ -447,3 +447,95 @@ function acceptWalk($conn,$iduser,$idwalk)
     header("location: ../managewalk.php?error=none");
     exit();
 }
+function approveWalk($conn,$idwalk)
+{
+    $approve = 1;
+    $sql="UPDATE walk SET approved =? WHERE id =?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../managewalk.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "ss",$approve,$idwalk);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../managewalk.php?error=none");
+    exit();
+}
+function denyWalk($conn,$idwalk)
+{
+    $deny = 1;
+    $sql="UPDATE walk SET cancelled =? WHERE id =?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../managewalk.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "ss",$deny,$idwalk);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+}
+function cancellMessage($conn,$idwalk,$idcancellinguser)
+{
+    $message="Spacer został anulowany";
+    $sql = "INSERT INTO chat (id_walk,id_sending_user,Message) VALUES (?,?,?);";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../managewalk.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "sis",$idwalk,$idcancellinguser,$message);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../managewalk.php?error=none");
+    exit();
+}
+function sendMessage($conn,$idwalk,$idsendinguser,$message)
+{
+    $sql = "INSERT INTO chat (id_walk,id_sending_user,Message) VALUES (?,?,?);";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../chat.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "sis",$idwalk,$idsendinguser,$message);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../chat.php?id=".$idwalk);
+    exit();
+}
+function deleteMessage($conn,$idwalk,$idmessage)
+{
+    $delete = "Wiadomość została usunięta";
+    $sql="UPDATE chat SET Message =? WHERE id =?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../chat.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "ss",$delete,$idmessage);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../chat.php?id=".$idwalk);
+    exit();
+}
+function setDisplayedMessage($conn,$idmessage)
+{
+    $displayed = 1;
+    $sql="UPDATE chat SET displayed =? WHERE id =?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../chat.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "ss",$displayed,$idmessage);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
