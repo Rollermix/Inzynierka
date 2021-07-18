@@ -28,6 +28,22 @@ while ($row = mysqli_fetch_array($result)) {
 
 
 ?>
+<form action="includes/reportuser.inc.php" method="post">
+    <select name ='user'>
+        <option>Wybierz Użytkownika</option>
+        <?php
+        $sqli = 'SELECT walk.id_user,user.login FROM walk INNER JOIN user ON walk.id_user=user.id WHERE user.login !="'.$_SESSION['useruid'].'"';
+        $result = mysqli_query($conn, $sqli);
+        while ($row = mysqli_fetch_array($result)) {
+
+            echo '<option>'.$row['login'].'</option>';
+        }
+        ?>
+    </select>
+    <input type = "text" name="reason" placeholder="Wpisz powód zgłoszenia">
+    <button type = "submit" name ="submit">Wyślij zgłoszenie</button>
+</form>
+
 
 
 </br>

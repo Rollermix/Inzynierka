@@ -559,3 +559,30 @@ function editWalk($conn,$idwalk,$spot,$date,$description)
     header("location: ../managewalk.php?error=none");
     exit();
 }
+function reportUser($conn,$reason,$user,$reporteduser)
+{
+    $sql = "INSERT INTO notification (id_user,id_reported_user,reason) VALUES (?,(SELECT id FROM user WHERE login =?),?);";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../managewalk.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "sss",$user,$reporteduser,$reason);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../managewalk.php?error=none");
+    exit();
+}
+function emptyField($field)
+{
+    if(empty($field))
+    {
+        $result = true;
+    }
+    else
+    {
+        $result = false;
+    }
+    return $result;
+}
