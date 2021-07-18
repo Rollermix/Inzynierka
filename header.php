@@ -15,8 +15,10 @@ session_start();
                     require_once 'includes/dbh.inc.php';
                     if (isset($_SESSION["useruid"]))
                     {
+                        hasunreadMessage($conn,$_SESSION["userid"]);
+                        echo '<br>';
                         hasdog($conn,$_SESSION["userid"]);
-                        echo  "<li><a href='suggestion.php'>Zgłoś coś</a></li>";
+                        echo  "<li><a href='suggestion.php'>Zgłoszenia i sugestie</a></li>";
                         echo  "<li><a href='managewalk.php'>Zarządzaj spacerami</a></li>";
                         echo  "<li><a href='manageaccount.php'>Zarządzaj profilem</a></li>";
                         echo  "<li><a href='includes/logout.inc.php'>Wyloguj sie</a></li>";

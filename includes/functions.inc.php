@@ -586,3 +586,13 @@ function emptyField($field)
     }
     return $result;
 }
+function hasunreadMessage($conn,$id)
+{
+    $sqli = 'SELECT id FROM walk WHERE id_user="'.$id.'" OR id_accompanied_user="'.$id.'"';
+    $result = mysqli_query($conn, $sqli);
+    $row = mysqli_fetch_array($result);
+    $sql2='Select count(displayed) FROM chat WHERE displayed="0" AND id_walk="'.$row['id'].'" AND id_sending_user!="'.$id.'"';
+    $result2 = mysqli_query($conn, $sql2);
+    $row2=mysqli_fetch_array($result2);
+    echo 'Masz: '.$row2['count(displayed)'].' nowych wiadmości';
+}
