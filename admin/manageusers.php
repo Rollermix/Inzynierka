@@ -26,6 +26,14 @@ isLogged();
                     $row2 = mysqli_num_rows($result2);
                     if ($row['blocked']==0 && $row['deleted']==0) {
                         echo $row['login'] . '<button>' . '<a href ="includes/manageusers.inc.php?block=' . $curr . '">' . ' Zablokuj' . '</a>' .
+                            '</button>' .'<button>' . '<a href ="includes/manageusers.inc.php?reporting=' . $curr . '">' . ' Zablokuj możliwość zgłaszania' . '</a>' .
+                            '</button>' . '<button>' . '<a href ="includes/manageusers.inc.php?delete=' . $curr . '">' . ' Usun' . '</a>' . '</button>';
+                        echo ' Użytkownik dostał następującą liczbę upomnień: '.$row2;
+                        echo '<br>';
+                    }
+                    else if ($row['blocked']==2 && $row['deleted']==0) {
+                        echo $row['login'] . '<button>' . '<a href ="includes/manageusers.inc.php?block=' . $curr . '">' . ' Zablokuj' . '</a>' .
+                            '</button>' .'<button>' . '<a href ="includes/manageusers.inc.php?unblockreporting=' . $curr . '">' . ' Odblokuj możliwość zgłaszania' . '</a>' .
                             '</button>' . '<button>' . '<a href ="includes/manageusers.inc.php?delete=' . $curr . '">' . ' Usun' . '</a>' . '</button>';
                         echo ' Użytkownik dostał następującą liczbę upomnień: '.$row2;
                         echo '<br>';

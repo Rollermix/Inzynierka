@@ -9,12 +9,23 @@
 require_once 'header.php';
 require_once 'includes/dbh.inc.php';
 ?>
-<form action="includes/suggestion.inc.php" method="post">
-    <input type = "text" name="name" placeholder="Co chciałbyś, aby znalazło się w naszym systemie....">
-    <button type = "submit" name ="submit">Wyślij</button>
-</form>
-</br>
-
+<?php
+$id = $_SESSION["userid"];
+$sqli = "SELECT blocked From user WHERE id ='".$id."'";
+$result = mysqli_query($conn, $sqli);
+$row = mysqli_fetch_array($result);
+if ($row['blocked']==0) {
+    echo '<form action="includes/suggestion.inc.php" method="post">';
+    echo '<input type = "text" name="name" placeholder="Co chciałbyś, aby znalazło się w naszym systemie....">';
+    echo '<button type = "submit" name ="submit">Wyślij</button>';
+    echo '</form>';
+    echo '</br>';
+}
+else if ($row['blocked']==2)
+{
+    echo "Nie możesz wysyłać sugestii";
+}
+?>
 <?php
 $id = $_SESSION["userid"];
 $sqli = "SELECT suggestions.id_status,suggestions.suggestion, status.status From suggestions INNER JOIN status 

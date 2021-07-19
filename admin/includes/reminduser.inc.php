@@ -6,3 +6,4 @@ require_once 'adminfunctions.inc.php';
     $adminid =  $_SESSION["userid"];
     $id =  $_SESSION["reported"];
     sendReminder($conn,$adminid,$id,$description);
+

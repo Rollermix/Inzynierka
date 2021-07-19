@@ -302,7 +302,19 @@ function sendReminder($conn,$adminid,$id,$description)
 }
 function acceptSuggestion($id,$conn)
 {
-    $sql="UPDATE suggestions SET id_status = 3 WHERE id=?;";
+    $sql = "UPDATE suggestions SET id_status = 3 WHERE id=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../admin/suggestions.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s", $id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
+function readNotofication($conn,$id)
+{
+    $sql="UPDATE notification SET id_status = 2 WHERE id=?;";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
@@ -312,5 +324,66 @@ function acceptSuggestion($id,$conn)
     mysqli_stmt_bind_param($stmt, "s",$id);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
+    exit();
+}
+function acceptnotification($conn,$id,$iduser)
+{
+    $sql="UPDATE notification SET id_status = 3 WHERE id=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../admin/managenotification.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s",$id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../reminduser.php?iduser=".$iduser);
+    exit();
+
+}
+function denynotification($conn,$id)
+{
+    $sql="UPDATE notification SET id_status = 4 WHERE id=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../managenotification.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s",$id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../managenotification.php?");
+    exit();
+}
+function blockreporting($conn,$nazwa)
+{
+    $sql="UPDATE user SET blocked = 2 WHERE login=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../manageusers.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s",$nazwa);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../manageusers.php?error=none");
+    exit();
+}
+function unblockreporting($conn,$nazwa)
+{
+    $sql="UPDATE user SET blocked = 0 WHERE login=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../manageusers.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s",$nazwa);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../manageusers.php?error=none");
     exit();
 }

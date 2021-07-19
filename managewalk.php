@@ -59,22 +59,32 @@ if ($numrows2>0) {
 }
 
 ?>
-<a>Zgłoś użytkownika</a>
-<form action="includes/reportuser.inc.php" method="post">
-    <select name ='user'>
-        <option>Wybierz Użytkownika</option>
-        <?php
-        $sqli = 'SELECT walk.id_user,user.login FROM walk INNER JOIN user ON walk.id_user=user.id WHERE user.login !="'.$_SESSION['useruid'].'"';
-        $result = mysqli_query($conn, $sqli);
-        while ($row = mysqli_fetch_array($result)) {
+<?php
+$id = $_SESSION["userid"];
+$sql2 = "SELECT blocked From user WHERE id ='".$id."'";
+$result2 = mysqli_query($conn, $sql2);
+$row2 = mysqli_fetch_array($result2);
+if ($row2['blocked']==0) {
+    echo '<a>Zgłoś użytkownika</a>';
+    echo ' <form action="includes/reportuser.inc.php" method="post">';
+    echo ' <select name ="user">';
+    echo ' <option>Wybierz Użytkownika</option>';
+    $sqli = 'SELECT walk.id_user,user.login FROM walk INNER JOIN user ON walk.id_user=user.id WHERE user.login !="' . $_SESSION['useruid'] . '"';
+    $result = mysqli_query($conn, $sqli);
+    while ($row = mysqli_fetch_array($result)) {
 
-            echo '<option>'.$row['login'].'</option>';
-        }
-        ?>
-    </select>
-    <input type = "text" name="reason" placeholder="Wpisz powód zgłoszenia">
-    <button type = "submit" name ="submit">Wyślij zgłoszenie</button>
-</form>
+        echo '<option>' . $row['login'] . '</option>';
+    }
 
+    echo '</select>';
+    echo '<input type = "text" name="reason" placeholder="Wpisz powód zgłoszenia">';
+    echo '<button type = "submit" name ="submit">Wyślij zgłoszenie</button>';
+    echo '</form>';
+}
+else if ($row2['blocked']==2)
+{
+    echo "Nie zgłaszać uzytkowników";
+}
+?>
 </body>
 </html>

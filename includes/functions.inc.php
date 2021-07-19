@@ -618,3 +618,4 @@ function hasunreadMessage($conn,$id)
     $row2=mysqli_fetch_array($result2);
     echo 'Masz: '.$row2['count(displayed)'].' nowych wiadmości';
 }
+

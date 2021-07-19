@@ -27,3 +27,15 @@ if(isset($_GET["delete"])) {
         deleteUser($conn,$nazwa);
     }
 }
+if(isset($_GET["reporting"]))
+{
+    $nazwa = $_GET["reporting"];
+    blockreporting($conn,$nazwa);
+}
+if(isset($_GET["unblockreporting"]))
+{
+    $nazwa = $_GET["unblockreporting"];
+    unblockreporting($conn,$nazwa);
+}
+
+
