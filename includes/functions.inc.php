@@ -300,8 +300,20 @@ function editPwd($conn,$login,$password,$newpassword,$repeatnewpassword)
         exit();
     }
 }
+function randomPassword() {
+    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    $pass = array(); //remember to declare $pass as an array
+    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+    for ($i = 0; $i < 8; $i++) {
+        $n = rand(0, $alphaLength);
+        $pass[] = $alphabet[$n];
+    }
+    return implode($pass); //turn the array into a string
+}
 function remindPassword($conn,$login)
 {
+    $password=randomPassword();
+    $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
     $sql = "SELECT email FROM user WHERE login =? or email=?;";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
@@ -314,10 +326,20 @@ function remindPassword($conn,$login)
     $resultData = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_assoc($resultData);
     $email=$row['email'];
-    $msg = "First line of text\nSecond line of text";
+    $msg = "Twoje nowe hasło to: ".$password." Zalecamy zmianę hasła po zalogowaniu";
     $msg = wordwrap($msg,70);
     mail($email,"My subject",$msg);
-    header("location: ../login.php?remind=".$email);
+    $sql2 = "Update user SET password=? WHERE login =? or email=?;";
+    $stmt2 = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt2,$sql2))
+    {
+        header("location: ../signup.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt2, "sss",$hashedPwd,$login,$login);
+    mysqli_stmt_execute($stmt2);
+    mysqli_stmt_close($stmt2);
+    header("location: ../login.php?error=none");
     exit();
 }
 function emptyInputSuggestion($suggestion)
