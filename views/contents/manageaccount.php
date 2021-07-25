@@ -41,7 +41,7 @@ $_SESSION["idchanging"]=$row['id'];
     </form>
 <br>
 <?php
-echo '<button>' . '<a href ="'.baseUrl().'/includes/deleteaccount.inc.php?id=' . $_SESSION["idchanging"] . '">' . ' Usuń konto' . '</a>' . '</button>';
+echo '<a class="btn btn-danger" href ="'.baseUrl().'/includes/deleteaccount.inc.php?id=' . $_SESSION["idchanging"] . '">' . ' Usuń konto' . '</a>';
 ?>
 <?php
 if(isset($_GET["error"]))
