@@ -30,13 +30,13 @@ if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
             $stmt = mysqli_stmt_init($conn);
             if(!mysqli_stmt_prepare($stmt,$sql))
             {
-                header("location: ../adddog.php?error=stmtfailed");
+                header("location: ". baseUrl() ."/views/contents/adddog.php?error=stmtfailed");
                 exit();
             }
             mysqli_stmt_bind_param($stmt, "ss",$fileName,$_SESSION['userid']);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
-            header("location: ../adddog.php?error=none");
+            header("location: ". baseUrl() ."/views/contents/adddog.php?error=none");
             exit();
         }else{
             $statusMsg = "Sorry, there was an error uploading your file.";

@@ -8,17 +8,17 @@ if(isset($_POST["submit"]))
 
     if(emptyInputLogin($login,$password)!==false)
     {
-        header("location: ../login.php?error=emptyinput");
+        header("location: ".baseUrl()."/login.php?error=emptyinput");
         exit();
     }
     if(isBlocked($conn,$login)!==false)
     {
-        header("location: ../login.php?error=accountblocked");
+        header("location: ".baseUrl()."/login.php?error=accountblocked");
         exit();
     }
     if(isDeleted($conn,$login)!==false)
     {
-        header("location: ../login.php?error=accountdeleted");
+        header("location: ".baseUrl()."/login.php?error=accountdeleted");
         exit();
     }
     loginUser($conn,$login,$password);

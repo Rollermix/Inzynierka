@@ -14,27 +14,27 @@ if (isset($_POST["submit"]))
     require_once 'functions.inc.php';
     if(emptyInputSignup($firstname,$lastname,$login,$email,$password,$repeatpassword)!==false)
     {
-        header("location: ../signup.php?error=emptyinput");
+        header("location: ". baseUrl() ."/views/contents/signup.php?error=emptyinput");
         exit();
     }
     if(invalidLogin($login)!==false)
     {
-        header("location: ../signup.php?error=invalidlogin");
+        header("location: ". baseUrl() ."/views/contents/signup.php?error=invalidlogin");
         exit();
     }
     if(invalidEmail($email)!==false)
     {
-        header("location: ../signup.php?error=invalidemail");
+        header("location: ". baseUrl() ."/views/contents/signup.php?error=invalidemail");
         exit();
     }
     if(pwdMatch($password,$repeatpassword)!==false)
     {
-        header("location: ../signup.php?error=passworddontmatch");
+        header("location: ". baseUrl() ."/views/contents/signup.php?error=passworddontmatch");
         exit();
     }
     if(loginExists($conn,$login,$email)!==false)
     {
-        header("location: ../signup.php?error=logintaken");
+        header("location: ". baseUrl() ."/views/contents/signup.php?error=logintaken");
         exit();
     }
     createUser($conn,$firstname,$lastname,$login,$email,$description,$password,$city);
@@ -42,5 +42,5 @@ if (isset($_POST["submit"]))
 }
 else
 {
-    header("location: ../signup.php");
+    header("location: ". baseUrl() ."/views/contents/signup.php");
 }

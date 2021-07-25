@@ -8,12 +8,12 @@ if(isset($_POST["submit"])) {
     if(emptyInputSuggestion($suggestion)!==false)
 
     {
-        header("location: ../suggestion.php?error=emptyinput");
+        header("location: ". baseUrl() ."/views/contents/suggestion.php?error=emptyinput");
         exit();
     }
     if(toLongSuggestion($suggestion)!==false)
     {
-        header("location: ../suggestion.php?error=tolongsuggestion");
+        header("location: ". baseUrl() ."/views/contents/suggestion.php?error=tolongsuggestion");
         exit();
     }
     addSuggestion($conn,$suggestion,$iduser);

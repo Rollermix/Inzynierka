@@ -9,12 +9,12 @@ if(isset($_POST["submit"])) {
     $reporteduser=$_POST['user'];
     if(emptyField($reason)!==false)
     {
-        header("location: ../managewalk.php?error=emptyinputReason");
+        header("location: ". baseUrl() ."/views/contents/managewalk.php?error=emptyinputReason");
         exit();
     }
     if($reporteduser="Wybierz Użytkownika")
     {
-        header("location: ../managewalk.php?error=emptyinputUser");
+        header("location: ". baseUrl() ."/views/contents/managewalk.php?error=emptyinputUser");
         exit();
     }
     reportUser($conn,$reason,$user,$reporteduser);

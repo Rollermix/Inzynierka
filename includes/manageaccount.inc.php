@@ -14,7 +14,7 @@ if(!empty($login))
 {
     if(invalidLogin($login)!==false)
     {
-        header("location: ../manageaccount?error=invalidlogin");
+        header("location: ". baseUrl() ."/views/contents/manageaccount?error=invalidlogin");
         exit();
     }
 }
@@ -23,7 +23,7 @@ else
 
 if(!empty($email)) {
     if (invalidEmail($email) !== false) {
-        header("location: ../manageaccount?error=invalidemail");
+        header("location: ". baseUrl() ."/views/contents/manageaccount?error=invalidemail");
         exit();
     }
 }
@@ -32,7 +32,7 @@ else
 
 if(!empty($login)) {
     if (loginExists($conn, $login, $email) !== false) {
-        header("location: ../manageaccount.php?error=logintaken");
+        header("location: ". baseUrl() ."/views/contents/manageaccount.php?error=logintaken");
         exit();
     }
 }

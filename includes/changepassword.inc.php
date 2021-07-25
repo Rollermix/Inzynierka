@@ -9,12 +9,12 @@ if(isset($_POST["submit2"])) {
     $login=$_SESSION["useruid"];
 
     if (emptyInputChangingPwd($password, $newpassword, $repeatnewpassword) !== false) {
-        header("location: ../manageaccount.php?error=emptyinput");
+        header("location: ". baseUrl() ."/views/contents/manageaccount.php?error=emptyinput");
         exit();
     }
     if(pwdMatch($newpassword,$repeatnewpassword)!==false)
     {
-        header("location: ../manageaccount.php?error=passworddontmatch");
+        header("location: ". baseUrl() ."/views/contents/manageaccount.php?error=passworddontmatch");
         exit();
     }
     editPwd($conn,$login,$password,$newpassword,$repeatnewpassword);

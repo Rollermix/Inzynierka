@@ -1,4 +1,22 @@
 <?php
+
+if(file_exists(stream_resolve_include_path('../../config.php'))) {
+    require_once('../../config.php');
+}
+if(file_exists(stream_resolve_include_path('../config.php'))) {
+    require_once('../config.php');
+}
+
+function baseUrl() {
+    global $CONFIG;
+
+    if(!isset($CONFIG->base_url)) {
+        return 'http://localhost';
+    }
+
+    return $CONFIG->base_url;
+}
+
 function emptyInputSignup($firstname,$lastname,$login,$email,$password,$repeatpassword)
 {
     $result;
@@ -57,7 +75,7 @@ function loginExists($conn, $login, $email)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../signup.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/signup.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss",$login, $email);
@@ -80,7 +98,7 @@ function loginExists2($conn, $login)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../signup.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/signup.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss",$login,$login);
@@ -106,14 +124,14 @@ function createUser($conn,$firstname,$lastname,$login,$email,$description,$passw
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../signup.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/signup.php?error=stmtfailed");
         exit();
     }
     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
     mysqli_stmt_bind_param($stmt, "sssssss",$firstname,$lastname,$login,$email,$description,$hashedPwd,$city);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../signup.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/signup.php?error=none");
     exit();
 }
 function emptyInputLogin($login,$password)
@@ -134,14 +152,14 @@ function loginUser($conn,$login,$password)
     $uidExists = loginExists($conn, $login, $login);
     if($uidExists === false)
     {
-        header("location: ../login.php?error=wrongLogin");
+        header("location: ". baseUrl() ."/views/contents/login.php?error=wrongLogin");
         exit();
     }
     $passwordHashed = $uidExists["password"];
-    $checkPwd = password_verify($password,$passwordHashed);
+    $checkPwd = password_verify($password, $passwordHashed);
     if($checkPwd === false)
     {
-        header("location: ../login.php?error=wrongPassword");
+        header("location: ". baseUrl() ."/views/contents/login.php?error=wrongPassword");
     }
     else if ($checkPwd === true)
     {
@@ -159,7 +177,7 @@ function isLogged()
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
         echo "Welcome to the member's area, " . $_SESSION['useruid'] . "!";
     } else {
-        header("location: ../login.php?error=notLogged");
+        header("location: ". baseUrl() ."/views/contents/login.php?error=notLogged");
         exit();
     }
 
@@ -171,7 +189,7 @@ function isBlocked($conn,$login)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../signup.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/signup.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss",$login, $email);
@@ -197,7 +215,7 @@ function isDeleted($conn,$login)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../signup.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/signup.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss",$login, $email);
@@ -230,13 +248,13 @@ function editUser($conn,$firstname,$lastname,$login,$email,$description,$city,$i
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../manageaccount.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/manageaccount.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "sssssss",$firstname,$lastname,$email,$login,$description,$city,$id);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../manageaccount.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/manageaccount.php?error=none");
     exit();
 }
 function deleteAccount($conn,$id)
@@ -247,13 +265,13 @@ function deleteAccount($conn,$id)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../manageaccount.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/manageaccount.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "s",$id);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header ("location: ../includes/logout.inc.php?deleted=true");
+    header ("location: ". baseUrl() ."/includes/logout.inc.php?deleted=true");
     exit();
 }
 function emptyInputChangingPwd($password,$newpassword,$repeatnewpassword)
@@ -274,14 +292,14 @@ function editPwd($conn,$login,$password,$newpassword,$repeatnewpassword)
     $uidExists = loginExists($conn, $login, $login);
     if($uidExists === false)
     {
-        header("location: ../login.php?error=wrongLogin");
+        header("location: ". baseUrl() ."/views/contents/login.php?error=wrongLogin");
         exit();
     }
     $passwordHashed = $uidExists["password"];
     $checkPwd = password_verify($password,$passwordHashed);
     if($checkPwd === false)
     {
-        header("location: ../login.php?error=wrongPassword");
+        header("location: ". baseUrl() ."/views/contents/login.php?error=wrongPassword");
     }
     else
     {
@@ -290,13 +308,13 @@ function editPwd($conn,$login,$password,$newpassword,$repeatnewpassword)
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt,$sql))
         {
-            header("location: ../signup.php?error=stmtfailed");
+            header("location: ". baseUrl() ."/views/contents/signup.php?error=stmtfailed");
             exit();
         }
         mysqli_stmt_bind_param($stmt, "ss",$hashedPwd,$login);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
-        header("location: ../manageaccount.php?error=none");
+        header("location: ". baseUrl() ."/views/contents/manageaccount.php?error=none");
         exit();
     }
 }
@@ -318,7 +336,7 @@ function remindPassword($conn,$login)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../signup.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/signup.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss",$login,$login);
@@ -333,13 +351,13 @@ function remindPassword($conn,$login)
     $stmt2 = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt2,$sql2))
     {
-        header("location: ../signup.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/signup.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt2, "sss",$hashedPwd,$login,$login);
     mysqli_stmt_execute($stmt2);
     mysqli_stmt_close($stmt2);
-    header("location: ../login.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/login.php?error=none");
     exit();
 }
 function emptyInputSuggestion($suggestion)
@@ -372,13 +390,13 @@ function addSuggestion($conn,$suggestion,$iduser)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../suggestion.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/suggestion.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "sss",$suggestion,$iduser,$status);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../suggestion.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/suggestion.php?error=none");
     exit();
 }
 function hasDog($conn,$id)
@@ -390,7 +408,7 @@ function hasDog($conn,$id)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../signup.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/signup.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "s",$id);
@@ -410,7 +428,7 @@ function adddog($conn,$name,$size,$opis,$user)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../adddog.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/adddog.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ssss",$user,$name,$size,$opis);
@@ -428,13 +446,13 @@ function editdog($conn,$name,$size,$opis,$user)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../editdog.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/editdog.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ssss",$name,$size,$opis,$user);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../editdog.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/editdog.php?error=none");
     exit();
 }
 function addwalk($conn, $spot, $date,$description,$addinguser)
@@ -443,13 +461,13 @@ function addwalk($conn, $spot, $date,$description,$addinguser)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../addwalk.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/addwalk.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ssss",$spot,$addinguser,$date,$description);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../addwalk.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/addwalk.php?error=none");
     exit();
 }
 function acceptWalk($conn,$iduser,$idwalk)
@@ -458,13 +476,13 @@ function acceptWalk($conn,$iduser,$idwalk)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../findwalk.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/findwalk.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss",$iduser,$idwalk);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../managewalk.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/managewalk.php?error=none");
     exit();
 }
 function approveWalk($conn,$idwalk)
@@ -474,13 +492,13 @@ function approveWalk($conn,$idwalk)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../managewalk.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/managewalk.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss",$approve,$idwalk);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../managewalk.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/managewalk.php?error=none");
     exit();
 }
 function denyWalk($conn,$idwalk)
@@ -490,7 +508,7 @@ function denyWalk($conn,$idwalk)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../managewalk.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/managewalk.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss",$deny,$idwalk);
@@ -505,13 +523,13 @@ function cancellMessage($conn,$idwalk,$idcancellinguser)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../managewalk.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/managewalk.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "sis",$idwalk,$idcancellinguser,$message);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../managewalk.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/managewalk.php?error=none");
     exit();
 }
 function sendMessage($conn,$idwalk,$idsendinguser,$message)
@@ -520,13 +538,13 @@ function sendMessage($conn,$idwalk,$idsendinguser,$message)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../chat.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/chat.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "sis",$idwalk,$idsendinguser,$message);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../chat.php?id=".$idwalk);
+    header("location: ". baseUrl() ."/views/contents/chat.php?id=".$idwalk);
     exit();
 }
 function deleteMessage($conn,$idwalk,$idmessage)
@@ -536,13 +554,13 @@ function deleteMessage($conn,$idwalk,$idmessage)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../chat.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/chat.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss",$delete,$idmessage);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../chat.php?id=".$idwalk);
+    header("location: ". baseUrl() ."/views/contents/chat.php?id=".$idwalk);
     exit();
 }
 function setDisplayedMessage($conn,$idmessage)
@@ -552,7 +570,7 @@ function setDisplayedMessage($conn,$idmessage)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../chat.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/chat.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss",$displayed,$idmessage);
@@ -570,13 +588,13 @@ function editWalk($conn,$idwalk,$spot,$date,$description)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../managewalk.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/managewalk.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ssss",$spot,$date,$description,$idwalk);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../managewalk.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/managewalk.php?error=none");
     exit();
 }
 function reportUser($conn,$reason,$user,$reporteduser)
@@ -585,13 +603,13 @@ function reportUser($conn,$reason,$user,$reporteduser)
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
-        header("location: ../managewalk.php?error=stmtfailed");
+        header("location: ". baseUrl() ."/views/contents/managewalk.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "sss",$user,$reporteduser,$reason);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../managewalk.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/managewalk.php?error=none");
     exit();
 }
 function emptyField($field)
@@ -613,3 +631,4 @@ function hasUnreadMessages($conn, $id)
     $results = mysqli_fetch_array($messages);
     return $results['displayed_messages_count'];
 }
+
