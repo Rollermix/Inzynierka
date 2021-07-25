@@ -2,7 +2,7 @@
 <?php require_once '../containers/menu.php'; ?>
 <?php
 $idwalk = $_GET["id"];
-echo '<form action="includes/editwalk.inc.php?id='.$idwalk.'" method="post">';
+echo '<form action="'. baseUrl() .'/includes/editwalk.inc.php?id='.$idwalk.'" method="post">';
 ?>
     <select name ='spot'>
         <option>Wybierz miejsce</option>

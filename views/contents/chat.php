@@ -8,7 +8,7 @@ while ($row = mysqli_fetch_array($result)) {
     {
         echo 'Wysłał: '.$row['login'].' Kiedy: '.$row['Date'];
         if($row['login']==$_SESSION['useruid']) {
-            echo '<button>' . '<a href="includes/deletemessage.inc.php?idmessage=' . $row['id'] . '&idwalk=' . $idwalk . '">' . 'Usuń wiadomość' . '</a></button>';
+            echo '<a class="btn btn-success" href="'. baseUrl() .'/includes/deletemessage.inc.php?idmessage=' . $row['id'] . '&idwalk=' . $idwalk . '">' . 'Usuń wiadomość' . '</a>';
             echo '<br>' . $row['Message'] . '<br>';
         }
         else if($row['login']!=$_SESSION['useruid'])
@@ -19,7 +19,7 @@ while ($row = mysqli_fetch_array($result)) {
 
     }
 }
-echo '<form action="includes/chat.inc.php?id='.$idwalk.'" method="post">';
+echo '<form action="'. baseUrl() .'/includes/chat.inc.php?id='.$idwalk.'" method="post">';
 ?>
     <input type = "text" name="message" placeholder="Wpisz wiadomość">
     <button type = "submit" name ="submit">Wyślij</button>

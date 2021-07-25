@@ -1,6 +1,6 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
-<form action="includes/editdog.inc.php" method="post" enctype="multipart/form-data">
+<form action="<?= baseUrl() . '/includes/editdog.inc.php'?>" method="post" enctype="multipart/form-data">
     <input type = "text" name="name" placeholder="Jak się wabi twój pies">
     <select name ='size'>
         <option>Wybierz rozmiar psa...</option>

@@ -13,7 +13,7 @@ $result = mysqli_query($conn, $sqli);
 while ($row = mysqli_fetch_array($result)) {
     if ($row['id_accompanied_user'] == NULL) {
         echo 'Dodał '.$row['login'].'Miejsce '.$row['name'].' Kiedy: '.$row['time'].' Opis: '.$row['description'].
-            '<button><a href="includes/acceptwalk.inc.php?id_walk='.$row['id'].'">Akceptuj</a></button>';
+            '<a class="btn btn-success" href="'. baseUrl() .'/includes/acceptwalk.inc.php?id_walk='.$row['id'].'">Akceptuj</a>';
     }
 }
 
@@ -27,7 +27,7 @@ $result2 = mysqli_query($conn, $sql2);
 $row2 = mysqli_fetch_array($result2);
 if ($row2['blocked']==0) {
     echo '<a>Zgłoś użytkownika</a>';
-    echo ' <form action="includes/reportuser.inc.php" method="post">';
+    echo ' <form action="'. baseUrl() .'/includes/reportuser.inc.php" method="post">';
     echo ' <select name ="user">';
     echo ' <option>Wybierz Użytkownika</option>';
     $sqli = 'SELECT walk.id_user,user.login FROM walk INNER JOIN user ON walk.id_user=user.id WHERE user.login !="' . $_SESSION['useruid'] . '"';

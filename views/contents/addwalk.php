@@ -1,6 +1,6 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
-<form action="includes/addwalk.inc.php" method="post">
+<form action="<?= baseUrl() . '/includes/addwalk.inc.php'?>" method="post">
     <select name ='spot'>
         <option>Wybierz miejsce</option>
         <?php
