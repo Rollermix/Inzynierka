@@ -34,4 +34,5 @@ echo '<form action="includes/editwalk.inc.php?id='.$idwalk.'" method="post">';
 
 </br>
 </body>
+<?php require_once 'footer.php'; ?>
 </html>

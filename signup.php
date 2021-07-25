@@ -69,4 +69,5 @@ require_once 'includes/dbh.inc.php';
     }
     ?>
 </body>
+<?php require_once 'footer.php'; ?>
 </html>

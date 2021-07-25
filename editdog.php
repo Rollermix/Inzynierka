@@ -25,4 +25,5 @@ require_once 'includes/dbh.inc.php';
 
 </br>
 </body>
+<?php require_once 'footer.php'; ?>
 </html>

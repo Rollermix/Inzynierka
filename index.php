@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> Praca inżynierska-logowanie</title>
+    <title> Praca inżynierska-logowanie d</title>
 </head>
 <body>
 <?php
@@ -63,4 +63,5 @@ if (isset($_SESSION["useruid"]))
     }
 ?>
 </body>
+<?php require_once 'footer.php'; ?>
 </html>

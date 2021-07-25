@@ -87,4 +87,5 @@ else if ($row2['blocked']==2)
 }
 ?>
 </body>
+<?php require_once 'footer.php'; ?>
 </html>

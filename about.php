@@ -10,4 +10,5 @@ require_once 'header.php';
 
 Praca inżynierska której autorami są: Piotr Czajka i Martyna Chmielewska
 </body>
+<?php require_once 'footer.php'; ?>
 </html>

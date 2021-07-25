@@ -44,4 +44,5 @@ else
     echo "nie zgłaszałeś nam nic!";
 ?>
 </body>
+<?php require_once 'footer.php'; ?>
 </html>
