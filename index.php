@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> Praca inżynierska-logowanie d</title>
+    <title> Praca inżynierska-logowanie</title>
 </head>
 <body>
 <?php

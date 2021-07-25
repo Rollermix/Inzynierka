@@ -5,6 +5,9 @@ session_start();
 <html>
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="assets/css/normalize.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/main.css">
     </head>
     <body>
         <nav>
