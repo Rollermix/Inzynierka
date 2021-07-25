@@ -3,11 +3,13 @@ body {
     background-image: url("../img/beagle-dog.jpg");
     background-repeat: no-repeat;
     background-position: bottom right;
+    background-size: 35%;
     min-height: 100vh;
 }
 
 .navbar {
     margin-bottom: 25px;
+    background-color: #914525;
 }
 
 .form-group input:first-child {
@@ -17,4 +19,41 @@ body {
 .form-group input {
     width: 350px;
     margin-bottom: 25px;
+}
+
+.navbar-nav {
+    flex-direction: column;
+}
+
+.navbar .account, .navbar .dogs, .navbar .system {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+@media only screen and (min-width: 992px) {
+    .navbar-nav {
+        flex-direction: row;
+    }
+
+    .navbar-collapse {
+        justify-content: flex-end;
+    }
+    
+    .navbar .account, .navbar .dogs, .navbar .system {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        margin: 0 15px;
+    }
+    
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-padding-left-right {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
