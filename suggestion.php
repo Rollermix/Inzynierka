@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title> Praca inżynierska-logowanie</title>
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
 <?php

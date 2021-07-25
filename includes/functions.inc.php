@@ -381,9 +381,11 @@ function addSuggestion($conn,$suggestion,$iduser)
     header("location: ../suggestion.php?error=none");
     exit();
 }
-function hasdog($conn,$id)
+function hasDog($conn,$id)
 {
-
+    // TODO: wiem że pewnie to będziesz poprawiał, w sumie warto po prostu
+    // być konsekwentnym pisząc metody bijące do bazy, bo się zastanawiałem
+    // czemu to tu jest, a już w hasUnreadMessages już nie :D
     $sql = "SELECT * FROM dog WHERE id_user = ?;";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
@@ -394,16 +396,12 @@ function hasdog($conn,$id)
     mysqli_stmt_bind_param($stmt, "s",$id);
     mysqli_stmt_execute($stmt);
     $resultData = mysqli_stmt_get_result($stmt);
+
     $row=mysqli_num_rows($resultData);
-    if($row==0)
-    {
-        echo '<a href="../inzynierka/adddog.php">Dodaj Psa</a>';
-    }
-    else if($row==1)
-    {
-        echo '<a href="../inzynierka/editdog.php">Edytuj Psa</a>';
-    }
+
     mysqli_stmt_close($stmt);
+
+    return $row > 0 ? true : false;
 }
 function adddog($conn,$name,$size,$opis,$user)
 {
@@ -598,24 +596,20 @@ function reportUser($conn,$reason,$user,$reporteduser)
 }
 function emptyField($field)
 {
-    if(empty($field))
-    {
-        $result = true;
-    }
-    else
-    {
-        $result = false;
-    }
-    return $result;
+    return empty($field); // TODO: jak dla mnie redundant, zostawiam jako legacy code, do usuniecia
 }
-function hasunreadMessage($conn,$id)
+function hasUnreadMessages($conn, $id)
 {
     $sqli = 'SELECT id FROM walk WHERE id_user="'.$id.'" OR id_accompanied_user="'.$id.'"';
-    $result = mysqli_query($conn, $sqli);
-    $row = mysqli_fetch_array($result);
-    $sql2='Select count(displayed) FROM chat WHERE displayed="0" AND id_walk="'.$row['id'].'" AND id_sending_user!="'.$id.'"';
-    $result2 = mysqli_query($conn, $sql2);
-    $row2=mysqli_fetch_array($result2);
-    echo 'Masz: '.$row2['count(displayed)'].' nowych wiadmości';
+    $isWalkAvailableForUser = mysqli_query($conn, $sqli);
+    // jezeli nie ma spaceru, znaczy to tyle, ze nie ma gdzie wyslac wiadomosci;
+    // TODO: lepiej to bedzie ogarnac w INNER JOIN czy tam LEFT JOIN, zamiast wysylac do mysql'a 
+    // 2 razy zapytanie
+    if(!$row = mysqli_fetch_array($isWalkAvailableForUser)) {
+        return false;
+    }
+    $sqli = 'SELECT COUNT(displayed) as displayed_messages_count FROM chat WHERE displayed="0" AND id_walk="'. $row['id']. '" AND id_sending_user!="'.$id.'"';
+    $messages = mysqli_query($conn, $sqli);
+    $results = mysqli_fetch_array($messages);
+    return $results['displayed_messages_count'];
 }
-
