@@ -1,52 +1,52 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
-    <section class="login-form">
-        <h2>
-            Zaloguj się
-        </h2>
-        <form action="<?= baseUrl() . '/includes/login.inc.php'?>" method="post">
-            <input type = "text" name="name" placeholder="Wpisz nazwę użytkownika lub email...">
-            <input type = "password" name="password" placeholder="Wpisz hasło...">
-            <button type = "submit" name ="submit">Zaloguj się</button>
-            <button type = "submit" name ="submit2">Przypomnij hasło</button>
-        </form>
-    </section>
+    <div class="container">
+        <div class="form-group d-flex justify-content-center">
+            <form action="<?= baseUrl() . '/includes/login.inc.php'?>" method="post">
+            <h2>Zaloguj się</h2>
+                <label for="username">Nazwa użytkownika</label>
+                <input class="form-control" type="text" name="name" id="username" placeholder="Wpisz nazwę użytkownika lub email...">
+
+                <label for="username">Hasło</label>
+                <input class="form-control" type="password" name="password" id="password" placeholder="Wpisz hasło...">
+
+                <div class="buttons d-flex justify-content-between">
+                    <button class="btn btn-success" type = "submit" name ="submit">Zaloguj się</button>
+                    <button class="btn btn-dark" type = "submit" name ="submit2">Przypomnij hasło</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <?php
     if(isset($_GET["error"]))
     {
-        if($_GET["error"]=="emptyinput")
-        {
-            echo"<p>Wypełnij wszystkie pola!</p>";
+        switch($_GET["error"]) {
+            case "emptyinput":
+                echo "<p>Wypełnij wszystkie pola!</p>";
+                break;
+            case "wronglogin": 
+                echo "<p>Niepoprawny login!</p>";
+                break;
+            case "wrongPassword": 
+                echo "<p>Niepoprawne hasło!</p>";
+                break;
+            case "stmtfailed":
+                echo "<p>Błąd podczas logowania, proszę zwróć się do administratora o pomoc.</p>";
+                break;
+            case "notLogged":
+                echo "<p>Brak dostępu, zaloguj się aby uzyskać dostęp!</p>";
+                break;
+            case "accountblocked": 
+                echo "<p>Konto zablokowane. Jeżeli uważasz, że to błąd, zwróć się proszę do administratora.</p>";
+                break;
+            case "accountblocked": 
+                echo "<p>Konto usunięte!</p>";
+                break;
+            case "none": 
+                echo "<p>Zalogowałeś się!</p>";
+            default:
+                echo "<p>Nieznany błąd, proszę zwróc się do administratora o pomoc.";
         }
-        else if($_GET["error"]=="wronglogin")
-        {
-            echo"<p>Niepoprawny login!</p>";
-        }
-        else if($_GET["error"]=="wrongPassword")
-        {
-            echo"<p>Niepoprawne hasło!</p>";
-        }
-
-        else if($_GET["error"]=="stmtfailed")
-        {
-            echo"<p>Something went wrong, try again!</p>";
-        }
-        else if($_GET["error"]=="notLogged")
-        {
-            echo"<p>Brak dostępu, zaloguj się aby uzyskać dostęp!</p>";
-        }
-        else if($_GET["error"]=="accountblocked")
-        {
-            echo"<p>Koncto zablokowane</p>";
-        }else if($_GET["error"]=="accountdeleted")
-        {
-            echo"<p>Konto usunięte</p>";
-        }
-        else if($_GET["error"]=="none")
-        {
-            echo "<p>Zalogowałeś sie</p>";
-        }
-
     }
     ?>
 <?php require_once '../containers/footer.php'; ?>

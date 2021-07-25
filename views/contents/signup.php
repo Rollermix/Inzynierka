@@ -4,7 +4,7 @@
         <h2>
             Zarejestruj się
         </h2>
-        <form action="includes/signup.inc.php" method="post">
+        <form action=<?= baseUrl(). "/includes/signup.inc.php"?> method="post">
             <input type = "text" name="firstname" placeholder="Wpisz imię...">
             <input type = "text" name="lastname" placeholder="Wpisz nazwisko...">
             <input type = "text" name="login" placeholder="Wpisz nazwę użytkownika...">

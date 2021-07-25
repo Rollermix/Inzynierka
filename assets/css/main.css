@@ -1,7 +1,20 @@
 body {
-    background-color: #eaeaea;
+    background-color: #ffffff;
+    background-image: url("../img/beagle-dog.jpg");
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    min-height: 100vh;
 }
 
 .navbar {
+    margin-bottom: 25px;
+}
+
+.form-group input:first-child {
+    margin-top: 25px;
+}
+
+.form-group input {
+    width: 350px;
     margin-bottom: 25px;
 }
