@@ -1,5 +1,5 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="about.php">O DoggoWalks</a>
+    <a class="navbar-brand" href="<?= baseUrl() . '/views/contents/main.php'?>">DoggoWalks</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,6 +8,9 @@
         <?php
         if (isset($_SESSION["useruid"])) {
             echo "<div class='system'>";
+                echo "<div class='nav-item'>";
+                    echo "<a class='nav-link' href='". baseUrl() ."/views/contents/about.php'>O projekcie</a>";
+                echo "</div>";
             if($messagesCount = hasUnreadMessages($conn, $_SESSION["userid"])) {
                 echo "<div class='nav-item d-flex flex-row'>";
                     echo "<div data-icon='&#xe021;' class='icon nav-link'>";
@@ -49,6 +52,9 @@
             echo "</div>";
 
         } else {
+            echo "<div class='nav-item'>";
+                echo "<a class='nav-link' href='". baseUrl() ."/views/contents/about.php'>O projekcie</a>";
+            echo "</div>";
             echo "<div class='nav-item'>";
                 echo "<a class='nav-link' href='". baseUrl() ."/views/contents/signup.php'>Zarejestruj się</a>";
             echo "</div>";
