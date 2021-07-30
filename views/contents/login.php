@@ -44,6 +44,8 @@
                 break;
             case "none": 
                 echo "<p>Zalogowałeś się!</p>";
+            case "remindnone":
+                echo "<p>Hasło zostało wysłane na maila!</p>";
             default:
                 echo "<p>Nieznany błąd, proszę zwróc się do administratora o pomoc.";
         }

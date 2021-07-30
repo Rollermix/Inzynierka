@@ -357,7 +357,7 @@ function remindPassword($conn,$login)
     mysqli_stmt_bind_param($stmt2, "sss",$hashedPwd,$login,$login);
     mysqli_stmt_execute($stmt2);
     mysqli_stmt_close($stmt2);
-    header("location: ". baseUrl() ."/views/contents/login.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/login.php?error=remindnone");
     exit();
 }
 function emptyInputSuggestion($suggestion)
@@ -631,4 +631,16 @@ function hasUnreadMessages($conn, $id)
     $results = mysqli_fetch_array($messages);
     return $results['displayed_messages_count'];
 }
-
+function readReminder($conn,$id)
+{
+    $sqli ='Update reminder SET displayed = 1 WHERE id=?';
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt,$sqli))
+    {
+        header("location: ". baseUrl() ."/views/contents/reminder.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s",$id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}

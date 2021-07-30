@@ -34,4 +34,19 @@ if(mysqli_num_rows($result)>0)
 else
     echo "nie zgłaszałeś nam nic!";
 ?>
+<br>
+<?php
+$id = $_SESSION["userid"];
+$sqli = "SELECT reminder.*,user.login From reminder INNER JOIN user ON reminder.id_sending_user = user.id WHERE reminder.id_user ='".$id."'";
+$result = mysqli_query($conn, $sqli);
+if(mysqli_num_rows($result)>0) {
+    echo "Twoje upomnienia"."<br>";
+    echo '<table>'.'<tr>'.'<th>Treść</th>'.'<th>Data</th>'.'<th>Kto wysłał</th>'.'</tr>';
+    while ($row = mysqli_fetch_array($result)) {
+        readReminder($conn,$row['id']);
+        echo '<tr><td>' . $row['Message'] . '</td>' . '<td>' . $row['Date'] . '</td>' . '<td>' . $row['login'] . '</td>' . '</tr>';
+        echo '</table>';
+    }
+}
+?>
 <?php require_once '../containers/footer.php'; ?>

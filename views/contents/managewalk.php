@@ -74,7 +74,7 @@ if ($row2['blocked']==0) {
 }
 else if ($row2['blocked']==2)
 {
-    echo "Nie zgłaszać uzytkowników";
+    echo "Nie możesz zgłaszać uzytkowników";
 }
 ?>
 <?php require_once '../containers/footer.php'; ?>

@@ -7,14 +7,24 @@ $row2 = mysqli_fetch_array($result2);
 $mycity = $row2['id_city'];
 
 echo "Znaleziono następujące spacery:<br>";
-$sqli = 'SELECT walk.*,spot.name,user.login,user.id_city From walk INNER JOIN spot ON spot.id=walk.id_spot INNER JOIN user ON user.id=walk.id_user 
-        WHERE walk.id_accompanied_user IS NULL AND walk.id_user!="'.$_SESSION['userid'].'" AND user.id_city ="'.$mycity.'"';
+$sqli = 'SELECT walk.*,spot.name,user.login,user.id_city,dog.name AS dogname,dog.size
+    From walk 
+    INNER JOIN spot ON spot.id=walk.id_spot 
+    INNER JOIN user ON user.id=walk.id_user 
+    INNER JOIN dog ON dog.id_user=user.id
+WHERE walk.id_accompanied_user IS NULL AND walk.id_user!="'.$_SESSION['userid'].'" AND user.id_city ="'.$mycity.'"';
 $result = mysqli_query($conn, $sqli);
+if(mysqli_num_rows($result)>0) {
+echo '<table>'.'<tr>'.'<th>Dodał</th>'.'<th>Miejsce</th>'.'<th>Kiedy</th>'.'<th>Opis</th>'.'<th>Rozmiar psa</th>'.'<th>Jak sie wabi pies</th>'.'<th></th></tr>';
 while ($row = mysqli_fetch_array($result)) {
     if ($row['id_accompanied_user'] == NULL) {
-        echo 'Dodał '.$row['login'].'Miejsce '.$row['name'].' Kiedy: '.$row['time'].' Opis: '.$row['description'].
-            '<a class="btn btn-success" href="'. baseUrl() .'/includes/acceptwalk.inc.php?id_walk='.$row['id'].'">Akceptuj</a>';
+
+      echo '<tr><td>'.'<a href="'.baseUrl().'/views/contents/profile.php?login='.$row['login'].'">'.$row['login'].'</a>'.'</td><td>'. $row['name'] . '</td><td> ' . $row['time'] . '</td><td>' . $row['description'].
+          '</td><td>'.$row['size'].'</td><td>'.$row['dogname'].'</td><td>'.
+            '<a class="btn btn-success" href="' . baseUrl() . '/includes/acceptwalk.inc.php?id_walk=' . $row['id'] . '">Akceptuj</a>'.'</td></tr>';
     }
+    echo '</table>';
+}
 }
 
 
@@ -44,7 +54,7 @@ if ($row2['blocked']==0) {
 }
 else if ($row2['blocked']==2)
 {
-    echo "Nie zgłaszać uzytkowników";
+    echo "Nie możesz zgłaszać uzytkowników";
 }
 ?>
 <?php require_once '../containers/footer.php'; ?>
