@@ -2,47 +2,77 @@
 <?php require_once '../containers/menu.php'; ?>
 <?php
 isLogged();
-$sqli = "SELECT id FROM user WHERE login='".$_SESSION["useruid"]."'";
+$sqli = "SELECT * FROM user WHERE login='".$_SESSION["useruid"]."'";
 $result = mysqli_query($conn, $sqli);
-$row = mysqli_fetch_array($result);
-$_SESSION["idchanging"]=$row['id'];
+$userdata = mysqli_fetch_array($result);
+$_SESSION["idchanging"]=$userdata['id'];
 
 ?>
-<section class="signup-form">
-    <h2>
-        Zmień dane konta
+<div class="container">
+    <section class="signup-form">
+        <h2 class="text-center">
+            Zmień dane konta
+        </h2>
+        <div class="form-group d-flex justify-content-center" id="change_data_account">
+            <form action="<?= baseUrl() . '/includes/manageaccount.inc.php'?>" method="post">
+                <input class="form-control" type = "text" name="firstname" placeholder="Wpisz imię..." value="<?= $userdata['name']?>">
+                <input class="form-control" type = "text" name="lastname" placeholder="Wpisz nazwisko..."  value="<?= $userdata['surname']?>">
+
+                <input class="form-control" type = "text" name="email" placeholder="Wpisz email..."  value="<?= $userdata['email']?>">
+                <select class="custom-select" name ='city' title="city">
+                    <?php
+                    $sqli = "SELECT * FROM city";
+                    $result = mysqli_query($conn, $sqli);
+                    
+                    while ($row = mysqli_fetch_array($result)) {
+                        
+                        if(isset($userdata['id_city']) && $userdata['id_city'] == $row['id']) {
+                            echo '<option value="'.$row['name'].'"selected="selected" >'.$row['name'].'</option>';                            
+                        } else {
+                            echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+                        }
+                    }
+
+                    if(!isset($userdata['id_city']) || !$userdata['id_city']) {
+                        echo '<option value="" disabled selected hidden>Choose a drink</option>';
+                    }
+
+                    ?>
+                </select>
+                <br>
+
+                <textarea class="form-control" type = "text" name="description" placeholder="Opisz siebie..." rows="15"><?= $userdata['description']?></textarea>
+
+                <button class="btn btn-success" type = "submit" name ="submit">Zmień dane</button>
+            </form>
+        </div>
+    </section>
+    <section class="change-password-form">
+        <h2 class="text-center">
+            Zmień hasło do konta
+        </h2>
+        <div class="form-group d-flex justify-content-center" id="change_password">
+        <form action="<?= baseUrl() . '/includes/changepassword.inc.php'?>" method="post">
+            <input class="form-control" type ="password" name="newpassword" placeholder="Wpisz nowe hasło">
+            <input class="form-control" type ="password" name="repeatnewpassword" placeholder="Powtórz nowe hasło">
+            <input class="form-control" type ="password" name="password" placeholder="Wpisz obecne hasło">
+            <button class="btn btn-success" type = "submit" name ="submit2">Zmień hasło</button>
+        </form>
+    </div>
+    </section>
+    <section class="delete-account-form">
+    <h2 class="text-center">
+        Usuń konto
     </h2>
-    <form action="<?= baseUrl() . '/includes/manageaccount.inc.php'?>" method="post">
-        <input type = "text" name="firstname" placeholder="Wpisz imię...">
-        <input type = "text" name="lastname" placeholder="Wpisz nazwisko...">
-        <input type = "text" name="login" placeholder="Wpisz nazwę użytkownika...">
-        <input type = "text" name="email" placeholder="Wpisz email...">
-        <select name ='city'>
-            <option>Wybierz miasto...</option>
-            <?php
-            $sqli = "SELECT name FROM city";
-            $result = mysqli_query($conn, $sqli);
-            while ($row = mysqli_fetch_array($result)) {
+    <div class="form-group d-flex justify-content-start" id="delete_account">
+        <?php
+            echo '<a class="btn btn-danger" href ="'.baseUrl().'/includes/deleteaccount.inc.php?id=' . $_SESSION["idchanging"] . '">' . ' Usuń konto' . '</a>';
+        ?>
+    </div>
+    </section>
+</div>
 
-                echo '<option>'.$row['name'].'</option>';
-            }
-            ?>
-        </select>
-        <input type = "text" name="description" placeholder="Opisz siebie...">
 
-        <button type = "submit" name ="submit">Zmień dane</button>
-    </form>
-</section>
-    <form action="<?= baseUrl() . '/includes/changepassword.inc.php'?>" method="post">
-        <input type ="password" name="newpassword" placeholder="Wpisz nowe hasło">
-        <input type ="password" name="repeatnewpassword" placeholder="Powtórz nowe hasło">
-        <input type ="password" name="password" placeholder="Wpisz obecne hasło">
-        <button type = "submit" name ="submit2">Zmień hasło</button>
-    </form>
-<br>
-<?php
-echo '<a class="btn btn-danger" href ="'.baseUrl().'/includes/deleteaccount.inc.php?id=' . $_SESSION["idchanging"] . '">' . ' Usuń konto' . '</a>';
-?>
 <?php
 if(isset($_GET["error"]))
 {

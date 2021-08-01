@@ -12,7 +12,7 @@ if(isset($_POST["submit"])) {
         header("location: ". baseUrl() ."/views/contents/managewalk.php?error=emptyinputReason");
         exit();
     }
-    if($reporteduser="Wybierz Użytkownika")
+    if($reporteduser=="Wybierz Użytkownika")
     {
         header("location: ". baseUrl() ."/views/contents/managewalk.php?error=emptyinputUser");
         exit();

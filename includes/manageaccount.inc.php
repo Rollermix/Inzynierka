@@ -31,6 +31,7 @@ else
     $email=NULL;
 
 if(!empty($login)) {
+
     if (loginExists($conn, $login, $email) !== false) {
         header("location: ". baseUrl() ."/views/contents/manageaccount.php?error=logintaken");
         exit();

@@ -21,6 +21,20 @@ body {
     margin-bottom: 25px;
 }
 
+#change_data_account input, #change_data_account .form-control, #change_data_account .custom-select {
+    width: 500px;
+    margin-bottom: 25px;
+}
+
+#change_password input, #change_password .form-control, #change_password .custom-select {
+    width: 500px;
+    margin-bottom: 25px;
+}
+
+#change_data_account {
+    width: unset;
+}
+
 .navbar-nav {
     flex-direction: column;
 }
@@ -56,4 +70,26 @@ body {
 .no-padding-left-right {
     padding-left: 0 !important;
     padding-right: 0 !important;
+}
+
+table {
+    table-layout: fixed;
+}
+
+thead {
+    color: white;
+}
+
+textarea.form-control {
+    width: 50vw;
+    margin-bottom: 15px;
+}
+
+#delete_account {
+    width: 500px;
+    margin: 0 auto;
+}
+
+#add-edit-dog select {
+    margin-bottom: 15px;
 }

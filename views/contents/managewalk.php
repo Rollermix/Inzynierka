@@ -64,7 +64,7 @@ if ($row2['blocked']==0) {
     $result = mysqli_query($conn, $sqli);
     while ($row = mysqli_fetch_array($result)) {
 
-        echo '<option>' . $row['login'] . '</option>';
+        echo '<option value="'.$row['login'].'">' . $row['login'] . '</option>';
     }
 
     echo '</select>';

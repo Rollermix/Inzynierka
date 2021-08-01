@@ -7,7 +7,7 @@
 <h2>Dostępne miasta</h2>
 <table class="table table-hover">
     <thead>
-        <tr>
+        <tr class="bg-dark">
             <th scope="col">Województwo</th>
             <th scope="col">Miasto</th>
             <th scope="col">Opis</th>
@@ -20,31 +20,42 @@
         $result = mysqli_query($conn, $sqli);
         while ($row = mysqli_fetch_array($result)) {
             if($row['deleted']==0) {
-            echo '<tr>'.'<td>'.$row['województwo'].'</td>'.'<td>'.'<a href ="'.baseUrl() . '/views/contents/main.php?city='.$row['name'].'">'.$row['name'].'</a>'.'</td>'.'<td>'.$row['description'].'</td>'.'</tr>';
+            echo '<tr class="table-secondary">'.'<td>'.$row['województwo'].'</td>'.'<td>'.'<a href ="'.baseUrl() . '/views/contents/main.php?city='.$row['name'].'">'.$row['name'].'</a>'.'</td>'.'<td>'.$row['description'].'</td>'.'</tr>';
             }
         }
     ?>
     </tbody>
 </table>
 </div>
-
 <?php
-// TODO: kod poniżej zostanie zwinięty do pliku .js
+    // TODO: kod poniżej zostanie zwinięty do pliku .js
     if(isset($_GET['city'])) {
         $city = ($_GET['city']);
         $sqli = "SELECT spot.name,spot.description From spot Inner Join city ON spot.id_city=city.id WHERE city.name='" . $city."'";
         $result = mysqli_query($conn, $sqli);
-        if(mysqli_num_rows($result)>0)
-        {
-            echo '<table>'.'<tr>'.'<th>Nazwa</th>'.'<th>Opis</th>'.'</tr>';
-        while ($row = mysqli_fetch_array($result)) {
-            echo '<tr><td>'.$row['name'].'</td>' .'<td>'. $row['description'] .'</td>' .'</tr>';
+        echo '<h3>Szczegóły miasta</h3>';
+        if(mysqli_num_rows($result)) {
+            echo '<table class="table table-hover">';
+                echo '<thead>';
+                    echo '<tr class="bg-dark">';
+                        echo '<th scope="col">Nazwa</th>';
+                        echo '<th scope="col">Opis</th>';
+                    echo '</tr>';
+                echo '</thead>';
+                echo '<tbody>';
+            while ($row = mysqli_fetch_array($result)) {
+                echo '<tr class="table-secondary">';
+                    echo '<td>' . $row['name'] . '</td>';
+                    echo '<td>' . $row['description'] . '</td>';
+                echo '</tr>';
+            }
+                echo "</tbody>";
             echo '</table>';
+        } else {
+            echo "<p>Brak miejsc w danym mieście</p>";
         }
     }
-        else
-            echo "Brak miejsc w danym mieście";
-    }
 ?>
+
 </div>
 <?php require_once '../containers/footer.php'; ?>
