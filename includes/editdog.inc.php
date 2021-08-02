@@ -32,17 +32,17 @@ if(isset($_POST["submit"])){
         // Upload file to server
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
             // Insert image file name into database
-            $sql="UPDATE user SET image_path =IFNULL(?,image_path) WHERE id=?";
+            $sql="UPDATE dog SET image_path =IFNULL(?,image_path) WHERE id=(SELECT id From dog where id_user=?)";
             $stmt = mysqli_stmt_init($conn);
             if(!mysqli_stmt_prepare($stmt,$sql))
             {
-                header("location: ". baseUrl() ."/views/contents/adddog.php?error=stmtfailed");
+                header("location: ". baseUrl() ."/views/contents/editdog.php?error=stmtfailed");
                 exit();
             }
             mysqli_stmt_bind_param($stmt, "ss",$fileName,$_SESSION['userid']);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
-            header("location: ". baseUrl() ."/views/contents/adddog.php?error=none");
+            header("location: ". baseUrl() ."/views/contents/editdog.php?error=none");
             exit();
         }else{
             $statusMsg = "Sorry, there was an error uploading your file.";
@@ -50,6 +50,8 @@ if(isset($_POST["submit"])){
     }else{
         $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
     }
+}else{
+    $statusMsg = 'Please select a file to upload.';
 }
 
 // Display status message

@@ -39,8 +39,7 @@ while ($row = mysqli_fetch_array($result)) {
     }
 }
 $sql2 = 'SELECT walk.*,spot.name,user.login From walk INNER JOIN spot ON spot.id=walk.id_spot 
-        INNER JOIN user ON user.id=walk.id_user  WHERE walk.id_accompanied_user IS NOT NULL 
-        AND walk.id_accompanied_user="'.$_SESSION['userid'].'"';
+        INNER JOIN user ON user.id=walk.id_user  WHERE  walk.id_accompanied_user="'.$_SESSION['userid'].'"';
 $result2 = mysqli_query($conn, $sql2);
 $numrows2=mysqli_num_rows($result2);
 if ($numrows2>0) {

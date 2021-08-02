@@ -26,7 +26,7 @@ if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
         // Upload file to server
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
             // Insert image file name into database
-            $sql="UPDATE user SET image_path =? WHERE id=?";
+            $sql="UPDATE dog SET image_path =IFNULL(?,image_path) WHERE id=(SELECT id From dog where id_user=?)";
             $stmt = mysqli_stmt_init($conn);
             if(!mysqli_stmt_prepare($stmt,$sql))
             {

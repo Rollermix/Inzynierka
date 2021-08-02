@@ -11,7 +11,7 @@
                     <option>Średni</option>
                     <option>Duży</option>
                 </select>
-                <textarea class="form-control" type = "text" name="opis" placeholder="Opisz Twojego psa"></textarea>
+                <input class="form-control" type = "text" name="opis" placeholder="Opisz Twojego psa">
                 <input class="form-control" type="file" name="file" >
                 <button class="btn btn-success" type = "submit" name ="submit">Wyślij</button>
             </form>

@@ -448,8 +448,7 @@ function editdog($conn,$name,$size,$opis,$user)
     mysqli_stmt_bind_param($stmt, "ssss",$name,$size,$opis,$user);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ". baseUrl() ."/views/contents/editdog.php?error=none");
-    exit();
+
 }
 function addwalk($conn, $spot, $date,$description,$addinguser)
 {

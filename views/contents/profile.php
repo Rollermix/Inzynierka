@@ -3,7 +3,7 @@
 <?php
 if(isset($_GET["login"])) {
     $login = $_GET["login"];
-    $sqli = 'Select user.login, user.name,user.surname,user.email,user.image_path,user.description,
+    $sqli = 'Select user.login, user.name,user.surname,user.email,dog.image_path,user.description,
        dog.size, dog.name AS dogname, dog.opis FROM user INNER JOIN dog ON user.id=dog.id_user WHERE user.login=?';
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sqli)) {
