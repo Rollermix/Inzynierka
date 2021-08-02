@@ -1,7 +1,7 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
-<a href ="addwalk.php">Dodaj spacer</a>
-<a href ="findwalk.php">Znajdź spacer</a>
+<a class="btn btn-info" href =  "<?= baseUrl() . "/views/contents/addwalk.php"?>">Dodaj spacer</a>
+<a class="btn btn-info" href = "<?= baseUrl() . "/views/contents/findwalk.php"?>">Znajdź spacer</a>
 <br>
 <?php
 echo "Twoje spacery bez par:<br>";

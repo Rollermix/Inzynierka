@@ -173,14 +173,10 @@ function loginUser($conn,$login,$password)
 }
 function isLogged()
 {
-
-    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-        echo "Welcome to the member's area, " . $_SESSION['useruid'] . "!";
-    } else {
+    if (!isset($_SESSION['loggedin']) && !$_SESSION['loggedin'] ) {
         header("location: ". baseUrl() ."/views/contents/login.php?error=notLogged");
         exit();
-    }
-
+    } 
 }
 function isBlocked($conn,$login)
 {
@@ -419,7 +415,7 @@ function hasDog($conn,$id)
 
     mysqli_stmt_close($stmt);
 
-    return $row > 0 ? true : false;
+    return $row > 0;
 }
 function adddog($conn,$name,$size,$opis,$user)
 {

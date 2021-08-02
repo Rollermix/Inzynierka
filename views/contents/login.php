@@ -7,7 +7,7 @@
                 <label for="username">Nazwa użytkownika</label>
                 <input class="form-control" type="text" name="name" id="username" placeholder="Wpisz nazwę użytkownika lub email...">
 
-                <label for="username">Hasło</label>
+                <label for="password">Hasło</label>
                 <input class="form-control" type="password" name="password" id="password" placeholder="Wpisz hasło...">
 
                 <div class="buttons d-flex justify-content-between">

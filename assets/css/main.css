@@ -93,3 +93,11 @@ textarea.form-control {
 #add-edit-dog select {
     margin-bottom: 15px;
 }
+
+div.tab-content {
+    margin-top: 25px;
+}
+
+.custom-file-label::after {
+    content: "Wybierz";
+}
