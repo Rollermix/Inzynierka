@@ -639,3 +639,14 @@ function readReminder($conn,$id)
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 }
+
+function getDogDetailsByUserId($conn, $userid) {
+    $sqli ='SELECT * FROM dog WHERE dog.id_user = "'.$userid.'"';
+    $messages = mysqli_query($conn, $sqli);
+    $results = mysqli_fetch_array($messages);
+    return $results;
+}
+
+function setSelectValue($valueToCheck, $optionValue) {
+    return !strcmp($valueToCheck, $optionValue) ? 'selected="selected"' : '';
+}

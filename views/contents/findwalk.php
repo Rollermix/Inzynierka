@@ -1,5 +1,6 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
+
 <?php
 $sql2 = 'SELECT id_city From USER WHERE id="'.$_SESSION['userid'].'"';
 $result2 = mysqli_query($conn, $sql2);
