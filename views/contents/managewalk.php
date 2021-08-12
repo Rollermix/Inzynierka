@@ -1,5 +1,7 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
+<div class="container">
+
 <a class="btn btn-info" href =  "<?= baseUrl() . "/views/contents/addwalk.php"?>">Dodaj spacer</a>
 <a class="btn btn-info" href = "<?= baseUrl() . "/views/contents/findwalk.php"?>">Znajdź spacer</a>
 <br>
@@ -55,9 +57,12 @@ $sql2 = "SELECT blocked From user WHERE id ='".$id."'";
 $result2 = mysqli_query($conn, $sql2);
 $row2 = mysqli_fetch_array($result2);
 if ($row2['blocked']==0) {
-    echo '<a>Zgłoś użytkownika</a>';
+
+    echo ' <div class="form-group d-flex flex-column justify-content-center" id="manage-walks">';
+    echo '<h3>Zgłoś użytkownika</h3>';
+    echo '<br>';
     echo ' <form action="'.baseUrl().'/includes/reportuser.inc.php" method="post">';
-    echo ' <select name ="user">';
+    echo ' <select name ="user" class="custom-select">';
     echo ' <option>Wybierz Użytkownika</option>';
     $sqli = 'SELECT walk.id_user,user.login FROM walk INNER JOIN user ON walk.id_user=user.id WHERE user.login !="' . $_SESSION['useruid'] . '"';
     $result = mysqli_query($conn, $sqli);
@@ -65,15 +70,24 @@ if ($row2['blocked']==0) {
 
         echo '<option value="'.$row['login'].'">' . $row['login'] . '</option>';
     }
-
-    echo '</select>';
-    echo '<input type = "text" name="reason" placeholder="Wpisz powód zgłoszenia">';
-    echo '<button type = "submit" name ="submit">Wyślij zgłoszenie</button>';
-    echo '</form>';
 }
-else if ($row2['blocked']==2)
+?>
+
+</select>
+<br>
+<br>
+
+<textarea class="form-control" type = "text" name="reason" placeholder="Wpisz powód zgłoszenia"></textarea>
+<button class="btn btn-info" type = "submit" name ="submit">Wyślij zgłoszenie</button>
+</form>
+</div>
+
+<?php
+if ($row2['blocked']==2)
 {
     echo "Nie możesz zgłaszać uzytkowników";
 }
 ?>
+</div>
+
 <?php require_once '../containers/footer.php'; ?>

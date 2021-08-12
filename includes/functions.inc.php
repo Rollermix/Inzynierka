@@ -650,3 +650,21 @@ function getDogDetailsByUserId($conn, $userid) {
 function setSelectValue($valueToCheck, $optionValue) {
     return !strcmp($valueToCheck, $optionValue) ? 'selected="selected"' : '';
 }
+
+function isAdmin($conn,$login)
+{
+    $email = $login;
+    $uidExists = loginExists($conn, $login, $email);
+    if($uidExists === false)
+    {
+        header("location: ". baseUrl() ."/views/contents/login.php?error=wrongLogin");
+        exit();
+    }
+
+    if (boolval($uidExists["admin"])) // ;_; sorry
+    {
+        return true;
+    }
+
+    return false;
+}

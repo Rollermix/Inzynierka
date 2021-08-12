@@ -94,6 +94,10 @@ textarea.form-control {
     margin-bottom: 15px;
 }
 
+#manage-walks {
+    width: 50vw;
+}
+
 div.tab-content {
     margin-top: 25px;
 }

@@ -40,11 +40,15 @@
                     echo "<a class='nav-link' href='". baseUrl() ."/views/contents/managewalk.php'>Zarządzaj spacerami</a>";
                 echo "</div>";
             echo "</div>";
-
             echo "<div class='account'>";
                 echo "<div class='nav-item'>";
                     echo "<a class='nav-link' href='". baseUrl() ."/views/contents/manageaccount.php'>Zarządzaj profilem</a>";
                 echo "</div>";
+                if(isAdmin($conn, $_SESSION['useruid'])) {
+                    echo "<div class='nav-item'>";
+                        echo "<a class='nav-link' href='". baseUrl() ."/admin/admin.php'>Administracja</a>";
+                    echo "</div>";
+                }
                 echo "<a class='nav-item d-flex flex-row'>";
                     echo "<a class='nav-link' href='". baseUrl() ."/includes/logout.inc.php'>Wyloguj się</a>";
                     echo "<div data-icon='&#xe036;' class='icon nav-link no-padding-left-right'>";
