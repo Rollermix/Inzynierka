@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title> Praca inżynierska-logowanie</title>
-</head>
-<body>
+<?php require_once '../views/containers/header.php'; ?>
+<?php require_once '../views/containers/menu.php'; ?>
 <?php
-require_once 'adminheader.php';
+require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
-isLogged();
 ?>
-
 <form action="includes/editcity.inc.php" method="post">
     <?php
     if(isset($_GET["edit"])) {
@@ -60,5 +53,4 @@ isLogged();
     ?>
     <button type = "submit" name ="submit">Edytuj</button>
 </form>
-</body>
-</html>
+<?php require_once '../views/containers/footer.php'; ?>

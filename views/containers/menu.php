@@ -11,17 +11,6 @@
                 echo "<div class='nav-item'>";
                     echo "<a class='nav-link' href='". baseUrl() ."/views/contents/about.php'>O projekcie</a>";
                 echo "</div>";
-            if($messagesCount = hasUnreadMessages($conn, $_SESSION["userid"])) {
-                echo "<div class='nav-item d-flex flex-row'>";
-                    echo "<div data-icon='&#xe021;' class='icon nav-link'>";
-                    echo "<a class='nav-link' href='#'></div> Nieprzeczytane wiadomości (".$messagesCount. ")</a>";
-                echo "</div>";
-            } else {
-                echo "<div class='nav-item d-flex flex-row'>";
-                    echo "<div data-icon='`' class='icon nav-link'></div>";
-                    echo "<a class='nav-link' href='#'>Nie masz nowych wiadomości.</a>";
-                echo "</div>";
-            }
                 echo "<div class='nav-item'>";
                     echo "<a class='nav-link' href='". baseUrl() ."/views/contents/suggestion.php'>Zgłoszenia i sugestie</a>";
                 echo "</div>";
@@ -41,17 +30,25 @@
                 echo "</div>";
             echo "</div>";
             echo "<div class='account'>";
-                echo "<div class='nav-item'>";
-                    echo "<a class='nav-link' href='". baseUrl() ."/views/contents/manageaccount.php'>Zarządzaj profilem</a>";
-                echo "</div>";
                 if(isAdmin($conn, $_SESSION['useruid'])) {
                     echo "<div class='nav-item'>";
                         echo "<a class='nav-link' href='". baseUrl() ."/admin/admin.php'>Administracja</a>";
                     echo "</div>";
                 }
-                echo "<a class='nav-item d-flex flex-row'>";
+                echo "<div class='nav-item'>";
+                    echo "<a class='nav-link' href='". baseUrl() ."/views/contents/manageaccount.php'>Zarządzaj profilem</a>";
+                echo "</div>";
+                if($messagesCount = hasUnreadMessages($conn, $_SESSION["userid"])) {
+                    echo "<div class='nav-item'>";
+                        echo "<a class='nav-link' href='#'>✉ Wiadomości (".$messagesCount. ")</a>";
+                    echo "</div>";
+                } else {
+                    echo "<div class='nav-item'>";
+                        echo "<a class='nav-link' href='#'>Wiadomości (0)</a>";
+                    echo "</div>";
+                }
+                echo "<div class='nav-item'>";
                     echo "<a class='nav-link' href='". baseUrl() ."/includes/logout.inc.php'>Wyloguj się</a>";
-                    echo "<div data-icon='&#xe036;' class='icon nav-link no-padding-left-right'>";
                 echo "</div>";
             echo "</div>";
 

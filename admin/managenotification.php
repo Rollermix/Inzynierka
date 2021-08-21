@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title> Praca inżynierska-logowanie</title>
-</head>
-<body>
+<?php require_once '../views/containers/header.php'; ?>
+<?php require_once '../views/containers/menu.php'; ?>
 <?php
-require_once 'adminheader.php';
 require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
 ?>
@@ -55,4 +49,4 @@ if(mysqli_num_rows($result)>0)
     }
 }
 ?>
-</body>
+<?php require_once '../views/containers/footer.php'; ?>

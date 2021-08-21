@@ -105,3 +105,48 @@ div.tab-content {
 .custom-file-label::after {
     content: "Wybierz";
 }
+
+div.admin-menu {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+div.admin-menu > ul {
+}
+
+div.admin-menu > ul > li {
+    height: 250px;
+    width: 250px;
+    font-size: 20px;
+    float: left;
+    list-style: none;
+    text-align: center;
+    background-color: #e9c6b0;
+    margin-right: 30px;
+    line-height: 60px;
+    transition: 0.3s ease-in-out;
+}
+
+div.admin-menu > ul > li:hover {
+    transition: 0.3s ease-in-out;
+    background-color: #f58646;
+}
+
+div.admin-menu > ul > li > a {
+    transition: 0.3s ease-in-out;
+
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    color: #3d3b3b
+}
+
+div.admin-menu > ul > li > a:hover {
+    transition: 0.3s ease-in-out;
+
+    color: #ffffff
+}

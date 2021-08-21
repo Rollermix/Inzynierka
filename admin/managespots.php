@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title> Praca inżynierska-logowanie</title>
-</head>
-<body>
+<?php require_once '../views/containers/header.php'; ?>
+<?php require_once '../views/containers/menu.php'; ?>
 <?php
-require_once 'adminheader.php';
-require_once 'includes/dbh.inc.php';
 require_once 'includes/adminfunctions.inc.php';
-isLogged();
+require_once 'includes/dbh.inc.php';
 ?>
-
     <h2>
         Zarządzaj miejscami
     </h2>
@@ -57,5 +49,4 @@ if(isset($_GET["acceptspot"]))
     acceptSuggestion($id,$conn);
 }
 ?>
-</body>
-</html>
+<?php require_once '../views/containers/footer.php'; ?>
