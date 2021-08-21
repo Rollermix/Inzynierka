@@ -232,7 +232,6 @@ function readSuggestion($id,$conn)
     mysqli_stmt_bind_param($stmt, "s",$id);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    exit();
 }
 function sendReminder($conn,$adminid,$id,$description)
 {

@@ -74,8 +74,6 @@ if(mysqli_num_rows($result))
     echo '</tbody>';
     echo '</table>';
 }
-
-
 ?>
 </div>
 

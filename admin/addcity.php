@@ -4,12 +4,6 @@
 require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
 ?>
-<?php
-require_once 'adminheader.php';
-require_once 'includes/dbh.inc.php';
-require_once 'includes/adminfunctions.inc.php';
-isLogged();
-?>
 
 <section class="city-form">
     <h2>

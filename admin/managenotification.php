@@ -14,7 +14,7 @@ $result = mysqli_query($conn, $sqli);
 if(mysqli_num_rows($result)>0)
 {
 
-    echo '<table>'.'<tr>'.'<th>Kto zgłasza</th>'.'<th>Kto jest zgłaszany</th>'.'<th>Powód</th>'.'<th>Status</th>'.'</tr>';
+    echo '<table class="table table-hover">'.'<tr>'.'<th>Kto zgłasza</th>'.'<th>Kto jest zgłaszany</th>'.'<th>Powód</th>'.'<th>Status</th>'.'</tr>';
     while ($row = mysqli_fetch_array($result)) {
         if($row['statusid']==1)
         {
