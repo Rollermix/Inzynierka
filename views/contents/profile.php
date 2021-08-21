@@ -1,8 +1,8 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
 <?php
-if(isset($_GET["login"])) {
-    $login = $_GET["login"];
+if(isset($_SESSION["useruid"])) {
+    $login = $_SESSION["useruid"];
     $sqli = 'Select user.login, user.name,user.surname,user.email,dog.image_path,user.description,
        dog.size, dog.name AS dogname, dog.opis FROM user INNER JOIN dog ON user.id=dog.id_user WHERE user.login=?';
     $stmt = mysqli_stmt_init($conn);

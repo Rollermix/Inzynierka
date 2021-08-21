@@ -1,15 +1,35 @@
 body {
-    background-color: #ffffff;
-    background-image: url("../img/beagle-dog.jpg");
+    background-color: #fafafa;
+    background-image: url("../img/doggo_walks.jpg");
     background-repeat: no-repeat;
     background-position: bottom right;
     background-size: 35%;
     min-height: 100vh;
 }
 
+.container > .title {
+    margin-top: 150px;
+    width: 35%;
+}
+
+.container > .title > .subtitle {
+    margin-top: 50px;
+    font-size: 20px;
+}
+
 .navbar {
-    margin-bottom: 25px;
-    background-color: #914525;
+    background-color: #fafafa;
+    margin: 0 30px 25px 30px;
+}
+
+.navbar .navbar-brand {
+    color: black !important;
+    font-size: 35px;
+
+}
+
+.navbar .nav-link {
+    color: black !important;
 }
 
 .form-group input:first-child {
@@ -142,11 +162,11 @@ div.admin-menu > ul > li > a {
     height: 100%;
     width: 100%;
     align-items: center;
-    color: #3d3b3b
+    color: #3d3b3b;
 }
 
 div.admin-menu > ul > li > a:hover {
     transition: 0.3s ease-in-out;
 
-    color: #ffffff
+    color: #ffffff;
 }
