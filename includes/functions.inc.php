@@ -668,3 +668,16 @@ function isAdmin($conn,$login)
 
     return false;
 }
+
+function getNotDeletesCitiesData($conn) {
+    $cities = [];
+    $sqli = "SELECT voivodship.name AS 'voivodeship', city.* From voivodship Inner Join city ON city.id_voivodship=voivodship.id";
+    $result = mysqli_query($conn, $sqli);
+    while ($row = mysqli_fetch_array($result)) {
+        if(!$row['deleted']) {
+            $cities[] = $row;
+        }
+    }
+
+    return $cities;
+}
