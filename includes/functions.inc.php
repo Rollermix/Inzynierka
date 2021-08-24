@@ -681,3 +681,16 @@ function getNotDeletesCitiesData($conn) {
 
     return $cities;
 }
+
+function getDogsAndItsOwners($conn) {
+
+    $dogsWithOwners = [];
+    $sqli = "Select CONCAT(user.name, ' ', user.surname) as fullname ,user.email,dog.image_path as dogimage,
+       dog.size, dog.name AS dogname, dog.opis FROM user INNER JOIN dog ON user.id=dog.id_user";
+    $result = mysqli_query($conn, $sqli);
+    while ($row = mysqli_fetch_array($result)) {
+        $dogsWithOwners[] = $row;
+    }
+
+    return $dogsWithOwners;
+}
