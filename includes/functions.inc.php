@@ -7,6 +7,8 @@ if(file_exists(stream_resolve_include_path('../config.php'))) {
     require_once('../config.php');
 }
 
+require_once('models.php');
+
 function baseUrl() {
     global $CONFIG;
 
@@ -19,55 +21,19 @@ function baseUrl() {
 
 function emptyInputSignup($firstname,$lastname,$login,$email,$password,$repeatpassword)
 {
-    $result;
-    if(empty($firstname) || empty($lastname) || empty($login) || empty($email) || empty($password) || empty($repeatpassword))
-    {
-        $result = true;
-    }
-    else
-    {
-        $result = false;
-    }
-    return $result;
+    return empty($firstname) || empty($lastname) || empty($login) || empty($email) || empty($password) || empty($repeatpassword);
 }
 function invalidLogin($login)
 {
-    $result;
-    if(!preg_match("/^[a-zA-Z0-9]+$/",$login))
-    {
-        $result = true;
-    }
-    else
-    {
-        $result = false;
-    }
-    return $result;
+    return !preg_match("/^[a-zA-Z0-9]+$/",$login);
 }
 function invalidEmail($email)
 {
-
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL))
-    {
-        $result = true;
-    }
-    else
-    {
-        $result = false;
-    }
-    return $result;
+    return !filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 function pwdMatch($password, $repeatpassword)
 {
-    $result;
-    if ($password!==$repeatpassword)
-    {
-        $result = true;
-    }
-    else
-    {
-        $result = false;
-    }
-    return $result;
+    return $password !== $repeatpassword;
 }
 function loginExists($conn, $login, $email)
 {
@@ -136,16 +102,7 @@ function createUser($conn,$firstname,$lastname,$login,$email,$description,$passw
 }
 function emptyInputLogin($login,$password)
 {
-    $result;
-    if(empty($login) || empty($password))
-    {
-        $result = true;
-    }
-    else
-    {
-        $result = false;
-    }
-    return $result;
+    return empty($login) || empty($password);
 }
 function loginUser($conn,$login,$password)
 {
@@ -206,7 +163,6 @@ function isBlocked($conn,$login)
 }
 function isDeleted($conn,$login)
 {
-    $result;
     $sql = "SELECT deleted FROM user WHERE login = ? OR email = ?;";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
@@ -218,17 +174,9 @@ function isDeleted($conn,$login)
     mysqli_stmt_execute($stmt);
     $resultData = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_array($resultData);
-    if($row['deleted']==1)
-    {
-        $result = true;
-    }
-    else
-    {
-        $result = false;
 
-    }
-    return $result;
     mysqli_stmt_close($stmt);
+    return $row['deleted'] == 1;
 }
 function editUser($conn,$firstname,$lastname,$login,$email,$description,$city,$id)
 {
@@ -272,16 +220,7 @@ function deleteAccount($conn,$id)
 }
 function emptyInputChangingPwd($password,$newpassword,$repeatnewpassword)
 {
-    $result;
-    if(empty($password) || empty($newpassword) || empty($repeatnewpassword))
-    {
-        $result = true;
-    }
-    else
-    {
-        $result = false;
-    }
-    return $result;
+    return empty($password) || empty($newpassword) || empty($repeatnewpassword);
 }
 function editPwd($conn,$login,$password,$newpassword,$repeatnewpassword)
 {
@@ -358,26 +297,11 @@ function remindPassword($conn,$login)
 }
 function emptyInputSuggestion($suggestion)
 {
-    $result;
-    if(empty($suggestion))
-    {
-        $result = true;
-    }
-    else
-    {
-        $result = false;
-    }
-    return $result;
+    return empty($suggestion);
 }
 function toLongSuggestion($suggestion)
 {
-    $result;
-        if(strlen($suggestion)>500)
-        {
-            $result = true;
-        }
-        else $result = false;
-        return $result;
+    return strlen($suggestion)>500;
 }
 function addSuggestion($conn,$suggestion,$iduser)
 {
@@ -669,14 +593,33 @@ function isAdmin($conn,$login)
     return false;
 }
 
-function getNotDeletesCitiesData($conn) {
+function getCitiesData($conn, $get_deleted = true) {
+
     $cities = [];
-    $sqli = "SELECT voivodship.name AS 'voivodeship', city.* From voivodship Inner Join city ON city.id_voivodship=voivodship.id";
+
+    $sqli = "SELECT voivodship.name AS 'voivodeship', city.* 
+             FROM voivodship 
+             INNER JOIN city 
+                 ON city.id_voivodship=voivodship.id";
     $result = mysqli_query($conn, $sqli);
-    while ($row = mysqli_fetch_array($result)) {
-        if(!$row['deleted']) {
-            $cities[] = $row;
+    while ($row = mysqli_fetch_object($result)) {
+        $city = new CityDto($row);
+        $cities[] = $city;
+    }
+
+    foreach ($cities as &$city) {
+        $sqli = "SELECT spot.name, spot.description, spot.id_city 
+                 FROM spot 
+                 INNER JOIN city 
+                     ON spot.id_city=city.id 
+                 WHERE city.id='" . $city->id."'";
+        $result = mysqli_query($conn, $sqli);
+        while ($spot = mysqli_fetch_object($result)) {
+            if($spot->id_city === $city->id) {
+                $city->addSpot($spot);
+            }
         }
+
     }
 
     return $cities;

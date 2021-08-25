@@ -305,3 +305,8 @@ div.admin-menu > ul > li > a:hover {
 .card-group > .card {
     margin: 0 20px 10px 20px;
 }
+
+.hidden-js {
+    display: none !important;
+    transition: all 0.4s linear;
+}

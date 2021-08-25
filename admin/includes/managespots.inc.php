@@ -2,7 +2,6 @@
 session_start();
 require_once 'dbh.inc.php';
 require_once 'adminfunctions.inc.php';
-isLogged();
 if (isset($_POST["submit"])) {
     $check = 'Wybierz miasto...';
     $city = $_POST["city"];

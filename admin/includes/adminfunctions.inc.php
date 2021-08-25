@@ -43,19 +43,11 @@ function loginAdminUser($conn,$login,$password)
         }
     }
 }
-function emptyInputAdd($name)
-{
-    $result;
-    if(empty($name))
-    {
-        $result = true;
-    }
-    else
-    {
-        $result = false;
-    }
-    return $result;
+function emptyInputAdd($name) {
+
+    return empty($name);
 }
+
 function addcity($conn,$voivodshipid,$name,$description)
 {
     if(empty($description))
@@ -127,7 +119,7 @@ function addspot($conn, $city, $name, $description)
     {
         $description="Nie dodano opisu miejsca";
     }
-    $sql="INSERT INTO spot (name,description,id_city) VALUES (?, ?, (SELECT id FROM city where name = ?));";
+    $sql="INSERT INTO spot (name,description,id_city,deleted) VALUES (?, ?, (SELECT id FROM city where name = ?), false);";
     $stmt=mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt,$sql))
     {
