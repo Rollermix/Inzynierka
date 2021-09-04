@@ -21,9 +21,11 @@
 
                 echo '<td><span>' . $city->voivodeship. '</span><br>';
                 echo '<span><i>dodano ' . mb_substr($city->created_at, 0, 10) . '</i></span></td>';
-                echo '<td><a href="'.baseUrl().'/views/contents/main.php?city=' . $city->name . '">'.$city->name.'</a><br>';
+                echo '<td><span>'.$city->name.'</span><br>';
                 if(count($city->spots)) {
                     echo '<span>Liczba spotów: '.count($city->spots).' (kliknij, aby rozwinąć)</span>';
+                } else {
+                    echo '<span>Brak spotów w danym mieście</span>';
                 }
                 echo "</td>";
                 echo '<td>' . $city->description . '</td>';
@@ -42,20 +44,5 @@
         ?>
         </tbody>
     </table>
-<!--    --><?php
-//        // TODO: kod poniżej zostanie zwinięty do pliku .js
-//        if(isset($_GET['city'])) {
-//            $city = ($_GET['city']);
-//            $sqli = "SELECT spot.name,spot.description From spot Inner Join city ON spot.id_city=city.id WHERE city.name='" . $city."'";
-//            $result = mysqli_query($conn, $sqli);
-//            echo '<h3>Szczegóły miasta</h3>';
-//            if(mysqli_num_rows($result)) {
-//
-//            } else {
-//                echo "<p>Brak miejsc w danym mieście</p>";
-//            }
-//        }
-//    ?>
-<div>
 
 <?php require_once '../containers/footer.php'; ?>

@@ -68,7 +68,7 @@ a::after {
 }
 
 a:hover::after,
-a:focus::after{
+a:focus::after {
     transform: translate3d(0, 0, 0);
 }
 
@@ -94,12 +94,15 @@ a:focus::after{
     color: black !important;
 }
 
-.form-group input:first-child {
+.form-group input[type="text"]:first-child, .form-group input[type="password"]:first-child {
     margin-top: 25px;
 }
 
-.form-group input {
+.form-group input[type="text"], .form-group input[type="password"] {
     width: 350px;
+}
+
+.form-group input[type="password"]:last-child {
     margin-bottom: 25px;
 }
 
@@ -135,14 +138,14 @@ a:focus::after{
     .navbar-collapse {
         justify-content: flex-end;
     }
-    
+
     .navbar .account, .navbar .dogs, .navbar .system {
         display: flex;
         flex-direction: row;
         justify-content: end;
         margin: 0 15px;
     }
-    
+
 }
 
 .no-padding {
@@ -236,41 +239,57 @@ div.admin-menu > ul > li > a:hover {
 .img {
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center; }
+    background-position: center center;
+}
 
 .table-wrap {
-    overflow-x: scroll; }
+    overflow-x: scroll;
+}
 
 .table {
     min-width: 1000px !important;
     width: 100%;
-    -webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
-    -moz-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
-    box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29); }
+    -webkit-box-shadow: 0 5px 12px -12px rgba(0, 0, 0, 0.29);
+    -moz-box-shadow: 0 5px 12px -12px rgba(0, 0, 0, 0.29);
+    box-shadow: 0 5px 12px -12px rgba(0, 0, 0, 0.29);
+}
+
 .table thead th {
     border: none;
     padding: 30px;
     font-size: 13px;
     font-weight: 500;
-    color: gray; }
+    color: gray;
+}
+
 .table thead tr {
     background: #fff;
-    border-bottom: 4px solid #eceffa; }
+    border-bottom: 4px solid #eceffa;
+}
+
 .table tbody tr {
     margin-bottom: 10px;
-    border-bottom: 4px solid #f8f9fd; }
+    border-bottom: 4px solid #f8f9fd;
+}
+
 .table tbody tr:last-child {
-    border-bottom: 0; }
+    border-bottom: 0;
+}
+
 .table tbody th, .table tbody td {
     border: none;
     padding: 20px;
     font-size: 14px;
     background: #fff;
-    vertical-align: middle; }
+    vertical-align: middle;
+}
+
 .table tbody td.status span {
     position: relative;
     border-radius: 30px;
-    padding: 4px 10px 4px 25px; }
+    padding: 4px 10px 4px 25px;
+}
+
 .table tbody td.status span:after {
     position: absolute;
     top: 9px;
@@ -278,29 +297,46 @@ div.admin-menu > ul > li > a:hover {
     width: 10px;
     height: 10px;
     content: '';
-    border-radius: 50%; }
+    border-radius: 50%;
+}
+
 .table tbody td.status .active {
     background: #cff6dd;
-    color: #1fa750; }
+    color: #1fa750;
+}
+
 .table tbody td.status .active:after {
-    background: #23bd5a; }
+    background: #23bd5a;
+}
+
 .table tbody td.status .waiting {
     background: #fdf5dd;
-    color: #cfa00c; }
+    color: #cfa00c;
+}
+
 .table tbody td.status .waiting:after {
-    background: #f2be1d; }
+    background: #f2be1d;
+}
+
 .table tbody td .img {
     width: 50px;
     height: 50px;
-    border-radius: 50%; }
+    border-radius: 50%;
+}
+
 .table tbody td .email span {
-    display: block; }
+    display: block;
+}
+
 .table tbody td .email span:last-child {
     font-size: 12px;
-    color: rgba(0, 0, 0, 0.3); }
+    color: rgba(0, 0, 0, 0.3);
+}
+
 .table tbody td .close span {
     font-size: 12px;
-    color: #dc3545; }
+    color: #dc3545;
+}
 
 .card-group > .card {
     margin: 0 20px 10px 20px;
@@ -309,4 +345,37 @@ div.admin-menu > ul > li > a:hover {
 .hidden-js {
     display: none !important;
     transition: all 0.4s linear;
+}
+
+div.login-form {
+    background-color: #fff;
+    padding: 40px;
+}
+
+input[type="text"], input[type="password"] {
+    border-radius: 0;
+    background-color: #f2f2f2;
+    height: 60px;
+}
+
+input.form-control::placeholder {
+    color: #dddddd;
+}
+
+.login-actions {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.btn-login {
+    width: 100%;
+    height: 56px;
+    font-size: 20px;
+    background-color: #f58646;
+    border-color: #f58646;
+}
+
+.btn-login:hover {
+    background-color: #be6531;
+    border-color: #be6531;
 }

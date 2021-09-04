@@ -118,8 +118,7 @@ function loginUser($conn,$login,$password)
     {
         header("location: ". baseUrl() ."/views/contents/login.php?error=wrongPassword");
     }
-    else if ($checkPwd === true)
-    {
+    else {
         session_start();
         $_SESSION["userid"] = $uidExists["id"];
         $_SESSION["useruid"] = $uidExists["login"];
@@ -128,13 +127,15 @@ function loginUser($conn,$login,$password)
         exit();
     }
 }
-function isLogged()
-{
-    if (!isset($_SESSION['loggedin']) && !$_SESSION['loggedin'] ) {
-        header("location: ". baseUrl() ."/views/contents/login.php?error=notLogged");
-        exit();
-    } 
+function isLogged() {
+    return isset($_SESSION['loggedin']) && $_SESSION['loggedin'];
 }
+
+function redirectToPage($page) {
+    header("location: ". $page);
+    exit();
+}
+
 function isBlocked($conn,$login)
 {
     $result=false;
@@ -628,7 +629,7 @@ function getCitiesData($conn, $get_deleted = true) {
 function getDogsAndItsOwners($conn) {
 
     $dogsWithOwners = [];
-    $sqli = "Select CONCAT(user.name, ' ', user.surname) as fullname ,user.email,dog.image_path as dogimage,
+    $sqli = "Select user.id,     CONCAT(user.name, ' ', user.surname) as fullname ,user.email,dog.image_path as dogimage,
        dog.size, dog.name AS dogname, dog.opis FROM user INNER JOIN dog ON user.id=dog.id_user";
     $result = mysqli_query($conn, $sqli);
     while ($row = mysqli_fetch_array($result)) {
@@ -636,4 +637,11 @@ function getDogsAndItsOwners($conn) {
     }
 
     return $dogsWithOwners;
+}
+
+function redirectIfLoggedIn() {
+    if(isLogged()) {
+        redirectToPage(baseUrl() . '/views/contents/start.php');
+        exit();
+    }
 }

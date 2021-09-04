@@ -1,7 +1,6 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
 <?php
-isLogged();
 $sqli = "SELECT * FROM user WHERE login='".$_SESSION["useruid"]."'";
 $result = mysqli_query($conn, $sqli);
 $userdata = mysqli_fetch_array($result);
