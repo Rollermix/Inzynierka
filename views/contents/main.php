@@ -24,8 +24,6 @@
                 echo '<td><span>'.$city->name.'</span><br>';
                 if(count($city->spots)) {
                     echo '<span>Liczba spotów: '.count($city->spots).' (kliknij, aby rozwinąć)</span>';
-                } else {
-                    echo '<span>Brak spotów w danym mieście</span>';
                 }
                 echo "</td>";
                 echo '<td>' . $city->description . '</td>';

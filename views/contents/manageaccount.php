@@ -53,7 +53,7 @@ $_SESSION["idchanging"]=$userdata['id'];
                         </select>
                         <br>
 
-                        <textarea class="form-control" type = "text" name="description" placeholder="Opisz siebie..." rows="15"><?= $userdata['description']?></textarea>
+                        <textarea class="form-control" type = "text" name="description" placeholder="Opisz siebie..." rows="10"><?= $userdata['description']?></textarea>
 
                         <button class="btn btn-success" type = "submit" name ="submit">Zmień dane</button>
                     </form>

@@ -3,9 +3,9 @@
 <?php
 redirectIfLoggedIn()
 ?>
-<div class="container">
+<div class="container-fluid">
     <div class="form-group d-flex justify-content-center">
-        <div class="remind-form">
+        <div class="login-form">
             <form action="<?= baseUrl() . '/includes/login.inc.php' ?>" method="post">
                 <h2 class="h2 text-center">Logowanie do strony</h2>
                 <label for="username"></label>

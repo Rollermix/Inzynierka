@@ -5,12 +5,14 @@ redirectIfLoggedIn()
 ?>
 <div class="container">
     <div class="form-group d-flex justify-content-center">
-        <div class="login-form">
+        <div class="remind-form">
             <form action="<?= baseUrl() . '/includes/login.inc.php' ?>" method="post">
                 <h2 class="h2 text-center">Przypomnij hasło</h2>
-                <label for="username"></label>
-                <input class="form-control" type="text" name="name" id="username"
-                       placeholder="Nazwa użytkownika lub email">
+                <label for="username">
+                    <span>Na powiazany adres e-mail zostanie wysłana wiadomość z dalszymi instrukcjami dotyczącymi odzyskiwania konta</span>
+                    <input class="form-control" type="text" name="name" id="username"
+                           placeholder="Nazwa użytkownika lub email" style="width: 100%; margin-top: 25px">
+                </label>
                 <div class="d-flex justify-content-center" style="padding-top: 25px;">
                     <button class="btn btn-success btn-login" type="submit" name="submit2">Resetuj hasło</button>
                 </div>
