@@ -4,7 +4,7 @@
 require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
 ?>
-
+<div class="container">
 <?php
 $sqli = "SELECT user.login,u.login AS `log`, notification.*, status.id AS `statusid`,status.status From notification INNER JOIN status 
     ON notification.id_status = status.id INNER JOIN user ON user.id=notification.id_user INNER JOIN user AS `u` ON u.id=notification.id_reported_user
@@ -14,7 +14,8 @@ $result = mysqli_query($conn, $sqli);
 if(mysqli_num_rows($result)>0)
 {
 
-    echo '<table class="table table-hover">'.'<tr>'.'<th>Kto zgłasza</th>'.'<th>Kto jest zgłaszany</th>'.'<th>Powód</th>'.'<th>Status</th>'.'</tr>';
+    echo '<table class="table table-hover"><thead>'.'<tr>'.'<th>Kto zgłasza</th>'.'<th>Kto jest zgłaszany</th>'.'<th>Powód</th>'.'<th>Status</th>'.'</tr></thead>';
+    echo '<tbody>';
     while ($row = mysqli_fetch_array($result)) {
         if($row['statusid']==1)
         {
@@ -37,7 +38,7 @@ if(mysqli_num_rows($result)>0)
         else if ($row['statusid']==3)
         {
             echo '<tr>' . '<td>' . $row['login'] . '</td>' . '<td>' . $row['log'] . '</td>' . '<td>' . $row['reason'] .
-                '</td>' . '<td>' . $row['status'] . '</td>' . '</tr>';
+                '</td>' . '<td>' . $row['status'] . '</td>' . '<td></td></tr>';
         }
         else if ($row['statusid']==4)
         {
@@ -45,8 +46,11 @@ if(mysqli_num_rows($result)>0)
                 '</td>' . '<td>' . $row['status'] . '</td>' . '<td>'.'<button>'.'<a href="reminduser.php?iduser='.$row["id_user"].'">'.
                 'Upomnij użytkownika, którzy zgłaszał'.'</a>'.'</button>'.'</td>'.'</tr>';
         }
-        echo '</table>';
     }
+    echo '</tbody>';
+    echo '</table>';
+
 }
 ?>
+</div>
 <?php require_once '../views/containers/footer.php'; ?>

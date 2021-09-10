@@ -7,6 +7,15 @@ body {
     min-height: 100vh;
 }
 
+div.triangle-background {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    border-top: 100vh solid #f58646;
+    border-right: 280px solid transparent;
+}
+
 .container > .title {
     margin-top: 150px;
     width: 35%;
@@ -80,12 +89,12 @@ a:focus::after {
 }
 
 .navbar {
-    background-color: #fafafa;
+    background-color: transparent;
     margin: 0 30px 25px 30px;
 }
 
 .navbar .navbar-brand {
-    color: black !important;
+    color: #fff !important;
     font-size: 35px;
 
 }
