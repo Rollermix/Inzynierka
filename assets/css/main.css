@@ -26,17 +26,8 @@ div.triangle-background {
     font-size: 20px;
 }
 
-.container > .go-to-cities {
-    margin-top: 30px;
-}
-
-.container > .go-to-cities > a {
-    text-decoration: none;
-    font-size: 1.2rem;
-}
-
 /* Underline styles */
-a {
+.custom-navbar a {
     display: inline-block;
     position: relative;
     padding: 0.2em 0;
@@ -44,7 +35,7 @@ a {
 }
 
 /* Fade in */
-a::after {
+.custom-navbar a::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -56,36 +47,42 @@ a::after {
     transition: opacity 300ms, transform 300ms;
 }
 
-a:hover::after,
-a:focus::after {
+.custom-navbar a:hover::after,
+.custom-navbar a:focus::after {
     opacity: 1;
     transform: translate3d(0, 0.2em, 0);
 }
 
 /* Slide in */
-a {
+.custom-navbar a {
     overflow: hidden;
 }
 
-a::after {
+.custom-navbar a::after {
     opacity: 1;
     transform: translate3d(-100%, 0, 0);
 }
 
-.container > a.go-to-cities {
-    font-size: 1.2rem;
+.container > .start-menu {
+    display: flex;
+    flex-direction: column;
 }
 
-a:hover::after,
-a:focus::after {
+.container > .start-menu > a.go-to-cities {
+    font-size: 1.2rem;
+    color: #f58646;
+    margin-top: 20px;
+}
+
+.custom-navbar a:hover::after,
+.custom-navbar a:focus::after {
     transform: translate3d(0, 0, 0);
 }
 
 
-.container > a.go-to-cities:hover {
+.container > .start-menu > a.go-to-cities:hover {
     text-decoration: none;
     color: #9f3c00;
-
 }
 
 .navbar {
@@ -200,51 +197,6 @@ div.tab-content {
     content: "Wybierz";
 }
 
-div.admin-menu {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
-
-div.admin-menu > ul {
-}
-
-div.admin-menu > ul > li {
-    height: 250px;
-    width: 250px;
-    font-size: 20px;
-    float: left;
-    list-style: none;
-    text-align: center;
-    background-color: #e9c6b0;
-    margin-right: 30px;
-    line-height: 60px;
-    transition: 0.3s ease-in-out;
-}
-
-div.admin-menu > ul > li:hover {
-    transition: 0.3s ease-in-out;
-    background-color: #f58646;
-}
-
-div.admin-menu > ul > li > a {
-    transition: 0.3s ease-in-out;
-
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    color: #3d3b3b;
-}
-
-div.admin-menu > ul > li > a:hover {
-    transition: 0.3s ease-in-out;
-
-    color: #ffffff;
-}
-
 .img {
     background-size: cover;
     background-repeat: no-repeat;
@@ -280,7 +232,7 @@ div.admin-menu > ul > li > a:hover {
     margin-bottom: 10px;
 }
 
-.table-secondary, .table-secondary>td, .table-secondary>th {
+.table-secondary, .table-secondary > td, .table-secondary > th {
     background-color: #fefefe;
 }
 
@@ -357,4 +309,35 @@ input.form-control::placeholder {
 .btn-login:hover {
     background-color: #be6531;
     border-color: #be6531;
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(245, 134, 70, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.custom-toggler.navbar-toggler {
+    border-color: #F58646;
+}
+
+.admin-tabs {
+    border-bottom: #fff solid 5px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.admin-tabs a {
+    color: #f58646;
+}
+
+.admin-menu {
+    background-color: #fff;
+    padding: 15px;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    border-color: #F58646;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+    border-color: #f8b190;
 }

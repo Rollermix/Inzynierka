@@ -9,7 +9,8 @@ redirectIfLoggedIn()
             <form action="<?= baseUrl() . '/includes/login.inc.php' ?>" method="post">
                 <h2 class="h2 text-center">Przypomnij hasło</h2>
                 <label for="username">
-                    <span>Na powiazany adres e-mail zostanie wysłana wiadomość z dalszymi instrukcjami dotyczącymi odzyskiwania konta</span>
+                    <br>
+                    <span>Na powiazany adres e-mail zostanie wysłana wiadomość <br>z dalszymi instrukcjami dotyczącymi odzyskiwania konta.</span>
                     <input class="form-control" type="text" name="name" id="username"
                            placeholder="Nazwa użytkownika lub email" style="width: 100%; margin-top: 25px">
                 </label>

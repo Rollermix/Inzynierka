@@ -1,10 +1,10 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark">
     <a class="navbar-brand" href="<?= baseUrl() . '/views/contents/start.php'?>">DoggoWalks</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="custom-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-    <div class="navbar-nav">
+    <div class="navbar-nav custom-navbar">
         <?php
         if (isset($_SESSION["useruid"])) {
             echo "<div class='system'>";
@@ -32,7 +32,7 @@
             echo "<div class='account'>";
                 if(isAdmin($conn, $_SESSION['useruid'])) {
                     echo "<div class='nav-item'>";
-                        echo "<a class='nav-link' href='". baseUrl() ."/admin/admin.php'>Administracja</a>";
+                        echo "<a class='nav-link' href='". baseUrl() ."/admin/suggestions.php'>Administracja</a>";
                     echo "</div>";
                 }
                 echo "<div class='nav-item'>";

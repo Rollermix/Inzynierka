@@ -4,7 +4,24 @@
 require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
 ?>
-<div class="container">
+<div class="container admin-menu">
+    <ul class="nav nav-tabs admin-tabs">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" href="suggestions.php" role="tab">Zarządzaj sugestiami</a>
+        </li>
+        <li class="nav-item active" role="presentation">
+            <a class="nav-link active" href="managenotification.php" data-toggle="tab" role="tab" aria-selected="true">Zarządzaj zgłoszeniami</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" href="managecities.php" role="tab">Dodaj miasto</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" href="manageusers.php" role="tab">Zarządzaj użytkownikami</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" href="managespots.php" role="tab">Zarządzaj miejscami</a>
+        </li>
+    </ul>
 <?php
 $sqli = "SELECT user.login,u.login AS `log`, notification.*, status.id AS `statusid`,status.status From notification INNER JOIN status 
     ON notification.id_status = status.id INNER JOIN user ON user.id=notification.id_user INNER JOIN user AS `u` ON u.id=notification.id_reported_user

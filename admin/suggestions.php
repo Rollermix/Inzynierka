@@ -4,7 +4,24 @@
 require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
 ?>
-<div class="container">
+<div class="container admin-menu">
+    <ul class="nav nav-tabs admin-tabs">
+        <li class="nav-item active" role="presentation">
+            <a class="nav-link active" href="suggestions.php" data-toggle="tab" role="tab" aria-selected="true">Zarządzaj sugestiami</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" href="managenotification.php" role="tab">Zarządzaj zgłoszeniami</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" href="managecities.php" role="tab">Dodaj miasto</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" href="manageusers.php" role="tab">Zarządzaj użytkownikami</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" href="managespots.php" role="tab">Zarządzaj miejscami</a>
+        </li>
+    </ul>
 <?php
 $sqli = "SELECT suggestions.id AS 'id',suggestions.id_user AS 'iduser', suggestions.id_status,suggestions.suggestion, status.status From suggestions INNER JOIN status 
     ON suggestions.id_status = status.id ORDER BY suggestions.id_status ASC";
