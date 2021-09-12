@@ -4,8 +4,8 @@
 require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
 ?>
-<div class="container admin-menu">
-    <ul class="nav nav-tabs admin-tabs">
+<div class="container custom-menu">
+    <ul class="nav nav-tabs custom-tabs">
         <li class="nav-item" role="presentation">
             <a class="nav-link" href="suggestions.php" role="tab">Zarządzaj sugestiami</a>
         </li>
@@ -31,25 +31,25 @@ $result = mysqli_query($conn, $sqli);
 if(mysqli_num_rows($result)>0)
 {
 
-    echo '<table class="table table-hover"><thead>'.'<tr>'.'<th>Kto zgłasza</th>'.'<th>Kto jest zgłaszany</th>'.'<th>Powód</th>'.'<th>Status</th>'.'</tr></thead>';
+    echo '<table class="table table-hover"><thead>'.'<tr class="bg-dark">'.'<th>Kto zgłasza</th>'.'<th>Kto jest zgłaszany</th>'.'<th>Powód</th>'.'<th>Status</th><th>Akcje</th>'.'</tr></thead>';
     echo '<tbody>';
     while ($row = mysqli_fetch_array($result)) {
         if($row['statusid']==1)
         {
             echo '<tr>' . '<td>' . $row['login'] . '</td>' . '<td>' . $row['log'] . '</td>' . '<td>' . $row['reason'] .
-                '</td>' . '<td>' . $row['status'] . '</td>' .'<td>'.'<button>'.
-                '<a href="includes/managenotification.inc.php?accept='.$row['id'].'&iduser='.$row['id_reported_user']. '">'.
-                'Akceptuj'.'</a>'.'</button>'.'<a href="includes/managenotification.inc.php?deny='.$row['id'].'">'.
-                'Odrzuć'.'</a>'.'</button>'.'</td>' .'</tr>';
+                '</td>' . '<td>' . $row['status'] . '</td>' .'<td class="d-flex justify-content-between">'.
+                '<a class="btn btn-success" href="includes/managenotification.inc.php?accept='.$row['id'].'&iduser='.$row['id_reported_user']. '">'.
+                'Akceptuj'.'</a>'.'<a class="btn btn-danger" href="includes/managenotification.inc.php?deny='.$row['id'].'">'.
+                'Odrzuć'.'</a>'.'</td>' .'</tr>';
             readNotofication($conn,$row["id"]);
         }
         else  if ($row['statusid']==2)
         {
         echo '<tr>' . '<td>' . $row['login'] . '</td>' . '<td>' . $row['log'] . '</td>' . '<td>' . $row['reason'] .
-            '</td>' . '<td>' . $row['status'] . '</td>' .'<td>'.'<button>'.
-            '<a href="includes/managenotification.inc.php?accept='.$row['id'].'&iduser='.$row['id_reported_user']. '">'.
-            'Akceptuj'.'</a>'.'</button>'.'<a href="includes/managenotification.inc.php?deny='.$row['id'].'">'.
-            'Odrzuć'.'</a>'.'</button>'.'</td>' .'</tr>';
+            '</td>' . '<td>' . $row['status'] . '</td>' .'<td class="d-flex justify-content-between">'.
+            '<a class="btn btn-success" href="includes/managenotification.inc.php?accept='.$row['id'].'&iduser='.$row['id_reported_user']. '">'.
+            'Akceptuj'.'</a>'.'<a class="btn btn-danger" href="includes/managenotification.inc.php?deny='.$row['id'].'">'.
+            'Odrzuć'.'</a>'.'</td>' .'</tr>';
 
         }
         else if ($row['statusid']==3)
@@ -60,8 +60,8 @@ if(mysqli_num_rows($result)>0)
         else if ($row['statusid']==4)
         {
             echo '<tr>' . '<td>' . $row['login'] . '</td>' . '<td>' . $row['log'] . '</td>' . '<td>' . $row['reason'] .
-                '</td>' . '<td>' . $row['status'] . '</td>' . '<td>'.'<button>'.'<a href="reminduser.php?iduser='.$row["id_user"].'">'.
-                'Upomnij użytkownika, którzy zgłaszał'.'</a>'.'</button>'.'</td>'.'</tr>';
+                '</td>' . '<td>' . $row['status'] . '</td>' . '<td>'.'<a style="white-space: unset" class="btn btn-danger" href="reminduser.php?iduser='.$row["id_user"].'">'.
+                'Upomnij użytkownika, którzy zgłaszał'.'</a>'.'</>'.'</td>'.'</tr>';
         }
     }
     echo '</tbody>';

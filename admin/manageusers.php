@@ -4,8 +4,8 @@
 require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
 ?>
-    <div class="container admin-menu">
-        <ul class="nav nav-tabs admin-tabs">
+    <div class="container custom-menu">
+        <ul class="nav nav-tabs custom-tabs">
             <li class="nav-item" role="presentation">
                 <a class="nav-link" href="suggestions.php" role="tab">Zarządzaj sugestiami</a>
             </li>

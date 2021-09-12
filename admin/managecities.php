@@ -4,8 +4,8 @@
 require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
 ?>
-    <div class="container admin-menu">
-        <ul class="nav nav-tabs admin-tabs">
+    <div class="container custom-menu">
+        <ul class="nav nav-tabs custom-tabs">
             <li class="nav-item" role="presentation">
                 <a class="nav-link" href="suggestions.php" role="tab">Zarządzaj sugestiami</a>
             </li>
@@ -23,52 +23,68 @@ require_once 'includes/dbh.inc.php';
                 <a class="nav-link" href="managespots.php" role="tab">Zarządzaj miejscami</a>
             </li>
         </ul>
-        <section class="city-form">
-            <h2>
-                Dodaj miasto
-            </h2>
+        <div class="form-group d-flex justify-content-center">
             <form action="includes/managecities.inc.php" method="post">
-                <form method="POST">
-                    <select name='voivodship'>
-                        <option>Wybierz województwo...</option>
-                        <?php
-                        $sqli = "SELECT id,name FROM voivodship";
-                        $result = mysqli_query($conn, $sqli);
-                        while ($row = mysqli_fetch_array($result)) {
+                <h2 class="text-center">
+                    Dodaj miasto
+                </h2>
+                <div class="d-flex flex-column">
+                    <label>
+                        <select class="custom-select" name='voivodship'>
+                            <option>Wybierz województwo...</option>
+                            <?php
+                            $sqli = "SELECT id,name FROM voivodship";
+                            $result = mysqli_query($conn, $sqli);
+                            while ($row = mysqli_fetch_array($result)) {
 
-                            echo '<option>' . $row['name'] . '</option>';
+                                echo '<option>' . $row['name'] . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </label>
+                    <label>
+                        <input class="form-control" type="text" name="name" placeholder="Wpisz nazwę miasta...">
+                    </label>
+                    <label>
+                        <input class="form-control" type="text" name="description" placeholder="Dodaj krótki opis...">
+                    </label>
+                    <button class="btn btn-dark btn-custom" type="submit" name="submit">Dodaj miasto</button>
+                    <?php
+                    if (isset($_GET["error"])) {
+                        if ($_GET["error"] == "errorinputvoivodship") {
+                            echo "<p class='text-center custom-error'>Nie wybrałeś województwa</p>";
                         }
-                        ?>
-                    </select>
-                    <input type="text" name="name" placeholder="Wpisz nazwę miasta...">
-                    <input type="text" name="description" placeholder="Dodaj krótki opis...">
-                    <button type="submit" name="submit">Dodaj miasto</button>
-                </form>
-        </section>
-        <?php
-        $sqli = "SELECT name,deleted FROM city";
-        $result = mysqli_query($conn, $sqli);
-        while ($row = mysqli_fetch_array($result)) {
-            if ($row['deleted'] == 0) {
-                $curr = $row['name'];
-                echo $row['name'] . '<button>' . '<a href ="editcity.php?edit=' . $curr . '">' . ' Edytuj' . '</a>' . '</button>' .
-                    '<button>' . '<a href ="includes/managecities.inc.php?delete=' . $curr . '">' . ' Usuń ' . '</a>' . '</button>' . '<br>';
-            }
-        }
-        ?>
-        <?php
-        if (isset($_GET["error"])) {
-            if ($_GET["error"] == "errorinputvoivodship") {
-                echo "<p>Nie wybrałeś województwa</p>";
-            }
-            if ($_GET["error"] == "emptyinputcity") {
-                echo "<p>Nie wpisałeś nazwy miasta</p>";
-            }
-            if ($_GET["error"] == "none") {
-                echo "<p>Pomyślnie dodano miasto!</p>";
-            }
-        }
+                        if ($_GET["error"] == "emptyinputcity") {
+                            echo "<p class='text-center custom-error'>Nie wpisałeś nazwy miasta</p>";
+                        }
+                        if ($_GET["error"] == "none") {
+                            echo "<p class='text-center custom-success'>Pomyślnie dodano miasto!</p>";
+                        }
+                    }
 
-        ?>
+                    ?>
+                </div>
+            </form>
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr class="bg-dark">
+                <th scope="col">Miasto</th>
+                <th scope="col">Akcje do wykonania</th>
+            </tr>
+            </thead>
+            <?php
+            $sqli = "SELECT name,deleted FROM city";
+            $result = mysqli_query($conn, $sqli);
+
+            while ($row = mysqli_fetch_array($result)) {
+                if (!$row['deleted']) {
+                    $curr = $row['name'];
+                    echo "<tr><td>" . $row['name'] . '</td><td><a class="btn btn-success" href ="editcity.php?edit=' . $curr . '">' . ' Edytuj' . '</a>   ' .
+                        '<a class="btn btn-danger" href ="includes/managecities.inc.php?delete=' . $curr . '">' . ' Usuń ' . '</a>' . '</td></tr>';
+                }
+            }
+            ?>
+        </table>
     </div>
 <?php require_once '../views/containers/footer.php'; ?>

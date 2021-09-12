@@ -47,16 +47,16 @@ function loginExists($conn, $login, $email)
     mysqli_stmt_bind_param($stmt, "ss",$login, $email);
     mysqli_stmt_execute($stmt);
     $resultData = mysqli_stmt_get_result($stmt);
-    if($row=mysqli_fetch_assoc($resultData))
+    if($row = mysqli_fetch_assoc($resultData))
     {
+        mysqli_stmt_close($stmt);
         return $row;
     }
     else
     {
-        $result = false;
-        return $result;
+        mysqli_stmt_close($stmt);
+        return false;
     }
-    mysqli_stmt_close($stmt);
 }
 function loginExists2($conn, $login)
 {

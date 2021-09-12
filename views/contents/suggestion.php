@@ -8,21 +8,21 @@ $id = $_SESSION["userid"];
 $sqli = "SELECT blocked From user WHERE id ='".$id."'";
 $result = mysqli_query($conn, $sqli);
 $row = mysqli_fetch_array($result);
-//if ($row['blocked']==0) {
-//    echo '<h1 class="text-center">Co chciałbyś, aby znalazło się w naszym systemie?</h1>';
-//    echo '<p class="text-center">W poniższym formularzu możesz przekazać nam informacje dotyczące rozszerzenia funkcjonalności portalu lub zgłosić błąd, który występuje na stronie.</p>';
-//    echo '<div class="form-group d-flex justify-content-center">';
-//        echo '<form action="'.baseUrl().'/includes/suggestion.inc.php" method="post">';
-//            echo '<textarea class="form-control" type = "text" name="name" rows="15"></textarea>';
-//            echo '<button class="btn btn-success" type = "submit" name ="submit">Wyślij</button>';
-//        echo '</form>';
-//    echo '</div>';
-//}
-//else if ($row['blocked']==2)
-//{
-//    echo "<p>Nie możesz wysyłać sugestii.</p>";
-//}
-//?>
+if ($row['blocked']==0) {
+    echo '<h1 class="text-center">Co chciałbyś, aby znalazło się w naszym systemie?</h1>';
+    echo '<p class="text-center">W poniższym formularzu możesz przekazać nam informacje dotyczące rozszerzenia funkcjonalności portalu lub zgłosić błąd, który występuje na stronie.</p>';
+    echo '<div class="form-group d-flex justify-content-center">';
+        echo '<form action="'.baseUrl().'/includes/suggestion.inc.php" method="post">';
+            echo '<textarea class="form-control" type = "text" name="name" rows="15"></textarea>';
+            echo '<button class="btn btn-success" type = "submit" name ="submit">Wyślij</button>';
+        echo '</form>';
+    echo '</div>';
+}
+else if ($row['blocked']==2)
+{
+    echo "<p>Nie możesz wysyłać sugestii.</p>";
+}
+?>
 <?php
 $id = $_SESSION["userid"];
 $sqli = "SELECT suggestions.id_status,suggestions.suggestion, status.status From suggestions INNER JOIN status 
