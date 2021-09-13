@@ -1,8 +1,9 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
-<div class="container">
+<div class="container custom-container">
 
 <a class="btn btn-info" href =  "<?= baseUrl() . "/views/contents/addwalk.php"?>">Dodaj spacer</a>
+<br>
 <a class="btn btn-info" href = "<?= baseUrl() . "/views/contents/findwalk.php"?>">Znajdź spacer</a>
 <br>
 <?php
@@ -26,14 +27,14 @@ while ($row = mysqli_fetch_array($result)) {
         if($row['approved']==1) {
             echo "Twoje zatwierdzone spacery:<br>";
             echo 'Użytkownik: ' . $row['login'] . ' Miejsce ' . $row['name'] . ' Kiedy: ' . $row['time'] . ' Opis: ' . $row['description'];
-            echo '<button>'.'<a href ="chat.php?id='.$row['id'].'">'.'Otwórz czat'.'</a>'.'</button>';
+            echo '<a class="btn btn-info" href ="chat.php?id='.$row['id'].'">'.'Otwórz czat'.'</a>';
         }
         echo '<br>';
         echo "Twoje spacery do akceptacji:<br>";
         if($row['approved']==0 && $row['cancelled']==0) {
             echo 'Użytkownik: ' . $row['login'] . ' Miejsce ' . $row['name'] . ' Kiedy: ' . $row['time'] . ' Opis: ' .
-                $row['description'].'<button>'.'<a href="includes/accept.inc.php?id='.$row['id'].'">'.'Akceptuj'.'</a>'.
-                '</button>'.'<button>'.'<a href="includes/deny.inc.php?id='.$row['id'].'">'.'Anuluj'.'</a>'.'</button>';
+                $row['description'].'<a class="btn btn-success" href="includes/accept.inc.php?id='.$row['id'].'">'.'Akceptuj'.'</a><br>'.
+                '<a class="btn btn-danger" href="includes/deny.inc.php?id='.$row['id'].'">'.'Anuluj'.'</a>';
         }
          if($row['cancelled']==1) {
         echo "Twoje anulowane spacery:<br>";

@@ -8,6 +8,30 @@ redirectIfLoggedIn()
         <div class="login-form">
             <form action="<?= baseUrl() . '/includes/login.inc.php' ?>" method="post">
                 <h2 class="h2 text-center">Logowanie do strony</h2>
+                <?php
+                if (isset($_GET["error"])) {
+                    switch ($_GET["error"]) {
+                        case "emptyinput":
+                            echo "<p class='text-center custom-error'>Wypełnij wszystkie pola!</p>";
+                            break;
+                        case "wronglogin":
+                        case "wrongPassword":
+                            echo "<p class='text-center custom-error'>Niepoprawne dane logowania!</p>";
+                            break;
+                        case "stmtfailed":
+                            echo "<p class='text-center custom-error'>Błąd podczas logowania, proszę zwróć się do administratora o pomoc.</p>";
+                            break;
+                        case "accountblocked":
+                            echo "<p class='text-center custom-error'>Konto zablokowane. Jeżeli uważasz, że to błąd, zwróć się proszę do administratora.</p>";
+                            break;
+                        case "none":
+                            break;
+                        case "remindnone":
+                            echo "<p class='text-center custom-success'>Hasło zostało wysłane na maila!</p>";
+                            break;
+                    }
+                }
+                ?>
                 <label for="username"></label>
                 <input class="form-control" type="text" name="name" id="username"
                        placeholder="Nazwa użytkownika lub email">
@@ -29,27 +53,4 @@ redirectIfLoggedIn()
         </div>
     </div>
 </div>
-<?php
-if (isset($_GET["error"])) {
-    switch ($_GET["error"]) {
-        case "emptyinput":
-            echo "<p>Wypełnij wszystkie pola!</p>";
-            break;
-        case "wronglogin":
-        case "wrongPassword":
-            echo "<p>Niepoprawne dane logowania!</p>";
-        case "stmtfailed":
-            echo "<p>Błąd podczas logowania, proszę zwróć się do administratora o pomoc.</p>";
-            break;
-        case "accountblocked":
-            echo "<p>Konto zablokowane. Jeżeli uważasz, że to błąd, zwróć się proszę do administratora.</p>";
-            break;
-        case "none":
-            break;
-        case "remindnone":
-            echo "<p>Hasło zostało wysłane na maila!</p>";
-            break;
-    }
-}
-?>
 <?php require_once '../containers/footer.php'; ?>

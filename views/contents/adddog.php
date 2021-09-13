@@ -1,6 +1,6 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
-<div class="container">
+<div class="container custom-container">
     <section class="dog">
         <div class="form-group d-flex justify-content-center" id="add-edit-dog">
             <form action="<?= baseUrl() . '/includes/adddog.inc.php'?>" method="post" enctype="multipart/form-data">

@@ -1,7 +1,7 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
 <?php $userDogData = getDogDetailsByUserId($conn, $_SESSION["userid"]); ?>
-    <div class="container" style="background-color: #fff;">
+    <div class="container custom-container">
         <section class="dog">
             <div class="form-group d-flex justify-content-center" id="add-edit-dog">
                 <form action="<?= baseUrl() . '/includes/editdog.inc.php' ?>" method="post"

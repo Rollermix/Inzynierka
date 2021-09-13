@@ -1,7 +1,7 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
 
-<div class="container">
+<div class="container custom-container">
 
 <?php
 $id = $_SESSION["userid"];
