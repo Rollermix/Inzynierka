@@ -7,7 +7,7 @@ $userdata = mysqli_fetch_array($result);
 $_SESSION["idchanging"] = $userdata['id'];
 
 ?>
-<div class="container custom-menu ">
+<div class="container custom-menu custom-container">
     <ul class="nav nav-tabs custom-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <a class="nav-link active" id="signup-tab" data-toggle="tab" href="#signup" role="tab"

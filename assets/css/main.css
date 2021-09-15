@@ -12,6 +12,7 @@ body {
     padding: 40px;
     display: flex;
     flex-direction: column;
+    max-width: 720px;
 }
 
 div.triangle-background {
@@ -127,14 +128,22 @@ div.triangle-background {
     margin-bottom: 25px;
 }
 
-#change_data_account input, #change_data_account .form-control, #change_data_account .custom-select {
+#change_data_account input, #change_data_account .form-control, #change_data_account .custom-select,
+#add-edit-dog input, #add-edit-dog .form-control, #add-edit-dog .custom-select,
+#suggestion-form input, #suggestion-form .form-control, #suggestion-form .custom-select {
     width: 500px;
     margin-bottom: 25px;
 }
 
-#change_password input, #change_password .form-control, #change_password .custom-select {
+#change_password input, #change_password .form-control, #change_password .custom-select,
+#add-edit-dog input, #add-edit-dog .form-control, #add-edit-dog .custom-select,
+#suggestion-form input, #suggestion-form .form-control, #suggestion-form .custom-select {
     width: 500px;
     margin-bottom: 25px;
+}
+
+.suggestion-form-main {
+    width: 100%;
 }
 
 #change_data_account {
@@ -187,7 +196,6 @@ thead {
 }
 
 textarea.form-control {
-    width: 50vw;
     margin-bottom: 15px;
 }
 
@@ -361,6 +369,11 @@ input.form-control::placeholder {
     flex-direction: column;
 }
 
+.just-normal-form {
+    display: flex;
+    flex-direction: column;
+}
+
 .btn-custom {
     margin-top: 15px;
     height: 60px;
@@ -404,4 +417,8 @@ input.form-control::placeholder {
 
 .js-change-navbar-color {
     color: #fff !important;
+}
+
+.delete-account-form {
+    padding-bottom: 25px;
 }

@@ -639,6 +639,13 @@ function getDogsAndItsOwners($conn) {
     return $dogsWithOwners;
 }
 
+function getUsernameById($conn, $id) {
+    $sqli = "Select CONCAT(user.name, ' ', user.surname) as fullname
+             FROM user WHERE user.id='".$id."'";
+    $result = mysqli_query($conn, $sqli);
+    return mysqli_fetch_array($result);
+}
+
 function redirectIfLoggedIn() {
     if(isLogged()) {
         redirectToPage(baseUrl() . '/views/contents/start.php');

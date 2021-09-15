@@ -38,23 +38,20 @@ if(mysqli_num_rows($result)>0)
      .'</tr></thead>';
      echo '<tbody>';
      while ($row = mysqli_fetch_array($result)) {
-         $statusClass = 'table-secondary';
-         $actionButtons = '<i>brak możliwych akcji do podjęcia</i>';
+         $statusClass = '';
+         $actionButtons = '';
          switch($row['status']) {
              case 'Nie odczytano':
                 readSuggestion($row["id"], $conn);
                  break;
              case 'W trakcie':
-                 $statusClass = 'table-info';
                  $actionButtons = '<a class="btn btn-secondary mr-2" href="addcity.php?acceptcity='.$row["id"].'">'.'Dodaj miasto'.'</a>'
                                   .'<a class="btn btn-secondary mr-2" href="managespots.php?acceptspot='.$row["id"].'">'.'Dodaj spot'.'</a>'
                                   .'<a class="btn btn-secondary mr-2" href="includes/suggestions.inc.php?discard='.$row["id"].'">'.'Odrzuć'.'</a>';
                  break;
              case 'Zaakceptowano':
-                 $statusClass = 'table-success';
                  break;
              case 'Odrzucono':
-                 $statusClass = 'table-danger';
                  $actionButtons = '<a class="btn btn-secondary" href="reminduser.php?iduser='.$row["iduser"].'">'.'Upomnij użytkownika'.'</a>';
                  break;
 

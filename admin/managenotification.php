@@ -38,8 +38,8 @@ if(mysqli_num_rows($result)>0)
         {
             echo '<tr>' . '<td>' . $row['login'] . '</td>' . '<td>' . $row['log'] . '</td>' . '<td>' . $row['reason'] .
                 '</td>' . '<td>' . $row['status'] . '</td>' .'<td class="d-flex justify-content-between">'.
-                '<a class="btn btn-success" href="includes/managenotification.inc.php?accept='.$row['id'].'&iduser='.$row['id_reported_user']. '">'.
-                'Akceptuj'.'</a>'.'<a class="btn btn-danger" href="includes/managenotification.inc.php?deny='.$row['id'].'">'.
+                '<a class="btn btn-dark" href="includes/managenotification.inc.php?accept='.$row['id'].'&iduser='.$row['id_reported_user']. '">'.
+                'Akceptuj'.'</a>'.'<a class="btn btn-dark" href="includes/managenotification.inc.php?deny='.$row['id'].'">'.
                 'Odrzuć'.'</a>'.'</td>' .'</tr>';
             readNotofication($conn,$row["id"]);
         }
@@ -47,8 +47,8 @@ if(mysqli_num_rows($result)>0)
         {
         echo '<tr>' . '<td>' . $row['login'] . '</td>' . '<td>' . $row['log'] . '</td>' . '<td>' . $row['reason'] .
             '</td>' . '<td>' . $row['status'] . '</td>' .'<td class="d-flex justify-content-between">'.
-            '<a class="btn btn-success" href="includes/managenotification.inc.php?accept='.$row['id'].'&iduser='.$row['id_reported_user']. '">'.
-            'Akceptuj'.'</a>'.'<a class="btn btn-danger" href="includes/managenotification.inc.php?deny='.$row['id'].'">'.
+            '<a class="btn btn-dark" href="includes/managenotification.inc.php?accept='.$row['id'].'&iduser='.$row['id_reported_user']. '">'.
+            'Akceptuj'.'</a>'.'<a class="btn btn-dark" href="includes/managenotification.inc.php?deny='.$row['id'].'">'.
             'Odrzuć'.'</a>'.'</td>' .'</tr>';
 
         }
@@ -60,7 +60,7 @@ if(mysqli_num_rows($result)>0)
         else if ($row['statusid']==4)
         {
             echo '<tr>' . '<td>' . $row['login'] . '</td>' . '<td>' . $row['log'] . '</td>' . '<td>' . $row['reason'] .
-                '</td>' . '<td>' . $row['status'] . '</td>' . '<td>'.'<a style="white-space: unset" class="btn btn-danger" href="reminduser.php?iduser='.$row["id_user"].'">'.
+                '</td>' . '<td>' . $row['status'] . '</td>' . '<td>'.'<a style="white-space: unset" class="btn btn-dark" href="reminduser.php?iduser='.$row["id_user"].'">'.
                 'Upomnij użytkownika, którzy zgłaszał'.'</a>'.'</>'.'</td>'.'</tr>';
         }
     }

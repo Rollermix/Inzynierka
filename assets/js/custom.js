@@ -3,8 +3,11 @@ $('input[type="file"]').change(function(e){
     $('.custom-file-label').html(fileName);
 });
 
-document.addEventListener('scroll', function(e) {
-    if (window.scrollY > 35) {
+changeNavbarClass();
+document.addEventListener('scroll', changeNavbarClass);
+
+function changeNavbarClass() {
+    if (window.scrollY >= 35) {
         document.querySelector('.navbar').classList.add('js-navbar-not-transparent');
         document.querySelector('.navbar-brand').classList.add('js-change-navbar-color');
         document.querySelectorAll('.nav-link').forEach(element => {
@@ -17,4 +20,4 @@ document.addEventListener('scroll', function(e) {
             element.classList.remove('js-change-navbar-color')
         });
     }
-});
+}

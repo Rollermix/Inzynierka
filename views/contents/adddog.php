@@ -1,21 +1,28 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
 <div class="container custom-container">
-    <section class="dog">
-        <div class="form-group d-flex justify-content-center" id="add-edit-dog">
-            <form action="<?= baseUrl() . '/includes/adddog.inc.php'?>" method="post" enctype="multipart/form-data">
-                <input class="form-control" type = "text" name="name" placeholder="Jak się wabi twój pies">
-                <select class="custom-select" name ='size'>
+    <h2 class="h2 text-center">Dodaj psa</h2>
+    <div class="form-group d-flex justify-content-center" id="add-edit-dog">
+        <form action="<?= baseUrl() . '/includes/adddog.inc.php' ?>" method="post" enctype="multipart/form-data" class="dog-form">
+            <label>
+                <input class="form-control" type="text" name="name" placeholder="Jak się wabi twój pies">
+            </label>
+            <label>
+                <select class="custom-select" name='size' style="margin-bottom: 0">
                     <option>Wybierz rozmiar psa...</option>
                     <option>Mały</option>
                     <option>Średni</option>
                     <option>Duży</option>
                 </select>
-                <input class="form-control" type = "text" name="opis" placeholder="Opisz Twojego psa">
-                <input class="form-control" type="file" name="file" >
-                <button class="btn btn-success" type = "submit" name ="submit">Wyślij</button>
-            </form>
-        </div>
-    </section>
+            </label>
+            <label>
+                <input class="form-control" type="text" name="opis" placeholder="Opisz Twojego psa">
+            </label>
+            <label>
+                <input class="form-control" type="file" name="file">
+            </label>
+            <button class="btn btn-dark" type="submit" name="submit">Dodaj psa</button>
+        </form>
+    </div>
 </div>
 <?php require_once '../containers/footer.php'; ?>

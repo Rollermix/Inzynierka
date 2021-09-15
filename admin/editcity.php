@@ -4,8 +4,10 @@
 require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
 ?>
-    <div class="container">
-        <form action="includes/editcity.inc.php" method="post">
+    <div class="container custom-container">
+        <h2 class="h2 text-center">Edytujesz miasto: <?= $_GET["edit"] ?></h2>
+        <br>
+        <form action="includes/editcity.inc.php" method="post" class="just-normal-form">
             <?php
             if (isset($_GET["edit"])) {
                 $nazwa = ($_GET["edit"]);
@@ -31,7 +33,8 @@ require_once 'includes/dbh.inc.php';
                 $resultData2 = mysqli_stmt_get_result($stmt2);
                 $rowvoidvoship = mysqli_fetch_array($resultData2);
                 $voivodship = $rowvoidvoship['name'];
-                echo '<select name ="voivodship">' . '<option>' . $voivodship . '</option>';
+                echo "<label>";
+                echo '<select name ="voivodship" class="custom-select" >' . '<option>' . $voivodship . '</option>';
                 $sqli = "SELECT name FROM voivodship";
                 $result = mysqli_query($conn, $sqli);
                 while ($row = mysqli_fetch_array($result)) {
@@ -39,18 +42,21 @@ require_once 'includes/dbh.inc.php';
                         echo '<option>' . $row['name'] . '</option>';
                 }
                 echo '</select>';
-
-                echo '<input type = "text" name="name" value="' . $nazwa . '">';
-
+                echo "</label>";
+                echo "<label>";
+                echo '<input class="form-control" type = "text" name="name" value="' . $nazwa . '">';
+                echo "</label>";
                 $description = $rowid['description'];
                 $_SESSION['idcity'] = $rowid['id'];
-                echo '<input type = "text" name="description" value="' . $description . '">';
+                echo "<label>";
+                echo '<textarea placeholder="Opis miasta" class="form-control"  type = "text" name="description" value="' . $description . '"></textarea>';
+                echo "</label>";
                 echo '<br >';
 
             }
 
             ?>
-            <button type="submit" name="submit">Edytuj</button>
+            <button type="submit" name="submit" class="btn btn-dark">Aktualizuj</button>
         </form>
     </div>
 

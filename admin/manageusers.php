@@ -23,8 +23,8 @@ require_once 'includes/dbh.inc.php';
                 <a class="nav-link" href="managespots.php" role="tab">Zarządzaj miejscami</a>
             </li>
         </ul>
-        <section class="city-form">
-            <h2>
+        <section class="just-normal-form">
+            <h2 class="h2 text-center">
                 Zarządzaj użytkownikami
             </h2>
             <?php
