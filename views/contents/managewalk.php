@@ -33,7 +33,7 @@ while ($row = mysqli_fetch_array($result)) {
         echo "Twoje spacery do akceptacji:<br>";
         if($row['approved']==0 && $row['cancelled']==0) {
             echo 'Użytkownik: ' . $row['login'] . ' Miejsce ' . $row['name'] . ' Kiedy: ' . $row['time'] . ' Opis: ' .
-                $row['description'].'<a class="btn btn-success" href="includes/accept.inc.php?id='.$row['id'].'">'.'Akceptuj'.'</a><br>'.
+                $row['description'].'<a class="btn btn-success" href="'.baseUrl().'/includes/accept.inc.php?id='.$row['id'].'">'.'Akceptuj'.'</a><br>'.
                 '<a class="btn btn-danger" href="includes/deny.inc.php?id='.$row['id'].'">'.'Anuluj'.'</a>';
         }
          if($row['cancelled']==1) {
