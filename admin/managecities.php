@@ -23,49 +23,50 @@ require_once 'includes/dbh.inc.php';
                 <a class="nav-link" href="managespots.php" role="tab">Zarządzaj miejscami</a>
             </li>
         </ul>
-        <div class="form-group d-flex justify-content-center">
-            <form action="includes/managecities.inc.php" method="post">
-                <h2 class="text-center">
-                    Dodaj miasto
-                </h2>
-                <div class="d-flex flex-column">
-                    <label>
-                        <select class="custom-select" name='voivodship'>
-                            <option>Wybierz województwo...</option>
-                            <?php
-                            $sqli = "SELECT id,name FROM voivodship";
-                            $result = mysqli_query($conn, $sqli);
-                            while ($row = mysqli_fetch_array($result)) {
+        <form action="includes/managecities.inc.php" method="post" class="just-normal-form">
+            <h2 class="text-center">
+                Dodaj miasto
+            </h2>
+            <br>
+            <div class="d-flex flex-column">
+                <label>
+                    <select class="custom-select" name='voivodship'>
+                        <option>Wybierz województwo...</option>
+                        <?php
+                        $sqli = "SELECT id,name FROM voivodship";
+                        $result = mysqli_query($conn, $sqli);
+                        while ($row = mysqli_fetch_array($result)) {
 
-                                echo '<option>' . $row['name'] . '</option>';
-                            }
-                            ?>
-                        </select>
-                    </label>
-                    <label>
-                        <input class="form-control" type="text" name="name" placeholder="Wpisz nazwę miasta...">
-                    </label>
-                    <label>
-                        <input class="form-control" type="text" name="description" placeholder="Dodaj krótki opis...">
-                    </label>
-                    <button class="btn btn-dark btn-custom" type="submit" name="submit">Dodaj miasto</button>
-                    <?php
-                    if (isset($_GET["error"])) {
-                        if ($_GET["error"] == "errorinputvoivodship") {
-                            echo "<p class='text-center custom-error'>Nie wybrałeś województwa</p>";
+                            echo '<option>' . $row['name'] . '</option>';
                         }
-                        if ($_GET["error"] == "emptyinputcity") {
-                            echo "<p class='text-center custom-error'>Nie wpisałeś nazwy miasta</p>";
-                        }
-                        if ($_GET["error"] == "none") {
-                            echo "<p class='text-center custom-success'>Pomyślnie dodano miasto!</p>";
-                        }
+                        ?>
+                    </select>
+                </label>
+                <label>
+                    <input class="form-control" type="text" name="name" placeholder="Wpisz nazwę miasta...">
+                </label>
+                <label>
+                    <input class="form-control" type="text" name="description" placeholder="Dodaj krótki opis...">
+                </label>
+                <button class="btn btn-dark btn-custom" type="submit" name="submit">Dodaj miasto</button>
+                <?php
+                if (isset($_GET["error"])) {
+                    if ($_GET["error"] == "errorinputvoivodship") {
+                        echo "<p class='text-center custom-error'>Nie wybrałeś województwa</p>";
                     }
+                    if ($_GET["error"] == "emptyinputcity") {
+                        echo "<p class='text-center custom-error'>Nie wpisałeś nazwy miasta</p>";
+                    }
+                    if ($_GET["error"] == "none") {
+                        echo "<p class='text-center custom-success'>Pomyślnie dodano miasto!</p>";
+                    }
+                }
 
-                    ?>
-                </div>
-            </form>
-        </div>
+                ?>
+            </div>
+        </form>
+        <br>
+        <br>
         <table class="table table-hover">
             <thead>
             <tr class="bg-dark">

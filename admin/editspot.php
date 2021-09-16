@@ -4,8 +4,10 @@
 require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
 ?>
-<div class="container custom-view">
-    <form action="includes/editspot.inc.php" method="post">
+<div class="container custom-container">
+    <h2 class="h2 text-center">Edytuj spot</h2>
+    <br>
+    <form action="includes/editspot.inc.php" method="post" class="just-normal-form">
         <?php
         if (isset($_GET["edit"])) {
             $nazwa = ($_GET["edit"]);
@@ -31,7 +33,8 @@ require_once 'includes/dbh.inc.php';
             $resultData2 = mysqli_stmt_get_result($stmt2);
             $rowcity = mysqli_fetch_array($resultData2);
             $city = $rowcity['name'];
-            echo '<select name ="city">' . '<option>' . $city . '</option>';
+            echo "<label>";
+            echo '<select class="custom-select" name ="city">' . '<option>' . $city . '</option>';
             $sqli = "SELECT name,deleted FROM city";
             $result = mysqli_query($conn, $sqli);
             while ($row = mysqli_fetch_array($result)) {
@@ -40,19 +43,23 @@ require_once 'includes/dbh.inc.php';
                 }
             }
             echo '</select>';
+            echo "</label>";
 
-            echo '<input type = "text" name="name" value="' . $nazwa . '">';
-
+            echo "<label>";
+            echo '<input class="form-control" type = "text" name="name" value="' . $nazwa . '">';
+            echo "</label>";
             $description = $rowid['description'];
             $_SESSION['idspot'] = $rowid['id'];
 
-            echo '<input type = "text" name="description" value="' . $description . '">';
-            echo '<br >';
+            echo "<label>";
+            echo '<input class="form-control" type = "text" name="description" value="' . $description . '">';
+            echo "</label>";
+
 
         }
 
         ?>
-        <button type="submit" name="submit">Edytuj</button>
+        <button class="btn btn-dark" type="submit" name="submit">Edytuj</button>
     </form>
 </div>
 <?php require_once '../views/containers/footer.php'; ?>

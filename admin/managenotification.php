@@ -22,6 +22,10 @@ require_once 'includes/dbh.inc.php';
             <a class="nav-link" href="managespots.php" role="tab">Zarządzaj miejscami</a>
         </li>
     </ul>
+    <h2 class="h2 text-center">
+        Zgłoszenia
+    </h2>
+    <br>
 <?php
 $sqli = "SELECT user.login,u.login AS `log`, notification.*, status.id AS `statusid`,status.status From notification INNER JOIN status 
     ON notification.id_status = status.id INNER JOIN user ON user.id=notification.id_user INNER JOIN user AS `u` ON u.id=notification.id_reported_user

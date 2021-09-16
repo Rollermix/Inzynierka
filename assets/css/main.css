@@ -424,3 +424,7 @@ input.form-control::placeholder {
 .delete-account-form {
     padding-bottom: 25px;
 }
+
+label {
+    display: unset;
+}

@@ -12,12 +12,11 @@
         echo '<h2 class="text-center">Co chciałbyś, aby znalazło się w naszym systemie?</h2>';
         echo '<p class="text-center">W poniższym formularzu możesz przekazać nam informacje dotyczące rozszerzenia funkcjonalności portalu lub zgłosić błąd, który występuje na stronie.</p>';
         echo '<div class="form-group d-flex justify-content-center">';
-        echo '<form action="' . baseUrl() . '/includes/suggestion.inc.php" method="post">';
+        echo '<form action="' . baseUrl() . '/includes/suggestion.inc.php" method="post" style="width: 100%;">';
         echo '<label>';
         echo '<textarea class="form-control" type = "text" name="name" rows="15"></textarea>';
         echo "</label>";
-        echo "<br>";
-        echo '<button class="btn btn-success" type = "submit" name ="submit">Wyślij</button>';
+        echo '<button class="btn btn-success" type = "submit" name ="submit" style="width: 100%;">Wyślij</button>';
         echo '</form>';
         echo '</div>';
     } else if ($row['blocked'] == 2) {

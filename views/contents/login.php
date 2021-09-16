@@ -32,18 +32,25 @@ redirectIfLoggedIn()
                     }
                 }
                 ?>
-                <label for="username"></label>
-                <input class="form-control" type="text" name="name" id="username"
-                       placeholder="Nazwa użytkownika lub email">
-                <label for="password"></label>
-                <input class="form-control" type="password" name="password" id="password" placeholder="Hasło">
+                <br>
+                <label for="username">
+                    <span>Nazwa użytkownika/adres e-mail</span>
+                    <input class="form-control" type="text" name="name" id="username"
+                           placeholder="Nazwa użytkownika lub email">
+                </label>
+                <br>
+                <label for="password">
+                    <span>Hasło</span>
+                    <input class="form-control" type="password" name="password" id="password" placeholder="Hasło">
+                </label>
                 <div class="d-flex justify-content-between login-actions">
                     <div>
                         <input type="checkbox" class="" id="remember-user">
                         <label for="remember-user">Zapamiętaj login</label>
                     </div>
                     <div>
-                        <a class="nav-link" style="padding: 0; color: black" href="<?= baseUrl() , '/views/contents/remindpassword.php'?>">Przypomnij hasło</a>
+                        <a class="nav-link" style="padding: 0; color: black"
+                           href="<?= baseUrl(), '/views/contents/remindpassword.php' ?>">Przypomnij hasło</a>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">

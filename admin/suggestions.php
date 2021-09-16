@@ -22,6 +22,10 @@ require_once 'includes/dbh.inc.php';
             <a class="nav-link" href="managespots.php" role="tab">Zarządzaj miejscami</a>
         </li>
     </ul>
+    <h2 class="h2 text-center">
+        Zgłoszone sugestie
+    </h2>
+    <br>
 <?php
 $sqli = "SELECT suggestions.id AS 'id',suggestions.id_user AS 'iduser', suggestions.id_status,suggestions.suggestion, status.status From suggestions INNER JOIN status 
     ON suggestions.id_status = status.id ORDER BY suggestions.id_status ASC";
