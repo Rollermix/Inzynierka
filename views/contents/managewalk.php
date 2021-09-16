@@ -13,7 +13,7 @@ $result = mysqli_query($conn, $sqli);
 while ($row = mysqli_fetch_array($result)) {
     if ($row['id_accompanied_user'] == NULL) {
         echo 'Miejsce '.$row['name'].' Kiedy: '.$row['time'].' Opis: '.$row['description'];
-        echo '<button>'.'<a href="editwalk.php?id='.$row['id'].'">'.'Edytuj'.'</a>'.'</button>';
+        echo '<a class="btn btn-dark" href="editwalk.php?id='.$row['id'].'">'.'Edytuj'.'</a>';
     }
 }
 ?>
@@ -79,7 +79,7 @@ if ($row2['blocked']==0) {
 <br>
 
 <textarea class="form-control" type = "text" name="reason" placeholder="Wpisz powód zgłoszenia"></textarea>
-<button class="btn btn-info" type = "submit" name ="submit">Wyślij zgłoszenie</button>
+<button style="width: 100%" class="btn btn-info" type = "submit" name ="submit">Wyślij zgłoszenie</button>
 </form>
 </div>
 

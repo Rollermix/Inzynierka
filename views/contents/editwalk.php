@@ -1,25 +1,33 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
 <div class="container custom-container">
+    <h2 class="h2 text-center">Edytuj spacer</h2>
+    <br>
     <?php
     $idwalk = $_GET["id"];
-    echo '<form action="' . baseUrl() . '/includes/editwalk.inc.php?id=' . $idwalk . '" method="post">';
+    echo '<form action="' . baseUrl() . '/includes/editwalk.inc.php?id=' . $idwalk . '" method="post" class="just-normal-form">';
     ?>
-    <select name='spot'>
-        <option>Wybierz miejsce</option>
-        <?php
-        $sqli = "SELECT spot.name FROM spot INNER JOIN city ON spot.id_city=city.id WHERE city.id=(SELECT id_city FROM user WHERE id=" . $_SESSION["userid"] . ")";
-        $result = mysqli_query($conn, $sqli);
-        while ($row = mysqli_fetch_array($result)) {
-            if ($row['deleted'] == 0)
-                echo '<option>' . $row['name'] . '</option>';
-
-        }
-        ?>
-    </select>
-    <input type="datetime-local" name="date">
-    <input type="text" name="description" placeholder="Opis...">
-    <button type="submit" name="submit">Edytuj spacer</button>
+    <label>
+        <select name='spot' class="custom-select">
+            <option>Wybierz miejsce</option>
+            <?php
+            $sqli = "SELECT spot.name FROM spot INNER JOIN city ON spot.id_city=city.id WHERE city.id=(SELECT id_city FROM user WHERE id=" . $_SESSION["userid"] . ")";
+            $result = mysqli_query($conn, $sqli);
+            while ($row = mysqli_fetch_array($result)) {
+                if ($row['deleted'] == 0) {
+                    echo '<option>' . $row['name'] . '</option>';
+                }
+            }
+            ?>
+        </select>
+    </label>
+    <label>
+        <input class="form-control" type="datetime-local" name="date">
+    </label>
+    <label>
+        <textarea class="form-control" type="text" name="description" placeholder="Opis"></textarea>
+    </label>
+    <button class="btn btn-dark" type="submit" name="submit">Edytuj spacer</button>
 
     </form>
 </div>
