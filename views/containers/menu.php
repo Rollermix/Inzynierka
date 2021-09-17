@@ -40,7 +40,7 @@
                 echo "</div>";
                 if($messagesCount = hasUnreadMessages($conn, $_SESSION["userid"])) {
                     echo "<div class='nav-item'>";
-                        echo "<a class='nav-link' href='#'>✉ Wiadomości (".$messagesCount. ")</a>";
+                        echo "<a class='nav-link' href='". baseUrl() ."/views/contents/managewalk.php?action=highlightmessage'>✉ Wiadomości (".$messagesCount. ")</a>";
                     echo "</div>";
                 } else {
                     echo "<div class='nav-item'>";

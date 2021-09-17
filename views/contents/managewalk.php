@@ -1,7 +1,20 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
 <div class="container custom-container">
+<?php
+    if(isset($_GET['action'])) {
+        switch($_GET['action']) {
+            case 'walkadded':
+                echo '<p class="text-center custom-success">Dodano spacer!</p>';
+                break;
+            case 'walkedited':
+                echo '<p class="text-center custom-success">Pomyślnie zedytowano spacer!</p>';
+                break;
+            default:
+        }
+    }
 
+?>
 <a class="btn btn-info" href =  "<?= baseUrl() . "/views/contents/addwalk.php"?>">Dodaj spacer</a>
 <br>
 <a class="btn btn-info" href = "<?= baseUrl() . "/views/contents/findwalk.php"?>">Znajdź spacer</a>
@@ -26,8 +39,14 @@ $result = mysqli_query($conn, $sqli);
 while ($row = mysqli_fetch_array($result)) {
         if($row['approved']==1) {
             echo "Twoje zatwierdzone spacery:<br>";
+            if(isset($_GET['action']) && $_GET['action'] === 'highlightmessage') {
+                echo '<div style=border: "1px solid black">';
+            }
             echo 'Użytkownik: ' . $row['login'] . ' Miejsce ' . $row['name'] . ' Kiedy: ' . $row['time'] . ' Opis: ' . $row['description'];
             echo '<a class="btn btn-info" href ="chat.php?id='.$row['id'].'">'.'Otwórz czat'.'</a>';
+            if(isset($_GET['action']) && $_GET['action'] === 'highlightmessage') {
+                echo '</div>';
+            }
         }
         echo '<br>';
         echo "Twoje spacery do akceptacji:<br>";

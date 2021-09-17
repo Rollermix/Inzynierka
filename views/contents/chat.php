@@ -7,13 +7,13 @@
     $result = mysqli_query($conn, $sqli);
     while ($row = mysqli_fetch_array($result)) {
         {
-            echo 'Wysłał: ' . $row['login'] . ' Kiedy: ' . $row['Date'];
+            echo ' Kiedy: ' . $row['Date'];
             if ($row['login'] == $_SESSION['useruid']) {
-                echo '<br>' . $row['Message'] . '<br>';
-                echo '<a href="' . baseUrl() . '/includes/deletemessage.inc.php?idmessage=' . $row['id'] . '&idwalk=' . $idwalk . '">' . 'Usuń wiadomość' . '</a>';
+                echo '<br><span class="your-message">' . $row['Message'] . '<br>';
+                echo '<a style="color: white" href="' . baseUrl() . '/includes/deletemessage.inc.php?idmessage=' . $row['id'] . '&idwalk=' . $idwalk . '">' . 'Usuń wiadomość' . '</a></span>';
             } else {
                 setDisplayedMessage($conn, $row['id']);
-                echo '<br>' . $row['Message'] . '<br>';
+                echo '<br><span class="person-message">' . $row['Message'] . '</span><br>';
             }
 
         }

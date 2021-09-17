@@ -387,7 +387,7 @@ function addwalk($conn, $spot, $date,$description,$addinguser)
     mysqli_stmt_bind_param($stmt, "ssss",$spot,$addinguser,$date,$description);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ". baseUrl() ."/views/contents/addwalk.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/managewalk.php?action=walkadded");
     exit();
 }
 function acceptWalk($conn,$iduser,$idwalk)
@@ -514,7 +514,7 @@ function editWalk($conn,$idwalk,$spot,$date,$description)
     mysqli_stmt_bind_param($stmt, "ssss",$spot,$date,$description,$idwalk);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ". baseUrl() ."/views/contents/managewalk.php?error=none");
+    header("location: ". baseUrl() ."/views/contents/managewalk.php?action=walkedited");
     exit();
 }
 function reportUser($conn,$reason,$user,$reporteduser)
@@ -651,4 +651,11 @@ function redirectIfLoggedIn() {
         redirectToPage(baseUrl() . '/views/contents/start.php');
         exit();
     }
+}
+
+function getWalkData($conn, $id) {
+    $sqli = "Select *
+             FROM walk WHERE walk.id='".$id."'";
+    $result = mysqli_query($conn, $sqli);
+    return mysqli_fetch_array($result);
 }

@@ -428,3 +428,13 @@ input.form-control::placeholder {
 label {
     display: unset;
 }
+
+.your-message {
+    background-color: #1c7430;
+    color: #fefefe;
+}
+
+.person-message {
+    background-color: #007bff;
+    color: #fefefe;
+}

@@ -10,7 +10,7 @@ if(isset($_POST["submit"])) {
     $idwalk=$_GET['id'];
     if (empty($description))
         $description=NULL;
-    if ($validationdate==$date);
+    if($validationdate==$date)
         $date=NULL;
     if($spot=="Wybierz Miejsce")
         $spot=NULL;

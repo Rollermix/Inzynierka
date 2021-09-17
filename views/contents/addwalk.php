@@ -21,7 +21,7 @@
             <input class="form-control" type="datetime-local" name="date">
         </label>
         <label>
-            <textarea class="form-control" type="text" name="description" placeholder="Opis spaceru"></textarea>
+            <textarea rows=10 class="form-control" type="text" name="description" placeholder="Opis spaceru"></textarea>
         </label>
         <button class="btn btn-success" type="submit" name="submit">Dodaj spacer</button>
     </form>
