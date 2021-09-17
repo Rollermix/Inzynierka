@@ -4,6 +4,9 @@
 require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
 ?>
+<?php
+canViewAsAdmin($conn);
+?>
 <div class="container custom-container">
     <h2 class="h2 text-center">Edytuj spot</h2>
     <br>

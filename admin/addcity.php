@@ -3,12 +3,14 @@
 <?php
 require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
+canViewAsAdmin($conn);
 ?>
 <div class="container custom-container">
     <section class="city-form">
         <h2 class="h2 text-center">
             Dodaj miasto
         </h2>
+        <br>
         <?php
         if (isset($_GET["error"])) {
             if ($_GET["error"] == "errorinputvoivodship") {
@@ -46,12 +48,12 @@ require_once 'includes/dbh.inc.php';
         </form>
     </section>
     <br>
-    <h4 class="h4 text-center">Treść sugestii</h4>
     <?php
     if (isset($_GET["acceptcity"])) {
         $id = $_GET["acceptcity"];
         $sqli = "SELECT suggestion FROM suggestions WHERE id=" . $id;
         $result = mysqli_query($conn, $sqli);
+        echo '<h4 class="h4 text-center">Treść sugestii</h4>';
         while ($row = mysqli_fetch_array($result)) {
 
             echo '<p style="border: 1px solid black; padding: 15px;">' . $row['suggestion'] . '</p>';

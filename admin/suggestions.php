@@ -4,6 +4,9 @@
 require_once 'includes/adminfunctions.inc.php';
 require_once 'includes/dbh.inc.php';
 ?>
+<?php
+canViewAsAdmin($conn);
+?>
 <div class="container custom-menu">
     <ul class="nav nav-tabs custom-tabs">
         <li class="nav-item active" role="presentation">

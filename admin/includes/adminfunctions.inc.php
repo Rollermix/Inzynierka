@@ -1,5 +1,24 @@
 <?php
 
+function canViewAsAdmin($conn) {
+    $currUserId = $_SESSION['userid'];
+    $sql = "SELECT user.admin FROM user WHERE id = ?;";
+    $stmt = $conn->prepare($sql);
+    if(!mysqli_stmt_prepare($stmt,$sql))
+    {
+        header("location: ../admin/adminlogin.php?error=stmtfailed");
+        exit();
+    }
+    $stmt->bind_param("s", $currUserId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = mysqli_fetch_row($result);
+    if(!$row || !!!$row[0]) {
+        header("location: ../admin/error.php");
+        exit();
+    }
+}
+
 function loginAdminUser($conn,$login,$password)
 {
     $uidExists = loginExists($conn, $login, $login);
