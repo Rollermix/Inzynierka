@@ -8,6 +8,10 @@ if(isset($_POST["submit"])) {
     $name= $_POST["name"];
     $size = $_POST["size"];
     $opis = $_POST["opis"];
+    if(!$name || !$size || !$opis) {
+        header("location: ". baseUrl() ."/views/contents/editdog.php?error=emptyinput");
+        exit();
+    }
     $user = $_SESSION["userid"];
     if(empty($opis))
         $opis=NULL;
@@ -27,7 +31,7 @@ $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
 if(isset($_POST["submit"])){
     // Allow certain file formats
-    $allowTypes = array('jpg','png','jpeg','gif','pdf');
+    $allowTypes = array('jpg','png','jpeg','JPG','PNG','JPEG');
     if(in_array($fileType, $allowTypes)){
         // Upload file to server
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
@@ -45,13 +49,13 @@ if(isset($_POST["submit"])){
             header("location: ". baseUrl() ."/views/contents/editdog.php?error=none");
             exit();
         }else{
-            $statusMsg = "Sorry, there was an error uploading your file.";
+            $statusMsg = "Wystąpił błąd podczas wysyłania zdjęcia psa - proszę zgłoś się do administratora.";
         }
     }else{
-        $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+        $statusMsg = 'Niepoprawny typ grafiki - dozwolone są formaty: .jpg, .jpeg, .png';
     }
 }else{
-    $statusMsg = 'Please select a file to upload.';
+    $statusMsg = 'Wybierz grafikę.';
 }
 
 // Display status message

@@ -1,12 +1,26 @@
 <?php require_once '../containers/header.php'; ?>
 <?php require_once '../containers/menu.php'; ?>
-<?php $userDogData = getDogDetailsByUserId($conn, $_SESSION["userid"]); ?>
+<?php $userDogData = getDogDetailsByUserId($conn, $_SESSION["userid"]);
+    if(!$userDogData) {
+        header("location: " . baseUrl() . "/views/contents/adddog.php");
+        exit();
+    }
+?>
     <div class="container custom-container">
         <div class="form-group d-flex justify-content-center" id="add-edit-dog">
             <form action="<?= baseUrl() . '/includes/editdog.inc.php' ?>" method="post"
                   enctype="multipart/form-data"
                   class="dog-form">
                 <h2 class="h2 text-center">Edytuj dane psa</h2>
+                <?php
+                if (isset($_GET["error"])) {
+                    switch ($_GET["error"]) {
+                        case "emptyinput":
+                            echo "<p class='text-center custom-error'>Wypełnij wszystkie pola!</p>";
+                            break;
+                    }
+                }
+                ?>
                 <label>
                     <input class="form-control" type="text" name="name" placeholder="Jak się wabi twój pies"
                            value="<?= $userDogData['name'] ?>">

@@ -20,6 +20,8 @@ if(isset($_POST["submit"]))
         exit();
     }
     addcity($conn,$voivodshipid,$name,$description);
+    header("location: ../managecities.php?error=updated");
+    exit();
 }
 else if(isset($_GET["delete"])) {
     $nazwa = ($_GET["delete"]);

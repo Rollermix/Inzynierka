@@ -20,10 +20,12 @@
             echo '<img class="card-img-top" src="'.$photo.'" alt="">';
             echo '<div class="card-body">';
                 echo '<p class="card-text">';
-                    echo '<span>Imię psa:'.$dogWithOwner['dogname'].'</span><br>';
-                    echo '<span>Opis psa:'.$dogWithOwner['opis'].'</span><br>';
-                    echo '<span>Właściciel: '.$dogWithOwner['fullname'].'</span>';
-                    echo '<a href="'.baseUrl().'/views/contents/chat.php?id='.$dogWithOwner["id"].'">(chatuj z właścicielem)</a><br>';
+                    echo '<span>Imię psa: '.$dogWithOwner['dogname'].'</span><br>';
+                    echo '<span>Opis psa: '.$dogWithOwner['opis'].'</span><br>';
+                    echo '<span>Właściciel: '.$dogWithOwner['fullname'].' </span>';
+                    echo '<a href="showprofile.php?id='.$dogWithOwner['id'].'">(profil)</a>';
+                    echo "<br>";
+                    echo '<a href="'.baseUrl().'/views/contents/chat.php?id='.$dogWithOwner["id"].'"> (chatuj z właścicielem)</a><br>';
                 echo '</p>';
             echo '</div>';
         echo '</div>';

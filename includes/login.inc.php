@@ -31,12 +31,12 @@ else if ((isset($_POST["submit2"])))
     require_once 'functions.inc.php';
     if(empty($login))
     {
-        header("location: ".baseUrl()."/views/contents/login.php?error=emptylogin");
+        header("location: ".baseUrl()."/views/contents/remindpassword.php?error=emptylogin");
         exit();
     }
     if(loginExists2($conn,$login)!==true)
     {
-        header("location: ".baseUrl()."/views/contents/login.php?error=loginnotexist");
+        header("location: ".baseUrl()."/views/contents/login.php?error=remindnone");
         exit();
     }
     remindPassword($conn,$login);

@@ -16,8 +16,7 @@ canViewAsAdmin($conn);
                 <a class="nav-link" href="managenotification.php" role="tab">Zarządzaj zgłoszeniami</a>
             </li>
             <li class="nav-item active" role="presentation">
-                <a class="nav-link active" href="addcity.php" data-toggle="tab" role="tab" aria-selected="true">Dodaj
-                    miasto</a>
+                <a class="nav-link active" href="addcity.php" data-toggle="tab" role="tab" aria-selected="true">Zarządzaj miastami</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" href="manageusers.php" role="tab">Zarządzaj użytkownikami</a>
@@ -28,7 +27,7 @@ canViewAsAdmin($conn);
         </ul>
         <form action="includes/managecities.inc.php" method="post" class="just-normal-form">
             <h2 class="text-center">
-                Dodaj miasto
+                Zarządzaj miastami
             </h2>
             <br>
             <div class="d-flex flex-column">
@@ -51,14 +50,23 @@ canViewAsAdmin($conn);
                 <label>
                     <input class="form-control" type="text" name="description" placeholder="Dodaj krótki opis...">
                 </label>
+                <label>
+                    <input class="form-control" type="file" name="file">
+                </label>
                 <button class="btn btn-dark btn-custom" type="submit" name="submit">Dodaj miasto</button>
                 <?php
                 if (isset($_GET["error"])) {
                     if ($_GET["error"] == "errorinputvoivodship") {
                         echo "<p class='text-center custom-error'>Nie wybrałeś województwa</p>";
                     }
+                    if ($_GET["error"] == "stmtfailed") {
+                        echo "<p class='text-center custom-error'>Wystąpił błąd podczas aktualizacji miasta</p>";
+                    }
                     if ($_GET["error"] == "emptyinputcity") {
                         echo "<p class='text-center custom-error'>Nie wpisałeś nazwy miasta</p>";
+                    }
+                    if ($_GET["error"] == "updated") {
+                        echo "<p class='text-center custom-success'>Pomyślnie zaktualizowano miasto!</p>";
                     }
                     if ($_GET["error"] == "none") {
                         echo "<p class='text-center custom-success'>Pomyślnie dodano miasto!</p>";

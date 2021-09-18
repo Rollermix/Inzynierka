@@ -16,7 +16,7 @@ canViewAsAdmin($conn);
             <a class="nav-link" href="managenotification.php" role="tab">Zarządzaj zgłoszeniami</a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link" href="managecities.php" role="tab">Dodaj miasto</a>
+            <a class="nav-link" href="managecities.php" role="tab">Zarządzaj miastami</a>
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link" href="manageusers.php" role="tab">Zarządzaj użytkownikami</a>

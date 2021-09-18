@@ -8,133 +8,108 @@ $_SESSION["idchanging"] = $userdata['id'];
 
 ?>
 <div class="container custom-menu custom-container">
-    <ul class="nav nav-tabs custom-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="signup-tab" data-toggle="tab" href="#signup" role="tab"
-               aria-controls="signup" aria-selected="true">Twoje dane</a>
+    <ul class="nav nav-tabs custom-tabs">
+        <li class="nav-item" role="presentation" role="tab">
+            <a class="nav-link" href="profile.php">Wyświetl profil</a>
+        </li>
+        <li class="nav-item active" role="presentation">
+            <a class="nav-link active" href="manageaccount.php" data-toggle="tab" role="tab" aria-selected="true">Edytuj
+                dane konta</a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link" id="change-password-tab" data-toggle="tab" href="#change-password" role="tab"
-               aria-controls="change-password" aria-selected="true">Zmiana hasła</a>
+            <a class="nav-link" href="changepassword.php" role="tab">Zmień hasło</a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link" id="delete-account-tab" data-toggle="tab" href="#delete-account" role="tab"
-               aria-controls="delete-account" aria-selected="true">Usunięcie konta</a>
+            <a class="nav-link" href="deleteaccount.php" role="tab">Usuń konto</a>
         </li>
     </ul>
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+    <div class="tab-content">
+        <div class="tab-pane fade show active">
             <section class="signup-form">
                 <h2 class="text-center">
                     Zmień dane konta
                 </h2>
+                <?php
+                if (isset($_GET["error"])) {
+                    if ($_GET["error"] == "emptyinput") {
+                        echo "<p class='text-center custom-error'>Wypełnij wszystkie pola!</p>";
+                    } else if ($_GET["error"] == "invalidlogin") {
+                        echo "<p class='text-center custom-error'>Niepoprawny login!</p>";
+                    } else if ($_GET["error"] == "passworddontmatch") {
+                        echo "<p class='text-center custom-error'>Wprowadziłeś różne hasła</p>";
+                    } else if ($_GET["error"] == "invalidemail") {
+                        echo "<p class='text-center custom-error'>Wprowadziłeś zły email</p>";
+                    } else if ($_GET["error"] == "logintaken") {
+                        echo "<p class='text-center custom-error'>Login zajęty</p>";
+                    } else if ($_GET["error"] == "emptyname") {
+                        echo "<p class='text-center custom-error'>Musisz podać imię</p>";
+                    } else if ($_GET["error"] == "emptysurname") {
+                        echo "<p class='text-center custom-error'>Musisz podać nazwisko</p>";
+                    } else if ($_GET["error"] == "emptyemail") {
+                        echo "<p class='text-center custom-error'>Adres e-mail jest wymagany</p>";
+                    } else if ($_GET["error"] == "emptycity") {
+                        echo "<p class='text-center custom-error'>Miasto jest wymagane</p>";
+                    } else if ($_GET["error"] == "stmtfailed") {
+                        echo "<p class='text-center custom-error'>Something went wrong, try again!</p>";
+                    } else if ($_GET["error"] == "none") {
+                        echo "<p class='text-center custom-success'>Zmieniłeś dane konta</p>";
+                    }
+                }
+                ?>
                 <div class="form-group d-flex justify-content-center" id="change_data_account">
                     <form action="<?= baseUrl() . '/includes/manageaccount.inc.php' ?>" method="post">
-                        <input class="form-control" type="text" name="firstname" placeholder="Imię"
-                               value="<?= $userdata['name'] ?>">
-                        <input class="form-control" type="text" name="lastname" placeholder="Nazwisko"
-                               value="<?= $userdata['surname'] ?>">
+                        <label>
+                            <span>Imię</span>
+                            <input class="form-control" type="text" name="firstname" placeholder="Imię"
+                                   value="<?= $userdata['name'] ?>">
+                        </label>
+                        <label>
+                            <span>Nazwisko</span>
+                            <input class="form-control" type="text" name="lastname" placeholder="Nazwisko"
+                                   value="<?= $userdata['surname'] ?>">
+                        </label>
 
-                        <input class="form-control" type="text" name="email" placeholder="E-mail"
-                               value="<?= $userdata['email'] ?>">
-                        <select class="custom-select" name='city' title="city">
-                            <?php
-                            $sqli = "SELECT * FROM city";
-                            $result = mysqli_query($conn, $sqli);
+                        <label>
+                            <span>E-mail</span>
+                            <input class="form-control" type="text" name="email" placeholder="E-mail"
+                                   value="<?= $userdata['email'] ?>">
+                        </label>
+                        <label>
+                            <span>Twoje miasto</span>
+                            <br>
+                            <select class="custom-select" name='city' title="city">
+                                <?php
+                                $sqli = "SELECT * FROM city";
+                                $result = mysqli_query($conn, $sqli);
 
-                            while ($row = mysqli_fetch_array($result)) {
+                                while ($row = mysqli_fetch_array($result)) {
 
-                                if (isset($userdata['id_city']) && $userdata['id_city'] == $row['id']) {
-                                    echo '<option value="' . $row['name'] . '"selected="selected" >' . $row['name'] . '</option>';
-                                } else {
-                                    echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
+                                    if (isset($userdata['id_city']) && $userdata['id_city'] == $row['id']) {
+                                        echo '<option value="' . $row['name'] . '"selected="selected" >' . $row['name'] . '</option>';
+                                    } else {
+                                        echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
+                                    }
                                 }
-                            }
 
-                            if (!isset($userdata['id_city']) || !$userdata['id_city']) {
-                                echo '<option value="" disabled selected hidden>Miasto</option>';
-                            }
+                                if (!isset($userdata['id_city']) || !$userdata['id_city']) {
+                                    echo '<option value="" disabled selected hidden>Miasto</option>';
+                                }
 
-                            ?>
-                        </select>
+                                ?>
+                            </select>
+                        </label>
                         <br>
 
-                        <textarea class="form-control" type="text" name="description" placeholder="Twój opis"
-                                  rows="10"><?= $userdata['description'] ?></textarea>
+                        <label>
+                            <span>Twój opis</span>
+                            <textarea class="form-control" type="text" name="description" placeholder="Twój opis" rows="10"><?= $userdata['description'] ?></textarea>
+                        </label>
 
                         <button class="btn btn-success" type="submit" name="submit">Zmień dane</button>
                     </form>
                 </div>
             </section>
         </div>
-        <div class="tab-pane fade" id="change-password" role="tabpanel" aria-labelledby="change-password-tab">
-            <section class="change-password-form">
-                <h2 class="text-center">
-                    Zmień hasło do konta
-                </h2>
-                <div class="form-group d-flex justify-content-center" id="change_password">
-                    <form action="<?= baseUrl() . '/includes/changepassword.inc.php' ?>" method="post">
-                        <p class="text-center">Wpisz obecne hasło, a następnie podaj 2 razy nowe hasło, <br>którym
-                            będziesz logować się do aplikacji</p>
-                        <input class="form-control" type="password" name="password" placeholder="Wpisz obecne hasło"
-                               autocomplete="current-password">
-                        <input class="form-control" type="password" name="newpassword" placeholder="Wpisz nowe hasło"
-                               autocomplete="new-password">
-                        <input class="form-control" type="password" name="repeatnewpassword"
-                               placeholder="Powtórz nowe hasło" autocomplete="new-password">
-                        <button class="btn btn-success" type="submit" name="submit2">Zmień hasło</button>
-                        <input type="hidden" name="username" id="username" value="<?= $userdata['login'] ?>">
-                    </form>
-                </div>
-            </section>
-        </div>
-        <div class="tab-pane fade" id="delete-account" role="tabpanel" aria-labelledby="delete-account-tab">
-            <section class="delete-account-form">
-                <h2 class="text-center">
-                    Usuń konto
-                </h2>
-                <p class="text-center">Operacja usunięcia konta jest nieodwracalna. Aby potwierdzić<br>usunięcie konta,
-                    podaj swoje hasło, którym logujesz się do aplikacji.</p>
-                <div class="form-group d-flex justify-content-start" id="delete_account">
-                    <form action="<?= baseUrl() . '/includes/deleteaccount.inc.php?id=' . $_SESSION["idchanging"] ?>"
-                          method="post"
-                            style="display: flex"
-                    >
-                        <label style="margin-bottom: 0" for="password_delete_account">
-                            <input id="password_delete_account" style="margin: 0 15px 0 0;" class="form-control"
-                                   type="password"
-                                   name="password_delete_account" placeholder="Wpisz obecne hasło">
-                        </label>
-                        <?php
-                        echo '<button type="submit" style="display: flex;justify-content: center;align-items: center;" class="btn btn-danger" 
-                        href ="' . baseUrl() . '/includes/deleteaccount.inc.php?id=' . $_SESSION["idchanging"] . '">' . ' Usuń konto' . '</button>';
-                        ?>
-
-                    </form>
-                </div>
-            </section>
-        </div>
     </div>
 </div>
-
-
-<?php
-if (isset($_GET["error"])) {
-    if ($_GET["error"] == "emptyinput") {
-        echo "<p>Wypełnij wszystkie pola!</p>";
-    } else if ($_GET["error"] == "invalidlogin") {
-        echo "<p>Niepoprawny login!</p>";
-    } else if ($_GET["error"] == "passworddontmatch") {
-        echo "<p>Wprowadziłeś różne hasła</p>";
-    } else if ($_GET["error"] == "invalidemail") {
-        echo "<p>Wprowadziłeś zły email</p>";
-    } else if ($_GET["error"] == "logintaken") {
-        echo "<p>Login zajęty</p>";
-    } else if ($_GET["error"] == "stmtfailed") {
-        echo "<p>Something went wrong, try again!</p>";
-    } else if ($_GET["error"] == "none") {
-        echo "<p>Zmieniłeś dane konta</p>";
-    }
-}
-?>
 <?php require_once '../containers/footer.php'; ?>

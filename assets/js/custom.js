@@ -10,13 +10,13 @@ function changeNavbarClass() {
     if (window.scrollY >= 35) {
         document.querySelector('.navbar').classList.add('js-navbar-not-transparent');
         document.querySelector('.navbar-brand').classList.add('js-change-navbar-color');
-        document.querySelectorAll('.nav-link').forEach(element => {
+        document.querySelectorAll('.navbar .nav-link').forEach(element => {
             element.classList.add('js-change-navbar-color')
         });
     } else {
         document.querySelector('.navbar').classList.remove('js-navbar-not-transparent');
         document.querySelector('.navbar-brand').classList.remove('js-change-navbar-logo-color');
-        document.querySelectorAll('.nav-link').forEach(element => {
+        document.querySelectorAll('.navbar .nav-link').forEach(element => {
             element.classList.remove('js-change-navbar-color')
         });
     }

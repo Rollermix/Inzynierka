@@ -9,13 +9,21 @@ if(isset($_POST["submit2"])) {
     $login=$_SESSION["useruid"];
 
     if (emptyInputChangingPwd($password, $newpassword, $repeatnewpassword) !== false) {
-        header("location: ". baseUrl() ."/views/contents/manageaccount.php?error=emptyinput");
+        header("location: ". baseUrl() ."/views/contents/changepassword.php?error=emptyinput");
         exit();
     }
-    if(pwdMatch($newpassword,$repeatnewpassword)!==false)
+    if(pwdMatch($newpassword,$repeatnewpassword))
     {
-        header("location: ". baseUrl() ."/views/contents/manageaccount.php?error=passworddontmatch");
+        header("location: ". baseUrl() ."/views/contents/changepassword.php?error=passworddontmatch");
         exit();
+    }
+    $curr_pass = $_POST["password"];
+    if($user_row = loginExists($conn, $_SESSION['useruid'], $_SESSION['useruid'])) {
+        $password = $user_row['password'];
+        if(!password_verify($curr_pass, $password)) {
+            header("location: ". baseUrl() ."/views/contents/changepassword.php?error=wrongpassword");
+            exit();
+        }
     }
     editPwd($conn,$login,$password,$newpassword,$repeatnewpassword);
 }

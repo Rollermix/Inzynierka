@@ -26,30 +26,3 @@ class CityDto {
         $this->spots[] = $spot;
     }
 }
-
-class Spot {
-    public $id;
-    public $name;
-    public $id_city;
-    public $description;
-    public $deleted;
-}
-
-abstract class Voivodeship {
-    const DOLNOSLASKIE = 'dolnośląskie';
-    const KUJAWSKOPOMORSKIE = "kujawsko-pomorskie";
-    const LUBELSKIE = "lubelskie";
-    const LUBUSKIE = "lubuskie";
-    const LODZKIE = "łódzkie";
-    const MALOPOLSKIE = "małopolskie";
-    const MAZOWIECKIE = "mazowieckie";
-    const OPOLSKIE = "opolskie";
-    const PODKARPACKIE = "podkarpackie";
-    const PODLASKIE = "podlaskie";
-    const POMORSKIE = "pomorskie";
-    const SLASKIE = "śląskie";
-    const SWIETOKRZYSKIE = "świętokrzyskie";
-    const WARMINSKOMAZURSKIE = "warmińsko-mazurskie";
-    const WIELKOPOLSKIE = "wielkopolskie";
-    const ZACHODNIOPOMORSKIE = "zachodniopomorskie";
-}

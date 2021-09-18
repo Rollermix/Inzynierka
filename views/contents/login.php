@@ -27,7 +27,7 @@ redirectIfLoggedIn()
                         case "none":
                             break;
                         case "remindnone":
-                            echo "<p class='text-center custom-success'>Hasło zostało wysłane na maila!</p>";
+                            echo "<p class='text-center custom-success'>Na powiązane konto e-mail<br>została wysłana wiadomość z dalszymi instrukcjami.</p>";
                             break;
                     }
                 }

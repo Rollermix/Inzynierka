@@ -83,9 +83,6 @@ function addcity($conn,$voivodshipid,$name,$description)
     mysqli_stmt_bind_param($stmt, "sss",$name,$description,$voivodshipid);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../managecities.php?error=none");
-    exit();
-
 }
 function blockUser($conn,$name)
 {
@@ -197,8 +194,6 @@ function editcity($conn,$id, $voivodship, $name, $description)
     mysqli_stmt_bind_param($stmt,"ssss",$name,$description,$voivodship,$id);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../managecities.php?error=updated");
-    exit();
 
 }
 function deleteCity($conn,$nazwa)

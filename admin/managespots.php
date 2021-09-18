@@ -16,8 +16,7 @@ canViewAsAdmin($conn);
                 <a class="nav-link" href="managenotification.php" role="tab">Zarządzaj zgłoszeniami</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" href="managecities.php" role="tab">Dodaj
-                    miasto</a>
+                <a class="nav-link" href="managecities.php" role="tab">Zarządzaj miastami</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" href="manageusers.php">Zarządzaj
@@ -48,6 +47,16 @@ canViewAsAdmin($conn);
             Zarządzaj miejscami
         </h2>
         <br>
+        <?php
+        if (isset($_GET["error"])) {
+            if ($_GET["error"] == "emptyinputspot" || $_GET["error"] == "errorinputcity") {
+                echo "<p class='text-center custom-error'>Wypełnij wszystkie pola!</p>";
+            }
+            if ($_GET["error"] == "none") {
+                echo "<p class='text-center custom-success'>Pomyślnie dodano spot!</p>";
+            }
+        }
+        ?>
         <form action="includes/managespots.inc.php" method="post" class="just-normal-form">
             <label>
                 <select class="custom-select" name='city'>
@@ -76,20 +85,24 @@ canViewAsAdmin($conn);
         <table class="table table-hover">
             <thead>
             <tr class="bg-dark">
+                <td>Miasto</td>
                 <td>Nazwa spotu</td>
                 <td>Akcje</td>
             </tr>
             </thead>
             <tbody>
             <?php
-            $sqli = "SELECT name,deleted FROM spot";
+            $sqli = "SELECT spot.name as spotname, spot.deleted, city.name as cityname FROM spot INNER JOIN city ON city.id = spot.id ORDER BY spot.id_city";
             $result = mysqli_query($conn, $sqli);
             while ($row = mysqli_fetch_array($result)) {
-                $curr = $row['name'];
+                $curr = $row['spotname'];
                 if ($row['deleted'] == 0) {
                     echo "<tr>";
                     echo "<td>";
-                    echo $row['name'];
+                    echo $row['cityname'];
+                    echo "</td>";
+                    echo "<td>";
+                    echo $row['spotname'];
                     echo "</td>";
                     echo "<td>";
                     echo '<a class="btn btn-success" href ="editspot.php?edit=' . $curr . '">' . ' Edytuj' . '</a> ' .

@@ -10,7 +10,7 @@ canViewAsAdmin($conn);
     <div class="container custom-container">
         <h2 class="h2 text-center">Edytujesz miasto: <?= $_GET["edit"] ?></h2>
         <br>
-        <form action="includes/editcity.inc.php" method="post" class="just-normal-form">
+        <form action="includes/editcity.inc.php" method="post" class="just-normal-form" enctype="multipart/form-data">
             <?php
             if (isset($_GET["edit"])) {
                 $nazwa = ($_GET["edit"]);
@@ -52,13 +52,14 @@ canViewAsAdmin($conn);
                 $description = $rowid['description'];
                 $_SESSION['idcity'] = $rowid['id'];
                 echo "<label>";
-                echo '<textarea placeholder="Opis miasta" class="form-control"  type = "text" name="description" value="' . $description . '"></textarea>';
+                echo '<textarea placeholder="Opis miasta" class="form-control"  type = "text" name="description">'.$description.'</textarea>';
                 echo "</label>";
-                echo '<br >';
-
+                echo '<br>';
             }
-
             ?>
+            <label>
+                <input class="form-control" type="file" name="file">
+            </label>
             <button type="submit" name="submit" class="btn btn-dark">Aktualizuj</button>
         </form>
     </div>

@@ -4,7 +4,8 @@ require_once 'dbh.inc.php';
 require_once 'functions.inc.php';
 
 if(!isset($_POST["password_delete_account"])) {
-    // redirect
+    header("location: ". baseUrl() ."/views/contents/deleteaccount.php?error=emptyinput");
+    exit();
 }
 
 if(isset($_GET["id"])) {
@@ -15,7 +16,8 @@ if(isset($_GET["id"])) {
        if(password_verify($curr_pass, $password)) {
            deleteAccount($conn, $id);
        } else {
-           echo "Niepoprawne hasło, konto nie zostanie usunięte";
+           header("location: ". baseUrl() ."/views/contents/deleteaccount.php?error=wrongpassword");
+           exit();
        }
     }
 }

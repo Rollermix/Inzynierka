@@ -9,38 +9,45 @@
         if (isset($_SESSION["useruid"])) {
             echo "<div class='system'>";
                 echo "<div class='nav-item'>";
-                    echo "<a class='nav-link' href='". baseUrl() ."/views/contents/about.php'>O projekcie</a>";
+                    echo "<a class='nav-link".getActiveMenuLink('about.php')."' href='". baseUrl() ."/views/contents/about.php'>O projekcie</a>";
                 echo "</div>";
                 echo "<div class='nav-item'>";
-                    echo "<a class='nav-link' href='". baseUrl() ."/views/contents/suggestion.php'>Zgłoszenia i sugestie</a>";
+                    echo "<a class='nav-link".getActiveMenuLink('suggestion.php')."' href='". baseUrl() ."/views/contents/suggestion.php'>Zgłoszenia i sugestie</a>";
                 echo "</div>";
             echo "</div>";
             echo "<div class='dogs'>";
             if(hasDog($conn, $_SESSION["userid"])) {
                 echo "<div class='nav-item'>";
-                    echo "<a class='nav-link' href='". baseUrl() ."/views/contents/editdog.php'>Edytuj Psa</a>";
+                    echo "<a class='nav-link".getActiveMenuLink('editdog.php')."' href='". baseUrl() ."/views/contents/editdog.php'>Edytuj Psa</a>";
                 echo "</div>";
             } else {
                 echo "<div class='nav-item'>";
-                    echo "<a class='nav-link' href='". baseUrl() ."/views/contents/adddog.php'>Dodaj Psa</a>";
+                    echo "<a class='nav-link".getActiveMenuLink('adddog.php')."' href='". baseUrl() ."/views/contents/adddog.php'>Dodaj Psa</a>";
                 echo "</div>";
             }
                 echo "<div class='nav-item'>";
-                    echo "<a class='nav-link' href='". baseUrl() ."/views/contents/managewalk.php'>Zarządzaj spacerami</a>";
+                    echo "<a class='nav-link".getActiveMenuLink('managewalk.php')."' href='". baseUrl() ."/views/contents/managewalk.php'>Zarządzaj spacerami</a>";
                 echo "</div>";
             echo "</div>";
             echo "<div class='account'>";
                 if(isAdmin($conn, $_SESSION['useruid'])) {
                     echo "<div class='nav-item'>";
-                        echo "<a class='nav-link' href='". baseUrl() ."/admin/suggestions.php'>Administracja</a>";
+                        echo "<a class='nav-link".getActiveMenuLink('suggestions.php').' '
+                            .getActiveMenuLink('managenotification.php').' '
+                            .getActiveMenuLink('managecities.php').' '
+                            .getActiveMenuLink('manageusers.php').' '
+                            .getActiveMenuLink('managespots.php').' '
+
+
+                            ."' href='". baseUrl() ."/admin/suggestions.php'>Administracja</a>";
                     echo "</div>";
                 }
                 echo "<div class='nav-item'>";
-                    echo "<a class='nav-link' href='". baseUrl() ."/views/contents/manageaccount.php'>Zarządzaj profilem</a>";
+                    echo "<a class='nav-link".getActiveMenuLink('manageaccount.php').' '.getActiveMenuLink('changepassword.php').' '.getActiveMenuLink('deleteaccount.php')."' href='". baseUrl() ."/views/contents/manageaccount.php'>Zarządzaj profilem</a>";
                 echo "</div>";
                 if($messagesCount = hasUnreadMessages($conn, $_SESSION["userid"])) {
                     echo "<div class='nav-item'>";
-                        echo "<a class='nav-link' href='". baseUrl() ."/views/contents/managewalk.php?action=highlightmessage'>✉ Wiadomości (".$messagesCount. ")</a>";
+                        echo "<a class='nav-link".getActiveMenuLink('managewalk.php')."' href='". baseUrl() ."/views/contents/managewalk.php?action=highlightmessage'>✉ Wiadomości (".$messagesCount. ")</a>";
                     echo "</div>";
                 } else {
                     echo "<div class='nav-item'>";
@@ -54,13 +61,13 @@
 
         } else {
             echo "<div class='nav-item'>";
-                echo "<a class='nav-link' href='". baseUrl() ."/views/contents/about.php'>O projekcie</a>";
+                echo "<a class='nav-link".getActiveMenuLink('about.php')."' href='". baseUrl() ."/views/contents/about.php'>O projekcie</a>";
             echo "</div>";
             echo "<div class='nav-item'>";
-                echo "<a class='nav-link' href='". baseUrl() ."/views/contents/signup.php'>Zarejestruj się</a>";
+                echo "<a class='nav-link".getActiveMenuLink('signup.php')."' href='". baseUrl() ."/views/contents/signup.php'>Zarejestruj się</a>";
             echo "</div>";
             echo "<div class='nav-item'>";
-                echo "<a class='nav-link' href='". baseUrl() ."/views/contents/login.php'>Zaloguj się</a>";
+                echo "<a class='nav-link".getActiveMenuLink('login.php')."' href='". baseUrl() ."/views/contents/login.php'>Zaloguj się</a>";
             echo "</div>";
         }
     ?>

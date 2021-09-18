@@ -8,7 +8,7 @@ canViewAsAdmin($conn);
 <div class="container custom-container">
     <section class="city-form">
         <h2 class="h2 text-center">
-            Dodaj miasto
+            Zarządzaj miastami
         </h2>
         <br>
         <?php
@@ -24,7 +24,7 @@ canViewAsAdmin($conn);
             }
         }
         ?>
-        <form action="includes/addcity.inc.php" method="post" class="just-normal-form">
+        <form action="includes/addcity.inc.php" method="post" class="just-normal-form" enctype="multipart/form-data">
             <label>
                 <select name='voivodship' class="custom-select">
                     <option>Wybierz województwo...</option>
@@ -43,6 +43,9 @@ canViewAsAdmin($conn);
             </label>
             <label>
                 <textarea type="text" name="description" placeholder="Krótki opis miasta" class="form-control" rows="10"></textarea>
+            </label>
+            <label>
+                <input class="form-control" type="file" name="file">
             </label>
             <button class="btn btn-dark" type="submit" name="submit">Dodaj miasto</button>
         </form>

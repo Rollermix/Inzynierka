@@ -10,6 +10,14 @@
     $row = mysqli_fetch_array($result);
     if ($row['blocked'] == 0) {
         echo '<h2 class="text-center">Co chciałbyś, aby znalazło się w naszym systemie?</h2>';
+
+        if (isset($_GET["error"])) {
+            switch ($_GET["error"]) {
+                case "emptyinput":
+                    echo "<p class='text-center custom-error'>Wypełnij wszystkie pola!</p>";
+                    break;
+            }
+        }
         echo '<p class="text-center">W poniższym formularzu możesz przekazać nam informacje dotyczące rozszerzenia funkcjonalności portalu lub zgłosić błąd, który występuje na stronie.</p>';
         echo '<div class="form-group d-flex justify-content-center">';
         echo '<form action="' . baseUrl() . '/includes/suggestion.inc.php" method="post" style="width: 100%;">';

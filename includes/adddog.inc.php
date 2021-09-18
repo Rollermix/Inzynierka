@@ -8,6 +8,10 @@ if(isset($_POST["submit"])) {
     $name= $_POST["name"];
     $size = $_POST["size"];
     $opis = $_POST["opis"];
+    if(!$name || !$size || !$opis) {
+        header("location: ". baseUrl() ."/views/contents/editdog.php?error=emptyinput");
+        exit();
+    }
     $user = $_SESSION["userid"];
     adddog($conn,$name,$size,$opis,$user);
 }
@@ -21,7 +25,7 @@ $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
 if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
     // Allow certain file formats
-    $allowTypes = array('jpg','png','jpeg','gif','pdf');
+    $allowTypes = array('jpg','png','jpeg','JPG','PNG','JPEG');
     if(in_array($fileType, $allowTypes)){
         // Upload file to server
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
