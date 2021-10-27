@@ -22,7 +22,8 @@ function baseUrl()
 
 function emptyInputSignup($firstname, $lastname, $login, $email, $password, $repeatpassword)
 {
-    return empty($firstname) || empty($lastname) || empty($login) || empty($email) || empty($password) || empty($repeatpassword);
+    return empty($firstname) || empty($lastname) || empty($login) || empty($email)
+        || empty($password) || empty($repeatpassword);
 }
 
 function invalidLogin($login)
@@ -85,14 +86,16 @@ function createUser($conn, $firstname, $lastname, $login, $email, $description, 
 {
     if ($city == "Wybierz miasto...")
         $city = NULL;
-    $sql = "INSERT INTO user (name,surname,login,email,description,password,id_city) VALUES (?,?,?,?,?,?,(SELECT id FROM city where name = ?));";
+    $sql = "INSERT INTO user (name,surname,login,email,description,password,id_city) 
+VALUES (?,?,?,?,?,?,(SELECT id FROM city where name = ?));";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: " . baseUrl() . "/views/contents/signup.php?error=stmtfailed");
         exit();
     }
     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
-    mysqli_stmt_bind_param($stmt, "sssssss", $firstname, $lastname, $login, $email, $description, $hashedPwd, $city);
+    mysqli_stmt_bind_param($stmt, "sssssss", $firstname, $lastname,
+        $login, $email, $description, $hashedPwd, $city);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     header("location: " . baseUrl() . "/views/contents/signup.php?error=none");

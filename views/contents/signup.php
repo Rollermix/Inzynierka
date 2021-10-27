@@ -13,13 +13,14 @@ redirectIfLoggedIn()
                     if ($_GET["error"] == "emptyinput") {
                         echo "<p class='text-center custom-error'>Wypełnij wszystkie pola!</p>";
                     } else if ($_GET["error"] == "invalidlogin") {
-                        echo "<p class='text-center custom-error'>Niepoprawny login!</p>";
+                        echo "<p class='text-center custom-error'>Niepoprawny login! Używaj 
+                        tylko takich znaków: a-zA-Z0-9</p>";
                     } else if ($_GET["error"] == "passworddontmatch") {
                         echo "<p class='text-center custom-error'>Wprowadziłeś różne hasła.</p>";
                     } else if ($_GET["error"] == "invalidemail") {
                         echo "<p class='text-center custom-error'>Wprowadziłeś zły adres e-mail</p>";
                     } else if ($_GET["error"] == "logintaken") {
-                        echo "<p class='text-center custom-error'>Login zajęty</p>";
+                        echo "<p class='text-center custom-error'>Login lub email zajęty</p>";
                     } else if ($_GET["error"] == "stmtfailed") {
                         echo "<p class='text-center custom-error'>Something went wrong, try again!</p>";
                     } else if ($_GET["error"] == "none") {

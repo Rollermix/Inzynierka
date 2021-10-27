@@ -14,7 +14,9 @@ redirectIfLoggedIn()
                         case "emptyinput":
                             echo "<p class='text-center custom-error'>Wypełnij wszystkie pola!</p>";
                             break;
-                        case "wronglogin":
+                        case "wrongLogin":
+                            echo "<p class='text-center custom-error'>Użytkownik o podanym loginie nie istnieje w systemie!</p>";
+                            break;
                         case "wrongPassword":
                             echo "<p class='text-center custom-error'>Niepoprawne dane logowania!</p>";
                             break;

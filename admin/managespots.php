@@ -78,7 +78,7 @@ canViewAsAdmin($conn);
             <label>
                 <input class="form-control" type="text" name="description" placeholder="Dodaj krótki opis...">
             </label>
-            <button style="height: 60px;" class="btn btn-dark" type="submit" name="submit">Dodaj spot</button>
+            <button style="height: 60px;" class="btn btn-dark" type="submit" name="submit">Dodaj miejsce</button>
         </form>
         <br>
         <br>
@@ -92,7 +92,7 @@ canViewAsAdmin($conn);
             </thead>
             <tbody>
             <?php
-            $sqli = "SELECT spot.name as spotname, spot.deleted, city.name as cityname FROM spot INNER JOIN city ON city.id = spot.id ORDER BY spot.id_city";
+            $sqli = "SELECT spot.name as spotname, spot.deleted, city.name as cityname FROM spot INNER JOIN city ON city.id = spot.id_city ORDER BY spot.id_city";
             $result = mysqli_query($conn, $sqli);
             while ($row = mysqli_fetch_array($result)) {
                 $curr = $row['spotname'];

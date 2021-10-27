@@ -9,7 +9,7 @@
     $result = mysqli_query($conn, $sqli);
     $row = mysqli_fetch_array($result);
     if ($row['blocked'] == 0) {
-        echo '<h2 class="text-center">Co chciałbyś, aby znalazło się w naszym systemie?</h2>';
+        echo '<h2 class="text-center">Masz jakieś sugestie?Napisz nam o nich</h2>';
 
         if (isset($_GET["error"])) {
             switch ($_GET["error"]) {
@@ -58,7 +58,7 @@
         echo '</tbody>';
         echo '</table>';
     } else {
-        echo "nie zgłaszałeś nam nic!";
+        echo "Nie dodałeś jeszcze żadnych zgłoszeń!";
     }
 
     $sqli = "SELECT reminder.*,user.login From reminder INNER JOIN user ON reminder.id_sending_user = user.id WHERE reminder.id_user ='" . $id . "'";

@@ -40,7 +40,7 @@ if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
             mysqli_stmt_bind_param($stmt, "ss",$fileName,$_SESSION['userid']);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
-            header("location: ". baseUrl() ."/views/contents/adddog.php?error=none");
+            header("location: ". baseUrl() ."/views/contents/profile.php?error=none");
             exit();
         }else{
             $statusMsg = "Sorry, there was an error uploading your file.";
