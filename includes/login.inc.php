@@ -36,7 +36,7 @@ else if ((isset($_POST["submit2"])))
     }
     if(loginExists2($conn,$login)!==true)
     {
-        header("location: ".baseUrl()."/views/contents/login.php?error=remindnone");
+        header("location: ".baseUrl()."/views/contents/remindpassword.php?error=wrongLogin");
         exit();
     }
     remindPassword($conn,$login);

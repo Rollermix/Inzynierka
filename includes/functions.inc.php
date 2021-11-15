@@ -181,30 +181,6 @@ function isDeleted($conn, $login)
 
 function editUser($conn, $firstname, $lastname, $login, $email, $description, $city, $id)
 {
-    if (!$firstname) {
-        header("location: " . baseUrl() . "/views/contents/manageaccount.php?error=emptyname");
-        exit();
-    }
-
-    if (!$lastname) {
-        header("location: " . baseUrl() . "/views/contents/manageaccount.php?error=emptysurname");
-        exit();
-    }
-
-    if (!$login) {
-        header("location: " . baseUrl() . "/views/contents/manageaccount.php?error=emptylogin");
-        exit();
-    }
-
-    if (!$email) {
-        header("location: " . baseUrl() . "/views/contents/manageaccount.php?error=emptyemail");
-        exit();
-    }
-
-    if (!$city) {
-        header("location: " . baseUrl() . "/views/contents/manageaccount.php?error=emptycity");
-        exit();
-    }
 
     $sql = "UPDATE user SET 
                 name=IFNULL(?,name),
@@ -314,7 +290,7 @@ function remindPassword($conn, $login)
     mysqli_stmt_bind_param($stmt2, "sss", $hashedPwd, $login, $login);
     mysqli_stmt_execute($stmt2);
     mysqli_stmt_close($stmt2);
-    header("location: " . baseUrl() . "/views/contents/login.php?error=remindnone");
+    header("location: " . baseUrl() . "/views/contents/remindpassword.php?error=remindnone");
     exit();
 }
 
