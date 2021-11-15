@@ -41,8 +41,12 @@ $_SESSION["idchanging"] = $userdata['id'];
                         echo "<p class='text-center custom-error'>Wprowadziłeś zły email</p>";
                     } else if ($_GET["error"] == "logintaken") {
                         echo "<p class='text-center custom-error'>Login zajęty</p>";
+                    } else if ($_GET["error"] == "emailtaken") {
+                        echo "<p class='text-center custom-error'>Email zajęty</p>";
                     } else if ($_GET["error"] == "emptyname") {
                         echo "<p class='text-center custom-error'>Musisz podać imię</p>";
+                    }else if ($_GET["error"] == "emptylogin") {
+                        echo "<p class='text-center custom-error'>Musisz podać nazwę użytkownika</p>";
                     } else if ($_GET["error"] == "emptysurname") {
                         echo "<p class='text-center custom-error'>Musisz podać nazwisko</p>";
                     } else if ($_GET["error"] == "emptyemail") {
@@ -71,8 +75,13 @@ $_SESSION["idchanging"] = $userdata['id'];
 
                         <label>
                             <span>E-mail</span>
-                            <input class="form-control" type="text" name="email" placeholder="E-mail"
-                                   value="<?= $userdata['email'] ?>">
+                            <input class="form-control" type="text" name="email" placeholder="<?= $userdata['email'] ?>"
+                                   >
+                        </label>
+                        <label>
+                            <span>Nazwa Użytkownika</span>
+                            <input class="form-control" type="text" name="login" placeholder="<?= $userdata['login'] ?>"
+                                   >
                         </label>
                         <label>
                             <span>Twoje miasto</span>

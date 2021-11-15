@@ -4,6 +4,15 @@
     <form action="<?= baseUrl() . '/includes/addwalk.inc.php' ?>" method="post" class="just-normal-form">
         <h2 class="h2 text-center">Dodaj spacer</h2>
         <br>
+        <?php
+        if (isset($_GET["error"])) {
+            switch ($_GET["error"]) {
+                case "emptyinput":
+                    echo "<p class='text-center custom-error'>Wypełnij wszystkie pola!</p>";
+                    break;
+            }
+        }
+        ?>
         <label>
             <select name='spot' class="custom-select">
                 <option>Wybierz miejsce</option>

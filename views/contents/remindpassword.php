@@ -27,8 +27,9 @@ if (isset($_GET["error"])) {
         case "emptylogin":
             echo "<p class='text-center custom-error'>Wypełnij wszystkie pola!</p>";
             break;
-        case "wronglogin": // czemu olewamy informacje o zlym koncie?
-            // chcemy uniknac teoretycznej sytuacji, gdzie uzytkownik robi bruteforce na istniejace loginy
+        case "wrongLogin":
+            echo "<p class='text-center custom-error'>W systemie nie ma użytkownika o podanym mailu lub loginie</p>";
+            break;
         case "remindnone":
             echo "<p class='text-center custom-success'>Na powiązane konto e-mail została wysłana wiadomość z dalszymi instrukcjami.</p>";
             break;
